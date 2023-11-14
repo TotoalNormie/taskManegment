@@ -62,4 +62,9 @@ body {
   .sidebar a {
     text-decoration: none;
     color: black;
+    transition: color 0.3s; /* Smooth transition effect */
+  }
+  
+  .sidebar a:hover {
+    color: white; /* Change the color on hover, you can use any color you prefer */
   }
