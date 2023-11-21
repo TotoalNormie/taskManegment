@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import makeAPIRequest from './functions/makeAPIRequest';
+import Header from './components/Header';
+import './style/App.css';
+
 function App() {
 	const [test, setTest] = useState(['']);
 	useEffect(() => {
@@ -10,14 +13,17 @@ function App() {
 				return;
 			}
 			console.log(res.error);
-            setTest('something went wrong');
+			setTest('something went wrong');
 		});
 	}, []);
 	return (
-		<div>
-			<h2>PHP + React test:</h2>
-			{test && <p>{test}</p>}
-		</div>
+		<>
+			<Header />
+			<div>
+				<h2>PHP + React test:</h2>
+				{test && <p>{test}</p>}
+			</div>
+		</>
 	);
 }
 export default App;
