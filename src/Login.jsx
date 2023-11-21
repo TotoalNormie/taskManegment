@@ -10,7 +10,6 @@ const Login = () => {
     <div className="LoginDiv">
       <input type="text" id="inputField" className="border-bottom-input" placeholder="Username"/>
       <input type="text" id="inputField" className="border-bottom-input" placeholder="Password"/>
-      <input type="text" id="inputField" className="border-bottom-input" placeholder="Confirm Password"/>
       <button className="login-button">
       Login
     </button>
