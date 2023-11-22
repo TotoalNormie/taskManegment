@@ -1,22 +1,29 @@
 import React, { useState, useEffect } from 'react';
+import makeAPIRequest from './functions/makeAPIRequest';
+import Header from './components/Header';
+import './style/App.css';
+
 function App() {
-	const [joke, setJoke] = useState(null);
+	const [test, setTest] = useState(['']);
 	useEffect(() => {
-		fetch('/api/test.php', {
-			method: 'GET',
-			headers: {
-				'X-RapidAPI-Key': 'your-api-key',
-				'X-RapidAPI-Host': 'jokes-by-api-ninjas.p.rapidapi.com',
-			},
-		})
-			.then(response => console.log(response)
-			.catch(error => console.log(error));
+		makeAPIRequest('test.php', res => {
+			if (res.error === undefined) {
+				console.log(res.message);
+				setTest(res.message);
+				return;
+			}
+			console.log(res.error);
+			setTest('something went wrong');
+		});
 	}, []);
 	return (
-		<div>
-			<h2>Joke of the day:</h2>
-			{joke && <p>{joke}</p>}
-		</div>
+		<>
+			<Header />
+			<div>
+				<h2>PHP + React test:</h2>
+				{test && <p>{test}</p>}
+			</div>
+		</>
 	);
 }
 export default App;
