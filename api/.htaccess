@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # RewriteRule for /{resource}/
+    RewriteRule ^([^/.]+)/?$ $1.php [QSA,L]
+
+    # RewriteRule for /{resource}/{id}
+    RewriteRule ^([^/.]+)/([^/.]+)/?$ $1.php?id=$2 [QSA,L]
+
+    # RewriteRule for /{resource}/{id}/{action}
+    RewriteRule ^([^/.]+)/([^/.]+)/([^/.]+)/?$ $1.php?id=$2&action=$3 [QSA,L]
+</IfModule>

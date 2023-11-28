@@ -4,7 +4,7 @@ import makeAPIRequest from '../functions/makeAPIRequest';
 const APITest = () => {
 	const [test, setTest] = useState(['']);
 	useEffect(() => {
-		makeAPIRequest('test.php', res => {
+		makeAPIRequest('test', res => {
 			if (res.error === undefined) {
 				console.log(res.message);
 				setTest(res.message);
@@ -12,6 +12,13 @@ const APITest = () => {
 			}
 			console.log(res.error);
 			setTest('something went wrong');
+		});
+		makeAPIRequest('htaccessTest/45/dcvd', res => {
+			if (res.error === undefined) {
+				console.log(res);
+				return;
+			}
+			console.log(res.error);
 		});
 	}, []);
 	return (
