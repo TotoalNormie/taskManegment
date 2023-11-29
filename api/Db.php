@@ -23,10 +23,10 @@ class Db
 
     public function __construct()
     {
-        $this->mysqli = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
+        $this->mysqli = new mysqli($this->servername, $this->username, $this->password, $this->dbname, $this->mysqli);
 
         if ($this->mysqli->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
+            die("Connection failed: " . $this->mysqli->connect_error);
         }
     }
     // visur kur ir parametri lieto mysqli::prepare
@@ -133,12 +133,24 @@ class Db
 
     function ListWorkers($project_id) // masīvs ar rindas ID
     {
-
+        $query = "SELECT User_ID FROM projectworkers WHERE Project_ID = $project_id";
+        $result = $this->mysqli->query($query);
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+        return $data;
     }
     
-    function CreateTask($project_id, $name, $description, $expire_time, $creator_identifier, $asignee = null)
+    function CreateTask($project_id, $name, $description, $due_date, $creator_identifier, $asignee = null)
     {
+        $stmt = $this->mysqli->prepare("INSERT INTO `tasks`(`Project_ID`, `Title`, `Description`, 
+        `Created_at`, `due_date`, `Created_by`, `Asignee_ID`) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("issiii", $username, $password, $user_identifier);
+        $stmt->execute();
 
+        if ($this->mysqli->affected_rows == 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     function ListTasks($project_id)
@@ -147,26 +159,26 @@ class Db
         $result = $this->mysqli->query($query);
         $data = $result->fetch_all(MYSQLI_ASSOC);
         return $data;
-        // if ($this->mysqli->affected_rows == 0) {
-        //     return false;
-        // } else {
-        //     return true;
-        // }
-        return [
-            [
-                "ID" => 0,
-                "Name" => "123",
-                "Description" => "321",
-                "expire_time" => 123,
-                "Status" => TaskState::ToDo,
-                "CreatedBy" => "Username"
-            ]
-        ];
-    }
+        if ($this->mysqli->affected_rows == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    //     return [
+    //     //     [
+    //     //         "ID" => 0,
+    //     //         "Name" => "123",
+    //     //         "Description" => "321",
+    //     //         "expire_time" => 123,
+    //     //         "Status" => TaskState::ToDo,
+    //     //         "CreatedBy" => "Username"
+    //     //     ]
+    //     // ];
+    // }
 
     function Updatetask($task_id, $name = null, $description = null, $expire_time = null, $status = null) // pārveido lai visas kolonnas ir opcionālas (https://www.w3schools.com/sql/func_sqlserver_coalesce.asp)
     {
-        $stmt = $this->mysqli->prepare("UPDATE tasks SET Title = ?, Description = ?, expire_time = ?, Status = ? WHERE task_id = ?");
+        $stmt = $this->mysqli->prepare("UPDATE tasks SET Title = COALESCE(?, Title), Description = COALESCE(?, Description), expire_time = COALESCE(?, expire_time), Status = ? WHERE Task_id = ?");
         $stmt->bind_param("ssiii", $name, $description, $expire_time, $status, $task_id);
         $stmt->execute();
 
@@ -178,13 +190,21 @@ class Db
     }
     function AssignTask($project_id, $task_id, $user_id=null)
     {
+        $stmt = $this->mysqli->prepare("UPDATE tasks SET Project_ID = ?, Task_ID = ?, Asignee_ID = COALESCE(?, Asignee_ID) WHERE Task_ID = ?");
+        $stmt->bind_param("iii", $project_id, $task_id, $user_id);
+        $stmt->execute();
 
+        if ($this->mysqli->affected_rows == 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     function DeleteTask($project_id, $task_id)
     {
         $stmt = $this->mysqli->prepare("DELETE FROM tasks WHERE Project_id = ? AND Task_id = ?");
-        $stmt->bind_aram("ii", $project_id, $task_id);
+        $stmt->bind_param("ii", $project_id, $task_id);
         $stmt->execute();
 
         if ($this->mysqli->affected_rows == 0) {
@@ -195,5 +215,5 @@ class Db
     }
 }
 
-$obj = new Db;
-print_r($obj->ListTasks(4));
+$taski = new Db;
+var_dump($obj->ListTasks(4));
