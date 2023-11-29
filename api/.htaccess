@@ -7,6 +7,6 @@
     # RewriteRule for /{resource}/{id}
     RewriteRule ^([^/.]+)/([^/.]+)/?$ $1.php?id=$2 [QSA,L]
 
-    # RewriteRule for /{resource}/{id}/{action}
-    RewriteRule ^([^/.]+)/([^/.]+)/([^/.]+)/?$ $1.php?id=$2&action=$3 [QSA,L]
+    # RewriteRule for /{resource}/{id}/{intent}
+    RewriteRule ^([^/.]+)/([^/.]+)/([^/.]+)/?$ $1.php?id=$2&intent=$3 [QSA,L]
 </IfModule>
