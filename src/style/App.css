@@ -8,5 +8,28 @@
 body {
 	margin: 0;
 	font-family: 'Open Sans', sans-serif;
-	
+}
+
+#root {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-template-rows: auto 1fr;
+	min-height: 100svh;
+}
+
+header {
+	/* grid-row: 1 / span 1; */
+	grid-column: 1 / span 2;
+}
+
+h1 {
+	font-size: 24px;
+}
+
+h2 {
+	font-size: 20px;
+}
+
+main {
+	padding: 1rem;
 }

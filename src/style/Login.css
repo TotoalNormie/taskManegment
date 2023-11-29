@@ -1,0 +1,63 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Noto Sans', Arial, sans-serif;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+
+.inputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.logo2 {
+  width: 25px; /* Set the desired width for the logo */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 10px; /* Adjust the margin as needed */
+  position: absolute;
+  left: 13px;
+  top: 75%;
+  transform: translateY(-50%);
+}
+
+.LoginDiv {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 350px;
+  width: 320px;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  text-align: center;
+  font-family: 'Noto Sans', Arial, sans-serif;
+}
+
+.border-bottom-input {
+  border: none;
+  outline: none;
+  width: 95%;
+  padding: 5px;
+  border-bottom: 1px solid #000;
+  background-color: white;
+  text-align: center;
+  margin-top: 40px;
+  font-size: 17px;
+}
+
+.login-button {
+  background-color: #D9D9D9;
+  border: none;
+  width: 100%;
+  padding: 15px 20px; /* Adjust padding as needed */
+  border-radius: 10px; /* Rounded corners */
+  cursor: pointer;
+  margin-top: 40px;
+  font-size: 16px;
+}
+
+.login-button:hover {
+  background-color: #606060; /* Darker grey on hover */
+  color: white;
+}
