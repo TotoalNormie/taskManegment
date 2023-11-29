@@ -62,7 +62,7 @@ class Db
 
     }
 
-    function FindUsers($partial_username) // LIMIT 10
+    function FindUsers($partial_username) // atgriez masīvu ar rindas ID, kur lietotājvārds sākas ar $partial_username LIMIT 10
     {
 
     }
@@ -108,7 +108,7 @@ class Db
 
     }
 
-    function AddWorker($project_id, $user_identifier)
+    function AddWorker($project_id, $user_id) // rindas ID
     {
         // $stmt = $this->mysqli->prepare("INSERT INTO projectworkers(Username, Passord, identifier) VALUES(?, ?, ?)");
         // $stmt->bind_param("s", $user_identifier);
@@ -121,7 +121,7 @@ class Db
         // }
     }
 
-    function RemoveWorker($project_id, $user_identifier)
+    function RemoveWorker($project_id, $user_id)
     {
 
     }
@@ -131,6 +131,11 @@ class Db
 
     }
 
+    function ListWorkers($project_id) // masīvs ar rindas ID
+    {
+
+    }
+    
     function CreateTask($project_id, $name, $description, $expire_time, $creator_identifier, $asignee = null)
     {
 
@@ -159,7 +164,7 @@ class Db
         ];
     }
 
-    function Updatetask($task_id, $name, $description, $expire_time, $status)
+    function Updatetask($task_id, $name = null, $description = null, $expire_time = null, $status = null) // pārveido lai visas kolonnas ir opcionālas (https://www.w3schools.com/sql/func_sqlserver_coalesce.asp)
     {
         $stmt = $this->mysqli->prepare("UPDATE tasks SET Title = ?, Description = ?, expire_time = ?, Status = ? WHERE task_id = ?");
         $stmt->bind_param("ssiii", $name, $description, $expire_time, $status, $task_id);
@@ -171,7 +176,7 @@ class Db
             return true;
         }
     }
-    function AssignTask($project_id, $task_id, $user_identifier) // identifier var būt null
+    function AssignTask($project_id, $task_id, $user_id=null)
     {
 
     }
