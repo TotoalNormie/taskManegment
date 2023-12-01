@@ -1,5 +1,6 @@
 <?php
 header("Access-Control-Allow-Origin: http://localhost:5173");
 
-echo json_encode($_GET);
+echo json_encode([$_GET, $_POST]);
+
 ?>

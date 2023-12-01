@@ -32,6 +32,8 @@ body {
   padding: 20px;
   text-align: center;
   font-family: 'Noto Sans', Arial, sans-serif;
+
+  --_error_color: rgb(202, 102, 119);
 }
 
 .border-bottom-input {
@@ -44,6 +46,7 @@ body {
   text-align: center;
   margin-top: 40px;
   font-size: 17px;
+  transition: border .3s ease;
 }
 
 .login-button {
@@ -55,9 +58,21 @@ body {
   cursor: pointer;
   margin-top: 40px;
   font-size: 16px;
+  transition: background-color .3s ease-in-out, color .3s ease-in-out;
 }
 
 .login-button:hover {
   background-color: #606060; /* Darker grey on hover */
   color: white;
+}
+
+.error {
+  padding-top: 1rem;
+  color: var(--_error_color);
+}
+
+.LoginDiv:has(.error:not(:empty)) {
+  & .border-bottom-input {
+    border-bottom: 1px solid var(--_error_color);
+  }
 }
