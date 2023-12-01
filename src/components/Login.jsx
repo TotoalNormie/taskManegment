@@ -1,6 +1,6 @@
 import React from 'react';
-import username_Logo from '../assets/username_Logo.PNG';
-import password_Logo from '../assets/password_Logo.PNG';
+import username_Logo from '../assets/username_Logo.png';
+import password_Logo from '../assets/password_Logo.png';
 import './style/Login.css';
 
 const Login = () => {

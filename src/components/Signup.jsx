@@ -1,7 +1,7 @@
 import '../style/Login.css'; 
-import username_Logo from '../assets/username_Logo.PNG';
-import password_Logo from '../assets/password_Logo.PNG';
-import confirm_Logo from '../assets/confirm_Logo.PNG';
+import username_Logo from '../assets/username_Logo.png';
+import password_Logo from '../assets/password_Logo.png';
+import confirm_Logo from '../assets/confirm_Logo.png';
 import React from 'react';
 
 const Signup = () => {
