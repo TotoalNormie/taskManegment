@@ -1,8 +1,8 @@
 import React from 'react';
 import Header from './Header.jsx';
-import username_Logo from '../assets/username_Logo.PNG';
-import password_Logo from '../assets/password_Logo.PNG';
-import './style/Login.css';
+import username_Logo from '../assets/username_Logo.png';
+import password_Logo from '../assets/password_Logo.png';
+import '../style/Login.css';
 
 const Login = () => {
   return (
