@@ -1,4 +1,3 @@
-import Header from './Header.jsx';
 import username_Logo from '../assets/username_Logo.png';
 import password_Logo from '../assets/password_Logo.png';
 import '../style/Login.css';
@@ -7,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 const Login = () => {
-	const [username, setUsername] = useState('');
+  	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 
 	const [error, setError] = useState('');
@@ -40,12 +39,11 @@ const Login = () => {
 			}
 		});
 	};
-
-	return (
-		<div>
-			<Header />
-			<div className='LoginDiv'>
-				<div className='inputContainer'>
+  return (
+    <div>
+      <form>
+        <div className="LoginDiv">
+          <div className='inputContainer'>
 					<img src={username_Logo} alt='username_Logo' className='logo2' />
 					<input
 						type='text'
@@ -71,9 +69,10 @@ const Login = () => {
 				<button className='login-button' onClick={handleForm}>
 					Login
 				</button>
-			</div>
-		</div>
-	);
+        </div>
+      </form>
+    </div>
+  );
 };
 
 export default Login;

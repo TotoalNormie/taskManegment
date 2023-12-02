@@ -1,5 +1,4 @@
-import '../style/Login.css'; // Import your stylesheet
-import Header from './Header.jsx';
+import '../style/Login.css'; 
 import username_Logo from '../assets/username_Logo.png';
 import password_Logo from '../assets/password_Logo.png';
 import confirm_Logo from '../assets/confirm_Logo.png';
@@ -11,7 +10,7 @@ const Signup = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [confirmPass, setConfirmPass] = useState('');
-
+  
 	const [error, setError] = useState('');
 
 	const navigate = useNavigate();
@@ -48,9 +47,9 @@ const Signup = () => {
 		});
 	};
 	return (
-		<div>
-			<Header />
-			<div className='LoginDiv'>
+    <div>
+      <form>
+        <div className='LoginDiv'>
 				<div className='inputContainer'>
 					<img src={username_Logo} alt='username_Logo' className='logo2' />
 					<input
@@ -87,8 +86,9 @@ const Signup = () => {
         <div className="error">{error}</div>
 				<button className='login-button' onClick={handleForm}>Sign up</button>
 			</div>
-		</div>
-	);
+      </form>
+    </div>
+  );
 };
 
 export default Signup;
