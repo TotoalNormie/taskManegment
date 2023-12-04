@@ -15,7 +15,8 @@ const Signup = () => {
 
 	const navigate = useNavigate();
 
-	const handleForm = () => {
+	const handleForm = (e) => {
+		e.preventDefault();
     if(password !== confirmPass) {
       setError('Passwords do not match');
       return;

@@ -13,7 +13,8 @@ const Login = () => {
 
 	const navigate = useNavigate();
 
-	const handleForm = () => {
+	const handleForm = (e) => {
+		e.preventDefault();
 		const body = new URLSearchParams({
 			user: username,
 			pass: password,
