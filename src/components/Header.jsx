@@ -11,7 +11,6 @@ const Header = () => {
 	const [drop, setDrop] = useState(false);
 	const [test, setTest] = useState(false);
 	if (location.pathname === '/landing') return null;
-	use
 
 	const handleClick = () => {
 		setDrop(!drop);
