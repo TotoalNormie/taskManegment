@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import makeAPIRequest from './functions/makeAPIRequest';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
@@ -8,23 +7,26 @@ import './style/App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import APITest from './components/APITest';
 import TestJomponent from './components/TestJomponent';
+import { UserProvider } from './components/UserProvider';
 
 function App() {
 	console.log(document.cookie);
 	return (
-		<BrowserRouter>
-			<Header />
-			<Sidebar />
-			<main>
-				<Routes>
-					{/* <Route exact path='/' element={<APITest />}></Route> */}
-					<Route exact path='/:id?' element={<APITest />}></Route>
-					<Route exact path='/test' element={<TestJomponent />}></Route>
-					<Route exact path='/signup' element={<Signup />}></Route>
-					<Route exact path='/login' element={<Login />}></Route>
-				</Routes>
-			</main>
-		</BrowserRouter>
+		<UserProvider>
+			<BrowserRouter>
+				<Header />
+				<Sidebar />
+				<main>
+					<Routes>
+						{/* <Route exact path='/' element={<APITest />}></Route> */}
+						<Route exact path='/:id?' element={<APITest />}></Route>
+						<Route exact path='/test' element={<TestJomponent />}></Route>
+						<Route exact path='/signup' element={<Signup />}></Route>
+						<Route exact path='/login' element={<Login />}></Route>
+					</Routes>
+				</main>
+			</BrowserRouter>
+		</UserProvider>
 	);
 }
 export default App;
