@@ -5,6 +5,25 @@
 	box-sizing: border-box;
 }
 
+:root {
+	--main-color: #918eff;
+}
+
+.hidden {
+	scale: 1 0;
+	translate: 0 -50%;
+	transition: scale 0.4s ease, translate 0.4s ease;
+}
+.flipped {
+	rotate: 180deg;
+}
+
+.stretched {
+	scale: 1 !important;
+	translate: 0 0 !important;
+}
+
+
 body {
 	margin: 0;
 	font-family: 'Open Sans', sans-serif;
@@ -15,11 +34,20 @@ body {
 	grid-template-columns: auto 1fr;
 	grid-template-rows: auto 1fr;
 	min-height: 100svh;
-}
+	& > header {
+		grid-row: 1 / span 1;
+		grid-column: 1 / span 2;
+	}
 
-header {
-	/* grid-row: 1 / span 1; */
-	grid-column: 1 / span 2;
+	& > main {
+		grid-row: 2 / span 1;
+		grid-column: 2 / span 1;
+	}
+
+	& > nav {
+		grid-row: 2 / span 1;
+		grid-column: 1 / span 1;
+	}
 }
 
 h1 {
