@@ -10,13 +10,15 @@ import APITest from './components/APITest';
 import TestJomponent from './components/TestJomponent';
 
 function App() {
+	console.log(document.cookie);
 	return (
 		<BrowserRouter>
 			<Header />
 			<Sidebar />
 			<main>
 				<Routes>
-					<Route exact path='/' element={<APITest />}></Route>
+					{/* <Route exact path='/' element={<APITest />}></Route> */}
+					<Route exact path='/:id?' element={<APITest />}></Route>
 					<Route exact path='/test' element={<TestJomponent />}></Route>
 					<Route exact path='/signup' element={<Signup />}></Route>
 					<Route exact path='/login' element={<Login />}></Route>
