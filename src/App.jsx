@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import makeAPIRequest from './functions/makeAPIRequest';
+import FullOpen from './components/FullOpen';
+import Home from './components/Home';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Login from './components/Login';
@@ -22,6 +24,8 @@ function App() {
 					<Route exact path='/test' element={<TestJomponent />}></Route>
 					<Route exact path='/signup' element={<Signup />}></Route>
 					<Route exact path='/login' element={<Login />}></Route>
+					<Route exact path='/home' element={<Home />}></Route>
+					<Route exact path='/fullopen' element={<FullOpen />}></Route>
 				</Routes>
 			</main>
 		</BrowserRouter>
