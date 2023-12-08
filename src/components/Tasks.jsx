@@ -3,7 +3,9 @@ import React from 'react';
 
 const Tasks = () => {
   return (
-    <p>Task</p>
+    <div className='ParentBox'>
+      
+    </div>
   );
 };
 export default Tasks;

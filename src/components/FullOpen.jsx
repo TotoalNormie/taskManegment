@@ -3,7 +3,9 @@ import React from 'react';
 
 const FullOpen = () => {
   return (
-    <p>FullOpen</p>
+    <div className='ParentBox'>
+      
+    </div>
   );
 };
 export default FullOpen;
