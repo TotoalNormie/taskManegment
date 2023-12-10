@@ -4,7 +4,7 @@ import '../style/Calendar.css';
 
 const DayLabels = () => {
   // Array of day names to display
-  const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const dayNames = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
   return (
     <div className="DayLabels">
@@ -17,13 +17,53 @@ const DayLabels = () => {
   );
 };
 
+const BottomDisplay = ({ selectedDate, shrunkenDiv }) => {
+  const formatDate = (date) => {
+    const dayOfMonth = date.getDate();
+    const suffix = getNumberSuffix(dayOfMonth);
+
+    const options = { weekday: 'long'};
+    return `${date.toLocaleDateString('en-US', options)} ${dayOfMonth}${suffix}`;
+  };
+
+  // Function to get the suffix for numbers (e.g., "st", "nd", "rd", "th")
+  const getNumberSuffix = (number) => {
+    if (number >= 11 && number <= 13) {
+      return 'th';
+    }
+    const lastDigit = number % 10;
+    switch (lastDigit) {
+      case 1:
+        return 'st';
+      case 2:
+        return 'nd';
+      case 3:
+        return 'rd';
+      default:
+        return 'th';
+    }
+  };
+
+  return (
+    <div className={`BottomDisplay ${shrunkenDiv !== null ? 'visible' : ''}`}>
+      {shrunkenDiv !== null && (
+        <p>
+          {formatDate(new Date(selectedDate.year, selectedDate.month - 1, shrunkenDiv - 5))}
+        </p>
+      )}
+    </div>
+  );
+};
+
 const Calendar = () => {
   const [selectedDate, setSelectedDate] = useState({
     year: 2023,
     month: 1,
+    day: null,
   });
 
   const [toggledButtons, setToggledButtons] = useState([]);
+  const [shrunkenDiv, setShrunkenDiv] = useState(null);
 
   const toggleButton = (index) => {
     setToggledButtons((prevToggledButtons) => {
@@ -31,6 +71,10 @@ const Calendar = () => {
       newToggledButtons[index] = !newToggledButtons[index];
       return newToggledButtons;
     });
+  };
+
+  const handleDoubleClick = (index) => {
+    setShrunkenDiv((prev) => (prev === index ? null : index));
   };
 
   const generateDivs = () => {
@@ -47,8 +91,9 @@ const Calendar = () => {
       divs.push(
         <button
           key={`prev-${i}`}
-          className={`generated-div prev-next-month`}
+          className={`generated-div prev-next-month ${shrunkenDiv === i ? 'shrunken' : ''}`}
           disabled={true}
+          onDoubleClick={() => handleDoubleClick(i)}
         >
           <span>{prevMonthLastDay - i + 1}</span>
         </button>
@@ -57,13 +102,17 @@ const Calendar = () => {
   
     // Days from the current month
     for (let i = 0; i < daysInMonth; i++) {
+      const dayOfMonth = i + 1;
       divs.push(
         <button
           key={`current-${i}`}
-          className={`generated-div ${toggledButtons[i] ? 'active' : ''}`}
+          className={`generated-div ${toggledButtons[i] ? 'active' : ''} ${
+            shrunkenDiv === i + daysFromPrevMonth ? 'shrunken' : ''
+          }`}
           onClick={() => toggleButton(i)}
+          onDoubleClick={() => handleDoubleClick(i + daysFromPrevMonth)}
         >
-          <span>{i + 1}.</span>
+          <span>{dayOfMonth}</span>
         </button>
       );
     }
@@ -76,8 +125,9 @@ const Calendar = () => {
       divs.push(
         <button
           key={`next-${i}`}
-          className={`generated-div prev-next-month`}
+          className={`generated-div prev-next-month ${shrunkenDiv === i + totalDays ? 'shrunken' : ''}`}
           disabled={true}
+          onDoubleClick={() => handleDoubleClick(i + totalDays)}
         >
           <span>{i + 1}</span>
         </button>
@@ -100,7 +150,8 @@ const Calendar = () => {
     }
 
     setSelectedDate(newDate);
-    setToggledButtons([]); // Reset toggled buttons when the month changes
+    setToggledButtons([]);
+    setShrunkenDiv(null); // Reset shrunken div on month change
   };
 
   return (
@@ -119,11 +170,15 @@ const Calendar = () => {
           <button onClick={() => handleMonthChange(1)}>&gt;</button>
         </div>
       </div>
-      <DayLabels /> {/* Add the new DayLabels component here */}
+      <DayLabels />
       <div className="Calendar">
         <div id="divContainer">{selectedDate.year > 0 && generateDivs()}</div>
       </div>
+      <BottomDisplay selectedDate={selectedDate} shrunkenDiv={shrunkenDiv} />
     </div>
+  
+
+  
   );
 };
 
