@@ -5,8 +5,6 @@ import React, { useState } from 'react';
 
 const FullOpen = () => {
   return (
-    <div>
-      <form>
         <div className='ParentBox'>
           <div className='Box'>
             <p>penis</p>
@@ -15,8 +13,6 @@ const FullOpen = () => {
             <Calendar />
           </div>
         </div>
-      </form>
-    </div>
   );
 };
 

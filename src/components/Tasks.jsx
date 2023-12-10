@@ -3,8 +3,11 @@ import React from 'react';
 
 const Tasks = () => {
   return (
-    <div className='ParentBox'>
-      
+    <div className='ParentBoxT'>
+      <div className='AddTask'></div>
+      <div className='ToDo'></div>
+      <div className='ToDo'></div>
+      <div className='ToDo'></div>
     </div>
   );
 };
