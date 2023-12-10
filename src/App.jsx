@@ -6,7 +6,7 @@ import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Login from './components/Login';
 import Signup from './components/Signup';
-import Calendar from './components/Calendar';
+import Tasks from './components/Tasks';
 import './style/App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import APITest from './components/APITest';
@@ -27,7 +27,7 @@ function App() {
 					<Route exact path='/login' element={<Login />}></Route>
 					<Route exact path='/home' element={<Home />}></Route>
 					<Route exact path='/fullopen' element={<FullOpen />}></Route>
-					<Route exact path='/calendar' element={<Calendar />}></Route>
+					<Route exact path='/tasks' element={<Tasks />}></Route>
 				</Routes>
 			</main>
 		</BrowserRouter>
