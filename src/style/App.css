@@ -16,6 +16,7 @@
 }
 .flipped {
 	rotate: 180deg;
+	transition: rotate 0.4s ease;
 }
 
 .stretched {

@@ -48,49 +48,47 @@ const Signup = () => {
 		});
 	};
 	return (
-		<div>
-			<form>
-				<div className='LoginDiv'>
-					<div className='inputContainer'>
-						<img src={username_Logo} alt='username_Logo' className='logo2' />
-						<input
-							type='text'
-							id='inputField'
-							className='border-bottom-input'
-							placeholder='Username'
-							value={username}
-							onChange={e => setUsername(e.target.value)}
-						/>
-					</div>
-					<div className='inputContainer'>
-						<img src={password_Logo} alt='password_Logo' className='logo2' />
-						<input
-							type='text'
-							id='inputField'
-							className='border-bottom-input'
-							placeholder='Password'
-							value={password}
-							onChange={e => setPassword(e.target.value)}
-						/>
-					</div>
-					<div className='inputContainer'>
-						<img src={confirm_Logo} alt='confirm_Logo' className='logo2' />
-						<input
-							type='text'
-							id='inputField'
-							className='border-bottom-input'
-							placeholder='Confirm Password'
-							value={confirmPass}
-							onChange={e => setConfirmPass(e.target.value)}
-						/>
-					</div>
-					<div className='error'>{error}</div>
-					<button className='login-button' onClick={handleForm}>
-						Sign up
-					</button>
+		<form>
+			<div className='LoginDiv'>
+				<div className='inputContainer'>
+					<img src={username_Logo} alt='username_Logo' className='logo2' />
+					<input
+						type='text'
+						id='inputField'
+						className='border-bottom-input'
+						placeholder='Username'
+						value={username}
+						onChange={e => setUsername(e.target.value)}
+					/>
 				</div>
-			</form>
-		</div>
+				<div className='inputContainer'>
+					<img src={password_Logo} alt='password_Logo' className='logo2' />
+					<input
+						type='text'
+						id='inputField'
+						className='border-bottom-input'
+						placeholder='Password'
+						value={password}
+						onChange={e => setPassword(e.target.value)}
+					/>
+				</div>
+				<div className='inputContainer'>
+					<img src={confirm_Logo} alt='confirm_Logo' className='logo2' />
+					<input
+						type='text'
+						id='inputField'
+						className='border-bottom-input'
+						placeholder='Confirm Password'
+						value={confirmPass}
+						onChange={e => setConfirmPass(e.target.value)}
+					/>
+				</div>
+				<div className='error'>{error}</div>
+				<button className='login-button' onClick={handleForm}>
+					Sign up
+				</button>
+			</div>
+		</form>
 	);
 };
 
