@@ -2,4 +2,107 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: 'Noto Sans', Arial, sans-serif;
-}
+  }
+  
+  .ParentBox {
+	height: 800px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center; /* Center content horizontally */
+  }
+  
+  .SliderContainer {
+	width: 70%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50%;
+	margin-bottom: 20px;
+  }
+  
+  .react-calendar {
+	font-family: 'Noto Sans', Arial, sans-serif;
+	width: 100%;
+	max-width: 400px; /* Adjust the width as needed */
+	margin: 0 auto;
+  }
+  
+  .generated-div {
+	background-color: #eeeeee;
+	width: calc((100%) / 8);
+	height: 90px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	display: inline-block;
+	text-align: center;
+	line-height: 80px;
+	cursor: pointer;
+	font-size: 50px;
+	border: none;
+	transition: transform 0.3s; /* Added transition for smooth shrink effect */
+  }
+  
+  .generated-div.active {
+	background-color: #918eff;
+  }
+  
+  /* Add styles for previous and next month's days */
+  .generated-div.prev-next-month {
+	background-color: #ccc;
+  }
+  
+  .generated-div.shrunken {
+	transform: scale(0.7); /* Adjust the scale factor as needed */
+  }
+  
+  .YeMo {
+	height: 100px;
+	width: 45%; /* Adjust the width as needed */
+	margin-right: 3%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center; /* Center content vertically */
+  }
+  
+  .Label {
+	font-size: 50px;
+	margin: 0 auto; /* Center content horizontally */
+	text-align: center; /* Center text horizontally */
+  }
+  
+  .Calendar {
+	margin-top: 20px;
+	height: 400px;
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center; /* Center content horizontally */
+  }
+  
+  .DayLabels {
+	display: flex;
+	justify-content: space-between;
+	margin-right:71px;
+	margin-bottom: 10px;
+	width: 48%;
+  }
+  
+  .day-label {
+	flex: 1;
+	text-align: center;
+	font-size: 18px; /* Adjust font size as needed */
+	font-weight: bold;
+	margin: 0;
+  }
+  
+  .BottomDisplay {
+	margin-top: 200px;
+	text-align: center;
+	display: none;
+  }
+  
+  .BottomDisplay.visible {
+	display: block;
+  }
