@@ -48,7 +48,7 @@ const BottomDisplay = ({ selectedDate, shrunkenDiv }) => {
     <div className={`BottomDisplay ${shrunkenDiv !== null ? 'visible' : ''}`}>
       {shrunkenDiv !== null && (
         <p>
-          {formatDate(new Date(selectedDate.year, selectedDate.month - 1, shrunkenDiv - 5))}
+          {formatDate(new Date(selectedDate.year, selectedDate.month - 1, shrunkenDiv - 3))}
         </p>
       )}
     </div>
@@ -155,7 +155,7 @@ const Calendar = () => {
   };
 
   return (
-    <div className="ParentBox">
+    <div className="ParentBoxCal">
       <div className="YeMo">
         <div>
           <button onClick={() => handleMonthChange(-1)}>&lt;</button>
