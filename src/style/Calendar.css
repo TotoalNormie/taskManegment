@@ -1,0 +1,105 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Noto Sans', Arial, sans-serif;
+  }
+  
+  .ParentBoxCal {
+	margin: 0;
+	padding: 0;
+	font-family: 'Noto Sans', Arial, sans-serif;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end; /* Align items to the right */
+  }
+  .SliderContainer {
+	width: 70%;
+	margin: 50% auto 20px;
+  }
+  
+  .react-calendar {
+	font-family: 'Noto Sans', Arial, sans-serif;
+	width: 100%;
+	max-width: 400px;
+	margin: 0 auto;
+  }
+  
+  .generated-div {
+	background-color: #eeeeee;
+	width: calc((100%) / 8);
+	height: 75px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	display: inline-block;
+	text-align: center;
+	line-height: 80px;
+	cursor: pointer;
+	font-size: 50px;
+	border: none;
+	transition: transform 0.3s;
+  }
+  
+  .generated-div.active {
+	background-color: #918eff;
+  }
+  
+  .generated-div.prev-next-month {
+	background-color: #ccc;
+  }
+  
+  .generated-div.shrunken {
+	transform: scale(0.7);
+  }
+  
+  .YeMo {
+	height: 100px;
+	width: 36%;
+	margin-right: 4%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+  }
+  
+  .Label {
+	font-size: 45px;
+	margin: 0 auto;
+	text-align: center;
+  }
+  
+  .Calendar {
+	margin-top: 20px;
+	height: 400px;
+	width: 40%;
+	margin-right: 20px;
+	display: flex;
+	flex-direction: column;
+
+  }
+  
+  .DayLabels {
+	display: flex;
+	justify-content: space-between;
+	margin-right: 46px;
+	margin-bottom: 5px;
+	width: 38.5%;
+  }
+  
+  .day-label {
+	flex: 1;
+	text-align: center;
+	font-size: 10apx;
+	font-weight: bold;
+	margin: 0;
+  }
+  
+  .BottomDisplay {
+	margin-top: 130px;
+	font-size: 30px;
+	text-align: center;
+	margin-right:270px;
+	display: none;
+  }
+  
+  .BottomDisplay.visible {
+	display: block;
+  }

@@ -1,8 +1,11 @@
 import makeAPIRequest from './functions/makeAPIRequest';
+import FullOpen from './components/FullOpen';
+import Home from './components/Home';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import Calendar from './components/Calendar';
 import './style/App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import APITest from './components/APITest';

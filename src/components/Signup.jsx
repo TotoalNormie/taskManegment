@@ -1,7 +1,5 @@
-import '../style/Login.css';
-import username_Logo from '../assets/username_Logo.png';
-import password_Logo from '../assets/password_Logo.png';
-import confirm_Logo from '../assets/confirm_Logo.png';
+import '../style/Login.css'; 
+import { User, Lock, CheckCircle } from "@phosphor-icons/react";
 import makeRequest from '../functions/makeAPIRequest';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -51,7 +49,7 @@ const Signup = () => {
 		<form>
 			<div className='LoginDiv'>
 				<div className='inputContainer'>
-					<img src={username_Logo} alt='username_Logo' className='logo2' />
+					<User className='logo2'/>
 					<input
 						type='text'
 						id='inputField'
@@ -62,7 +60,7 @@ const Signup = () => {
 					/>
 				</div>
 				<div className='inputContainer'>
-					<img src={password_Logo} alt='password_Logo' className='logo2' />
+				<Lock className='logo2'/>
 					<input
 						type='text'
 						id='inputField'
@@ -73,7 +71,7 @@ const Signup = () => {
 					/>
 				</div>
 				<div className='inputContainer'>
-					<img src={confirm_Logo} alt='confirm_Logo' className='logo2' />
+				<CheckCircle className='logo2'/>
 					<input
 						type='text'
 						id='inputField'
