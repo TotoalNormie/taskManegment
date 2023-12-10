@@ -1,10 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import makeAPIRequest from '../functions/makeAPIRequest';
 import { useParams } from 'react-router-dom';
+import { useUserContext } from './UserProvider';
 
 const APITest = () => {
 	const { id } = useParams();
 	const [test, setTest] = useState(['']);
+	const { user, setUser } = useUserContext();
+	console.log(user);
+
 	useEffect(() => {
 		makeAPIRequest('test', res => {
 			if (res.error === undefined) {
