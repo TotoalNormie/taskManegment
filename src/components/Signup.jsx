@@ -8,17 +8,17 @@ const Signup = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [confirmPass, setConfirmPass] = useState('');
-  
+
 	const [error, setError] = useState('');
 
 	const navigate = useNavigate();
 
-	const handleForm = (e) => {
+	const handleForm = e => {
 		e.preventDefault();
-    if(password !== confirmPass) {
-      setError('Passwords do not match');
-      return;
-    }
+		if (password !== confirmPass) {
+			setError('Passwords do not match');
+			return;
+		}
 
 		const body = new URLSearchParams({
 			user: username,
@@ -46,9 +46,8 @@ const Signup = () => {
 		});
 	};
 	return (
-    <div>
-      <form>
-        <div className='LoginDiv'>
+		<form>
+			<div className='LoginDiv'>
 				<div className='inputContainer'>
 					<User className='logo2'/>
 					<input
@@ -82,12 +81,13 @@ const Signup = () => {
 						onChange={e => setConfirmPass(e.target.value)}
 					/>
 				</div>
-        <div className="error">{error}</div>
-				<button className='login-button' onClick={handleForm}>Sign up</button>
+				<div className='error'>{error}</div>
+				<button className='login-button' onClick={handleForm}>
+					Sign up
+				</button>
 			</div>
-      </form>
-    </div>
-  );
+		</form>
+	);
 };
 
 export default Signup;
