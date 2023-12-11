@@ -21,7 +21,7 @@ const Header = () => {
 			<Link to='/' className='logo'>
 				<img src={logo} alt='logo' />
 			</Link>
-			<Link to='/' className='title'>
+			<Link to='/' className='title-header'>
 				JustToDoIt!
 			</Link>
 			<div className='user'>
