@@ -62,7 +62,7 @@ const Signup = () => {
 				<div className='inputContainer'>
 				<Lock className='logo2'/>
 					<input
-						type='text'
+						type='password'
 						id='inputField'
 						className='border-bottom-input'
 						placeholder='Password'
@@ -73,7 +73,7 @@ const Signup = () => {
 				<div className='inputContainer'>
 				<CheckCircle className='logo2'/>
 					<input
-						type='text'
+						type='password'
 						id='inputField'
 						className='border-bottom-input'
 						placeholder='Confirm Password'

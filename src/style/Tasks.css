@@ -12,8 +12,7 @@ body {
 	padding: 0;
 	font-family: 'Noto Sans', Arial, sans-serif;
 	display: flex;
-	border-style: solid;
-	flex-direction: column;
+		flex-direction: column;
 	align-items: flex-start; /* Align Tasks to the left */
   }
   
@@ -86,10 +85,164 @@ body {
 	justify-content: center;
   }
   
+  
+  .CloseButton {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	cursor: pointer;
+	font-size: 18px;
+	color: #333;
+  }
+  body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Noto Sans', Arial, sans-serif;
+  }
+  
+  .ParentBoxT {
+	height: 1000px;
+	width: 45%;
+	position: fixed;
+	margin: 0;
+	padding: 0;
+	font-family: 'Noto Sans', Arial, sans-serif;
+	display: flex;
+		flex-direction: column;
+	align-items: flex-start; /* Align Tasks to the left */
+  }
+  
+  .AddTask {
+	width: 100%;
+	height: 50px;
+
+	margin-bottom: 10px; /* Add margin to separate ToDo items */
+	display: flex; /* Add this line to enable flex layout for AddTask */
+  }
+  
+  .AddAddTask {
+	width: 50%;
+	height: 50px;
+  }
+  
+  .ProjectSettings {
+	width: 50%;
+	height: 50px;
+	text-align: right;
+  }
+  
+  .ToDo {
+	width: 100%;
+	height: auto;
+	background-color: #EFEFEF;
+	margin-bottom: 30px; /* Add margin to separate ToDo items */
+  }
+  
+  .Button {
+	background-color: #EFEFEF;
+	border: none;
+	font-family: 'Noto Sans', Arial, sans-serif;
+	padding: 6px 30px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 21px;
+	margin: 2px 2px;
+	cursor: pointer;
+	border-radius: 5px;
+  }
+  .Button2 {
+	background-color: #EFEFEF;
+	border: none;
+	padding: 6px 30px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 21px;
+	margin: 2px 2px;
+	cursor: pointer;
+  }
+  
+  .Button:hover {
+	background-color: #D0D0D0; /* Darkened color for hover effect */
+  }
+  .Button2:hover {
+	background-color: #D0D0D0; /* Darkened color for hover effect */
+  }
+  .Popup {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  }
+  
   .PopupContent {
 	background: #E4E4E4;
-	width: 60%;
-	height: 40%;
-	padding: 20px;
+	width: 55%;
+	height: 60%;
+	
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	position: relative;
+	text-align: center;
+	font-size: 25px;
+  }
+  .CloseButton {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	cursor: pointer;
+	font-size: 18px;
+	color: #333;
+  }
+  .Project{
+	text-align: left;
+	margin-left: 30px;
+	width: 25%;
+	font-size: 22px;
+	font-family: 'Noto Sans', Arial, sans-serif;
+	float: left;
+  }
+  .TodoTable {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 10px;
+  }
+  
+  .TodoTable th, .TodoTable td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: left;
+  }
+  .logo2 {
+	width: 25px; /* Set the desired width for the logo */
+	height: auto; /* Maintain aspect ratio */
+	margin-right: 10px; /* Adjust the margin as needed */
+	position: absolute;
+	left: 13px;
+	top: 75%;
+	transform: translateY(-50%);
+}
+  .thing{
+	font-size: 20px;
+  }
+  .EnterNameInput{
+	border: none;
+	float: left;
+	outline: none;
+	width: 60%;
+	padding: 5px;
+	background-color: #EEEEEE;
+	text-align: left;
+	margin-top: 20px;
+	font-size: 17px;
+	transition: border 0.3s ease;
+  }
+  .Labelw{
+	font-size: 20px;
+	margin-left: 20px;
   }

@@ -1,13 +1,18 @@
-import '../style/Tasks.css';
 import React, { useState } from 'react';
+import '../style/Tasks.css';
 
 const ProjectSettingsPopup = ({ onClose }) => {
   return (
     <div className="Popup">
       <div className="PopupContent">
-        {/* Add your project settings content here */}
-        <p>Project Settings Popup</p>
-        <button onClick={onClose}>Close</button>
+        <div className="CloseButton" onClick={onClose}>
+          X
+        </div>
+        <p>Project Settings</p>
+        <div className='Project'><p>Project Name</p><p className='thing'>The name of this project</p></div>
+        <div className='EnterName'>
+          <input type='text' className='EnterNameInput' placeholder='Enter name' />
+        </div>
       </div>
     </div>
   );
@@ -38,9 +43,45 @@ const Tasks = () => {
           </button>
         </div>
       </div>
-      <div className="ToDo"></div>
-      <div className="ToDo"></div>
-      <div className="ToDo"></div>
+      {/* First TODO div with a table */}
+      <div className="ToDo">
+        <div className='Labelw'><p>TODO</p></div>
+        {/* Table for the first TODO div */}
+        <table className='TodoTable'>
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Status</th>
+              <th>Due Date</th>
+              {/* Add more columns as needed */}
+            </tr>
+          </thead>
+          <tbody>
+            {/* Add rows for tasks */}
+            <tr>
+              <td>Task 1</td>
+              <td>Not Started</td>
+              <td>2023-12-31</td>
+              {/* Add more cells as needed */}
+            </tr>
+            {/* Add more rows as needed */}
+          </tbody>
+        </table>
+        {/* End of table */}
+      </div>
+      {/* End of first TODO div with a table */}
+
+      {/* Other TODO, In Progress, and Finished divs */}
+      <div className="ToDo">
+        <div className='Labelw'><p>In Progress</p></div>
+        {/* Add content for the In Progress div */}
+      </div>
+
+      <div className="ToDo">
+        <div className='Labelw'><p>Finished</p></div>
+        {/* Add content for the Finished div */}
+      </div>
+      {/* End of other TODO, In Progress, and Finished divs */}
 
       {isPopupVisible && <ProjectSettingsPopup onClose={closePopup} />}
     </div>
