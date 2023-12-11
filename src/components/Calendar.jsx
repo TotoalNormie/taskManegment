@@ -1,6 +1,8 @@
 // Import React and other necessary dependencies
 import React, { useState } from 'react';
 import '../style/Calendar.css';
+import { CaretRight, CaretLeft } from "@phosphor-icons/react";
+
 
 const DayLabels = () => {
   // Array of day names to display
@@ -157,9 +159,11 @@ const Calendar = () => {
   return (
     <div className="ParentBoxCal">
       <div className="YeMo">
-        <div>
-          <button onClick={() => handleMonthChange(-1)}>&lt;</button>
-        </div>
+      <div>
+  <button className="arrow-button" onClick={() => handleMonthChange(-1)}>
+    <CaretLeft />
+  </button>
+</div>
         <label className="Label">
           {new Date(selectedDate.year, selectedDate.month - 1, 1).toLocaleString('default', {
             month: 'long',
@@ -167,7 +171,11 @@ const Calendar = () => {
           {selectedDate.year}
         </label>
         <div>
-          <button onClick={() => handleMonthChange(1)}>&gt;</button>
+        <div>
+  <button className="arrow-button" onClick={() => handleMonthChange(1)}>
+    <CaretRight />
+  </button>
+</div>
         </div>
       </div>
       <DayLabels />

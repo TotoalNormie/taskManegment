@@ -39,10 +39,12 @@ const Tasks = () => {
           </button>
         </div>
         <div className="ProjectSettings">
+          
           <button className="Button2" onClick={openPopup}>
-          <Gear className='Gear' style={{ marginRight: '8px' }} />
-
-          Project Settings
+            <div className='GearAndText'>
+          <div><Gear className='Gear' style={{ marginRight: '8px' }} /></div>
+          <div>Project Settings</div>
+          </div>
           </button>
         </div>
       </div>

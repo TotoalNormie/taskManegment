@@ -50,8 +50,8 @@
   
   .YeMo {
 	height: 100px;
-	width: 70%;
-	margin-right: 9%;
+	width: 75%;
+	margin-right: 7%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -99,4 +99,21 @@
   
   .BottomDisplay.visible {
 	display: block;
+  }
+  
+  .arrow-button {
+	border: none;
+	background: none;
+	padding: 0;
+	font-size: 40px;
+	cursor: pointer;
+	transition: filter 0.3s;
+  }
+  
+  .arrow-button:hover {
+	filter: brightness(1.2);
+  }
+  
+  .arrow-button:focus {
+	outline: none;
   }
