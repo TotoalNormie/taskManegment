@@ -28,7 +28,7 @@ const Sidebar = () => {
 	)
 		return null;
 
-	useEffect(() => {}, []);
+	// useEffect(() => {}, []);
 
 	return (
 		<div className='wrapper'>
