@@ -47,7 +47,7 @@ const BottomDisplay = ({ selectedDate, shrunkenDiv }) => {
     <div className={`BottomDisplay ${shrunkenDiv !== null ? 'visible' : ''}`}>
       {shrunkenDiv !== null && (
         <p>
-          {formatDate(new Date(selectedDate.year, selectedDate.month - 1, shrunkenDiv - 3))}
+          {formatDate(new Date(selectedDate.year, selectedDate.month - 1, shrunkenDiv - 5))}
         </p>
       )}
     </div>

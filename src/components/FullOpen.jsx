@@ -1,6 +1,9 @@
 import '../style/FullOpen.css';
 import '../style/Calendar.css';
+import '../style/Tasks.css';
 import Calendar from './Calendar';
+import Tasks from './Tasks';
+import React from 'react';
 import { useEffect, useState } from 'react';
 import makeAPIRequest from '../functions/makeAPIRequest';
 import { useParams } from 'react-router';
@@ -19,14 +22,14 @@ const FullOpen = () => {
 		}
 	}, []);
 	return (
-		<div className='ParentBox'>
-			<div className='Box'>
-				<p>penis</p>
-			</div>
-			<div className='Box'>
-				<Calendar />
-			</div>
-		</div>
+    <div className='ParentBox'>
+    <div className='BoxL'>
+    <Tasks />
+    </div>
+    <div className='Box'>
+      <Calendar />
+    </div>
+  </div>
 	);
 };
 

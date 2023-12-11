@@ -2,21 +2,21 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: 'Noto Sans', Arial, sans-serif;
-}
-.ParentBox {
+  }
+  
+  .ParentBox {
 	height: 800px;
-	border-style: solid;
 	position: relative;
 	display: flex;
-	flex-direction: column;
-	align-items: center; /* Center content horizontally */
-	
+	flex-direction: row; /* Change to row to place Tasks and Calendar side by side */
   }
-  .Box{
-	display: inline-block;
-  border: 1px solid red;
-  padding: 1rem 1rem;
-  vertical-align: middle;
-  }
-
   
+  .BoxL {
+	flex: 1; /* Use flex property to make Tasks take available space */
+	padding: 1rem;
+  }
+  
+  .Box {
+	flex: 1; /* Use flex property to make Calendar take available space */
+	padding: 1rem;
+  }
