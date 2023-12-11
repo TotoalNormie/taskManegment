@@ -1,6 +1,5 @@
 // Import React and other necessary dependencies
 import React, { useState } from 'react';
-import '../style/Calendar.css';
 
 const DayLabels = () => {
   // Array of day names to display
