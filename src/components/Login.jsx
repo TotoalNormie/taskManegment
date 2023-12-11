@@ -43,7 +43,7 @@ const Login = () => {
 		<form>
 			<div className='LoginDiv'>
 				<div className='inputContainer'>
-					<img src={username_Logo} alt='username_Logo' className='logo2' />
+					<User className='logo2' />
 					<input
 						type='text'
 						id='usernameInput'

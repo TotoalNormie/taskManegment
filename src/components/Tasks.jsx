@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '../style/Tasks.css';
+import { DotsThreeVertical } from "@phosphor-icons/react";
 
 const ProjectSettingsPopup = ({ onClose }) => {
   return (
@@ -43,45 +44,83 @@ const Tasks = () => {
           </button>
         </div>
       </div>
-      {/* First TODO div with a table */}
       <div className="ToDo">
         <div className='Labelw'><p>TODO</p></div>
-        {/* Table for the first TODO div */}
         <table className='TodoTable'>
           <thead>
             <tr>
-              <th>Task</th>
-              <th>Status</th>
+              <th>Name</th>
+              <th>Asignee</th>
               <th>Due Date</th>
-              {/* Add more columns as needed */}
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
-            {/* Add rows for tasks */}
             <tr>
               <td>Task 1</td>
               <td>Not Started</td>
               <td>2023-12-31</td>
-              {/* Add more cells as needed */}
+              <td><button className="Button" onClick={() => console.log('Task added')}>Accept</button></td>
+              <td><button className="ButtonDots" onClick={() => console.log('Dots button clicked')}>
+                <DotsThreeVertical />
+              </button></td>
             </tr>
-            {/* Add more rows as needed */}
           </tbody>
         </table>
-        {/* End of table */}
       </div>
-      {/* End of first TODO div with a table */}
 
-      {/* Other TODO, In Progress, and Finished divs */}
       <div className="ToDo">
         <div className='Labelw'><p>In Progress</p></div>
-        {/* Add content for the In Progress div */}
+        <table className='TodoTable'>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Asignee</th>
+              <th>Due Date</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Task 1</td>
+              <td>Not Started</td>
+              <td>2023-12-31</td>
+              <td><button className="Button" onClick={() => console.log('Task added')}>Accept</button></td>
+              <td><button className="ButtonDots" onClick={() => console.log('Dots button clicked')}>
+                <DotsThreeVertical />
+              </button></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       <div className="ToDo">
         <div className='Labelw'><p>Finished</p></div>
-        {/* Add content for the Finished div */}
+        <table className='TodoTable'>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Asignee</th>
+              <th>Due Date</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Task 1</td>
+              <td>Not Started</td>
+              <td>2023-12-31</td>
+              <td><button className="Button" onClick={() => console.log('Task added')}>Accept</button></td>
+              <td><button className="ButtonDots" onClick={() => console.log('Dots button clicked')}>
+                <DotsThreeVertical />
+              </button></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      {/* End of other TODO, In Progress, and Finished divs */}
 
       {isPopupVisible && <ProjectSettingsPopup onClose={closePopup} />}
     </div>
