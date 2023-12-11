@@ -1,4 +1,4 @@
-import { User, Lock} from "@phosphor-icons/react";
+import { User, Lock } from '@phosphor-icons/react';
 import '../style/Login.css';
 import makeRequest from '../functions/makeAPIRequest';
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +7,7 @@ import { useState } from 'react';
 const Login = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
- 
+
 	const [error, setError] = useState('');
 
 	const navigate = useNavigate();
@@ -43,10 +43,9 @@ const Login = () => {
 		<form>
 			<div className='LoginDiv'>
 				<div className='inputContainer'>
-					<img src={username_Logo} alt='username_Logo' className='logo2' />
+					<User className='logo2' />
 					<input
 						type='text'
-						id='usernameInput'
 						className='border-bottom-input'
 						placeholder='Username'
 						value={username}
@@ -54,10 +53,9 @@ const Login = () => {
 					/>
 				</div>
 				<div className='inputContainer'>
-				<Lock className='logo2'/>
+					<Lock className='logo2' />
 					<input
 						type='password'
-						id='passwordInput'
 						className='border-bottom-input'
 						placeholder='Password'
 						value={password}

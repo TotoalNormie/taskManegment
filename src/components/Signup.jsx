@@ -1,5 +1,5 @@
-import '../style/Login.css'; 
-import { User, Lock, CheckCircle } from "@phosphor-icons/react";
+import '../style/Login.css';
+import { User, Lock, CheckCircle } from '@phosphor-icons/react';
 import makeRequest from '../functions/makeAPIRequest';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -49,10 +49,9 @@ const Signup = () => {
 		<form>
 			<div className='LoginDiv'>
 				<div className='inputContainer'>
-					<User className='logo2'/>
+					<User className='logo2' />
 					<input
 						type='text'
-						id='inputField'
 						className='border-bottom-input'
 						placeholder='Username'
 						value={username}
@@ -60,10 +59,9 @@ const Signup = () => {
 					/>
 				</div>
 				<div className='inputContainer'>
-				<Lock className='logo2'/>
+					<Lock className='logo2' />
 					<input
-						type='text'
-						id='inputField'
+						type='password'
 						className='border-bottom-input'
 						placeholder='Password'
 						value={password}
@@ -71,10 +69,9 @@ const Signup = () => {
 					/>
 				</div>
 				<div className='inputContainer'>
-				<CheckCircle className='logo2'/>
+					<CheckCircle className='logo2' />
 					<input
-						type='text'
-						id='inputField'
+						type='password'
 						className='border-bottom-input'
 						placeholder='Confirm Password'
 						value={confirmPass}
