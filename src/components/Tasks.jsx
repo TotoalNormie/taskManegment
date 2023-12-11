@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import '../style/Tasks.css';
-import { DotsThreeVertical } from "@phosphor-icons/react";
+import { DotsThreeVertical, Gear, X } from "@phosphor-icons/react";
 
 const ProjectSettingsPopup = ({ onClose }) => {
   return (
     <div className="Popup">
       <div className="PopupContent">
         <div className="CloseButton" onClick={onClose}>
-          X
+          <X />
         </div>
         <p>Project Settings</p>
         <div className='Project'><p>Project Name</p><p className='thing'>The name of this project</p></div>
@@ -40,7 +40,9 @@ const Tasks = () => {
         </div>
         <div className="ProjectSettings">
           <button className="Button2" onClick={openPopup}>
-            Project Settings
+          <Gear className='Gear' style={{ marginRight: '8px' }} />
+
+          Project Settings
           </button>
         </div>
       </div>
