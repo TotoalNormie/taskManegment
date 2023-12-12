@@ -33,6 +33,15 @@ const TaskList = ({ tasks }) => {
   );
 };
 const TaskRow = ({ name, assignee, dueDate, onAccept, onDotsClick }) => {
+    const [isDropdownVisible, setDropdownVisible] = useState(false);
+    const toggleDropdown = () => {
+      setDropdownVisible(!isDropdownVisible);
+    };
+  
+    const closeDropdown = () => {
+      setDropdownVisible(false);
+    };
+  
   return (
     <tr>
       <td>{name}</td>
@@ -40,9 +49,17 @@ const TaskRow = ({ name, assignee, dueDate, onAccept, onDotsClick }) => {
       <td>{dueDate}</td>
       <td><button className="Button" onClick={onAccept}>Accept</button></td>
       <td>
-        <button className="ButtonDots" onClick={onDotsClick}>
-          <DotsThreeVertical />
-        </button>
+        <div className="DropdownContainer">
+          <button className="ButtonDots" onClick={toggleDropdown}>
+            <DotsThreeVertical />
+          </button>
+          {isDropdownVisible && (
+            <div className="Dropdown" onClick={closeDropdown}>
+                <button className="ButtonD" onClick={() => console.log('Task added')}> Edit </button>
+                <button className="ButtonD" onClick={() => console.log('Task added')}> Delete </button>
+            </div>
+          )}
+        </div>
       </td>
     </tr>
   );
@@ -94,9 +111,7 @@ const Tasks = () => {
     <div className="ParentBoxT">
       <div className="AddTask">
         <div className="AddAddTask">
-          <button className="Button" onClick={() => console.log('Task added')}>
-            Add Task
-          </button>
+          <button className="Button" onClick={() => console.log('Task added')}> Add Task </button>
         </div>
         <div className="ProjectSettings">
           
