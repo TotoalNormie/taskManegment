@@ -1,92 +1,4 @@
-body {
-	margin: 0;
-	padding: 0;
-	font-family: 'Noto Sans', Arial, sans-serif;
-  }
-  
-  .ParentBoxT {
-	height: 1000px;
-	width: 45%;
-	position: fixed;
-	margin: 0;
-	padding: 0;
-	font-family: 'Noto Sans', Arial, sans-serif;
-	display: flex;
-		flex-direction: column;
-	align-items: flex-start; /* Align Tasks to the left */
-  }
-  
-  .AddTask {
-	width: 100%;
-	height: 50px;
-
-	margin-bottom: 10px; /* Add margin to separate ToDo items */
-	display: flex; /* Add this line to enable flex layout for AddTask */
-  }
-  
-  .AddAddTask {
-	width: 50%;
-	height: 50px;
-  }
-  
-  .ProjectSettings {
-	width: 50%;
-	height: 50px;
-	text-align: right;
-  }
-  
-  .ToDo {
-	width: 100%;
-	height: 120px;
-	background-color: #EFEFEF;
-	margin-bottom: 30px; /* Add margin to separate ToDo items */
-  }
-  
-  .Button {
-	background-color: #EFEFEF;
-	border: none;
-	font-family: 'Noto Sans', Arial, sans-serif;
-	padding: 6px 30px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 21px;
-	margin: 2px 2px;
-	cursor: pointer;
-	border-radius: 5px;
-  }
-  .Button2 {
-	background-color: #EFEFEF;
-	border: none;
-	padding: 6px 30px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 21px;
-	margin: 2px 2px;
-	cursor: pointer;
-  }
-  
-  .Button:hover {
-	background-color: #D0D0D0; /* Darkened color for hover effect */
-  }
-  .Button2:hover {
-	background-color: #D0D0D0; /* Darkened color for hover effect */
-  }
-  .Popup {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.5);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-  }
-  
-  
-  .CloseButton {
+.CloseButton {
 	position: absolute;
 	top: 10px;
 	right: 10px;
@@ -94,30 +6,23 @@ body {
 	font-size: 18px;
 	color: #333;
   }
-  body {
-	margin: 0;
-	padding: 0;
-	font-family: 'Noto Sans', Arial, sans-serif;
-  }
   
   .ParentBoxT {
-	height: 1000px;
-	width: 45%;
-	position: fixed;
+	height: auto;
+	width: 100%;
 	margin: 0;
 	padding: 0;
 	font-family: 'Noto Sans', Arial, sans-serif;
 	display: flex;
-		flex-direction: column;
+	flex-direction: column;
 	align-items: flex-start; /* Align Tasks to the left */
   }
   
   .AddTask {
 	width: 100%;
 	height: 50px;
-
-	margin-bottom: 10px; /* Add margin to separate ToDo items */
-	display: flex; /* Add this line to enable flex layout for AddTask */
+	margin-bottom: 10px;
+	display: flex;
   }
   
   .AddAddTask {
@@ -135,14 +40,14 @@ body {
 	width: 100%;
 	height: auto;
 	background-color: #EFEFEF;
-	margin-bottom: 30px; /* Add margin to separate ToDo items */
+	margin-bottom: 30px;
   }
   
   .Button {
 	background-color: #D9D9D9;
 	border: none;
-	font-family: 'Noto Sans', Arial, sans-serif;
 	padding: 6px 30px;
+	font-family: 'Noto Sans', Arial, sans-serif;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
@@ -151,10 +56,11 @@ body {
 	cursor: pointer;
 	border-radius: 5px;
   }
+  
   .Button2 {
 	background-color: #D9D9D9;
 	border: none;
-	padding: 6px 30px;
+	padding: 1px 10px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
@@ -164,10 +70,23 @@ body {
   }
   
   .Button:hover {
-	background-color: #D0D0D0; /* Darkened color for hover effect */
+	background-color: #D0D0D0;
   }
+  
   .Button2:hover {
-	background-color: #D0D0D0; /* Darkened color for hover effect */
+	background-color: #D0D0D0;
+  }
+  .ButtonD{
+	background-color: #D9D9D9;
+	border: none;
+	text-align: left;
+	font-size: 19px;
+	width:100%;
+	height:27px;
+	cursor: pointer;
+  }
+  .ButtonD:hover {
+	background-color: #D0D0D0;
   }
   .Popup {
 	position: fixed;
@@ -185,12 +104,12 @@ body {
 	background: #E4E4E4;
 	width: 55%;
 	height: 60%;
-	
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 	position: relative;
 	text-align: center;
 	font-size: 25px;
   }
+  
   .CloseButton {
 	position: absolute;
 	top: 10px;
@@ -199,7 +118,8 @@ body {
 	font-size: 18px;
 	color: #333;
   }
-  .Project{
+  
+  .Project {
 	text-align: left;
 	margin-left: 30px;
 	width: 25%;
@@ -208,74 +128,117 @@ body {
 	float: left;
   }
   
-  .TodoTable th, .TodoTable td {
+  .TodoTable th,
+  .TodoTable td {
 	border: 1px solid #ddd;
 	padding: 8px;
 	text-align: left;
   }
   
-  .thing{
+  .thing {
 	font-size: 20px;
   }
-  .EnterNameInput{
+  
+  .EnterNameInput {
 	border: none;
 	float: left;
 	outline: none;
 	width: 60%;
 	padding: 5px;
-	background-color: #EEEEEE;
+	background-color: #eeeeee;
 	text-align: left;
 	margin-top: 20px;
 	font-size: 17px;
 	transition: border 0.3s ease;
   }
-  .Labelw{
+  
+  .Labelw {
 	font-size: 20px;
 	margin-left: 20px;
   }
+  
   .TodoTable {
 	width: 95%;
 	border-collapse: collapse;
 	margin-left: 2.5%;
 	margin-top: 10px;
-	padding: 0 20px; /* Add padding to both sides of the table */
-  }
-  .TodoTable th {
-	border: none;
-	border-bottom: 1px solid;
-	margin-left: 20px;
+	padding: 0 20px;
   }
   
-  /* Modify this rule to remove borders from table cells */
+  .TodoTable th {
+	border: none;
+	
+	border-bottom: 1px solid;
+	margin-left: 21px;
+	font-weight: lighter;
+  }
+  
   .TodoTable td {
 	border: none;
   }
+  
   .TodoTable th:first-child,
-.TodoTable td:first-child {
-	width: 300px; /* Adjust the width as needed */
-}
-.DotsThreeVertical {
-	font-size: 30px; /* Adjust the size as needed */
+  .TodoTable td:first-child {
+	width: 300px;
   }
+  
+  .DotsThreeVertical {
+	font-size: 30px;
+  }
+  
   .TodoTable th:last-child,
-.TodoTable td:last-child {
-  width: 50px; /* Adjust the width as needed */
-}
-.TodoTable th:nth-last-child(2),
-.TodoTable td:nth-last-child(2) {
-  width: 80px; /* Adjust the width as needed */
-}
-.TodoTable tbody tr:hover {
-	background-color: #E7E7E7; /* Darkened color for hover effect */
+  .TodoTable td:last-child {
+	width: 50px;
   }
-.ButtonDots{
+  
+  .TodoTable th:nth-last-child(2),
+  .TodoTable td:nth-last-child(2) {
+	width: 80px;
+  }
+  
+  .TodoTable tbody tr:hover {
+	background-color: #e7e7e7;
+  }
+  
+  .ButtonDots {
 	font-size: 30px;
 	background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0; /* Remove padding */
-}
-
-.ButtonDots:hover {
-  color: #555; /* Change color on hover as desired */
-}
+	border: none;
+	cursor: pointer;
+	padding: 0;
+  }
+  
+  
+  .Gear {
+	font-size: 30px;
+  }
+  
+  .GearAndText {
+	display: flex;
+	align-items: center;
+  }
+  .icon{
+	background-color: #ccc;
+	border-radius: 50%;
+	height: 50px;
+	margin-left: 6px;
+	width: 50px;
+  }
+  .DropdownContainer {
+	position: relative;
+	display: inline-block;
+  }
+  
+  .Dropdown {
+	position: absolute;
+	top: 100%;
+	right: 10px;
+	background-color: #D9D9D9;
+	border: none;
+	width:163px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-radius: 10%;
+	z-index: 1;
+  }
+  
