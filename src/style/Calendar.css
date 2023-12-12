@@ -50,24 +50,23 @@
   
   .YeMo {
 	height: 100px;
-	width: 75%;
-	margin-right: 7%;
+	width: 68%;
+	margin-right: 11%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
   }
   
   .Label {
-	font-size: 45px;
+	font-size: 43px;
 	margin: 0 auto;
 	text-align: center;
   }
   
   .Calendar {
 	margin-top: 20px;
-	height: 400px;
-	width: 80%;
-	margin-right: 20px;
+	width: 70%;
+	margin-right: 70px;
 	display: flex;
 	flex-direction: column;
 
@@ -76,9 +75,9 @@
   .DayLabels {
 	display: flex;
 	justify-content: space-between;
-	margin-right: 46px;
+	margin-right: 76px;
 	margin-bottom: 5px;
-	width: 77%;
+	width: 70%;
   }
   
   .day-label {
@@ -90,7 +89,7 @@
   }
   
   .BottomDisplay {
-	margin-top: 130px;
+	margin-top: 10px;
 	font-size: 30px;
 	text-align: center;
 	margin-right:270px;
