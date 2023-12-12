@@ -1,7 +1,52 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import '../style/Tasks.css';
 import { DotsThreeVertical, Gear, X } from "@phosphor-icons/react";
 
+const TaskList = ({ tasks }) => {
+  return (
+    <div className="ToDo">
+      <div className='Labelw'><p>{tasks.label}</p></div>
+      <table className='TodoTable'>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Asignee</th>
+            <th>Due Date</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {tasks.items.map((task, index) => (
+            <TaskRow
+              key={index}
+              name={task.name}
+              assignee={task.assignee}
+              dueDate={task.dueDate}
+              onAccept={task.onAccept}
+              onDotsClick={task.onDotsClick}
+            />
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+const TaskRow = ({ name, assignee, dueDate, onAccept, onDotsClick }) => {
+  return (
+    <tr>
+      <td>{name}</td>
+      <td><div className='icon'>{assignee}</div></td>
+      <td>{dueDate}</td>
+      <td><button className="Button" onClick={onAccept}>Accept</button></td>
+      <td>
+        <button className="ButtonDots" onClick={onDotsClick}>
+          <DotsThreeVertical />
+        </button>
+      </td>
+    </tr>
+  );
+};
 const ProjectSettingsPopup = ({ onClose }) => {
   return (
     <div className="Popup">
@@ -30,6 +75,21 @@ const Tasks = () => {
     setPopupVisible(false);
   };
 
+  const taskData = {
+    todo: [
+      { name: "Task 1", assignee: <div></div>, dueDate: "2023-12-31", onAccept: () => console.log('Task added'), onDotsClick: () => console.log('Dots button clicked') },
+      // Add more tasks as needed
+    ],
+    inProgress: [
+      { name: "Task 1", assignee: <div></div>, dueDate: "2023-12-31", onAccept: () => console.log('Task added'), onDotsClick: () => console.log('Dots button clicked') },
+      // Add more tasks as needed
+    ],
+    finished: [
+      { name: "Task 1", assignee: <div></div>, dueDate: "2023-12-31", onAccept: () => console.log('Task added'), onDotsClick: () => console.log('Dots button clicked') },
+      // Add more tasks as needed
+    ],
+  };
+
   return (
     <div className="ParentBoxT">
       <div className="AddTask">
@@ -48,83 +108,9 @@ const Tasks = () => {
           </button>
         </div>
       </div>
-      <div className="ToDo">
-        <div className='Labelw'><p>TODO</p></div>
-        <table className='TodoTable'>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Asignee</th>
-              <th>Due Date</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Task 1</td>
-              <td>Not Started</td>
-              <td>2023-12-31</td>
-              <td><button className="Button" onClick={() => console.log('Task added')}>Accept</button></td>
-              <td><button className="ButtonDots" onClick={() => console.log('Dots button clicked')}>
-                <DotsThreeVertical />
-              </button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div className="ToDo">
-        <div className='Labelw'><p>In Progress</p></div>
-        <table className='TodoTable'>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Asignee</th>
-              <th>Due Date</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Task 1</td>
-              <td>Not Started</td>
-              <td>2023-12-31</td>
-              <td><button className="Button" onClick={() => console.log('Task added')}>Accept</button></td>
-              <td><button className="ButtonDots" onClick={() => console.log('Dots button clicked')}>
-                <DotsThreeVertical />
-              </button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div className="ToDo">
-        <div className='Labelw'><p>Finished</p></div>
-        <table className='TodoTable'>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Asignee</th>
-              <th>Due Date</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Task 1</td>
-              <td>Not Started</td>
-              <td>2023-12-31</td>
-              <td><button className="Button" onClick={() => console.log('Task added')}>Accept</button></td>
-              <td><button className="ButtonDots" onClick={() => console.log('Dots button clicked')}>
-                <DotsThreeVertical />
-              </button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <TaskList tasks={{ label: 'TODO', items: taskData.todo }} />
+      <TaskList tasks={{ label: 'In Progress', items: taskData.inProgress }} />
+      <TaskList tasks={{ label: 'Finished', items: taskData.finished }} />
 
       {isPopupVisible && <ProjectSettingsPopup onClose={closePopup} />}
     </div>
@@ -132,3 +118,5 @@ const Tasks = () => {
 };
 
 export default Tasks;
+
+
