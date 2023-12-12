@@ -98,11 +98,11 @@ const Tasks = () => {
       // Add more tasks as needed
     ],
     inProgress: [
-      { name: "Task 1", assignee: <div></div>, dueDate: "2023-12-31", onAccept: () => console.log('Task added'), onDotsClick: () => console.log('Dots button clicked') },
+      { name: "Task 2", assignee: <div></div>, dueDate: "2023-12-31", onAccept: () => console.log('Task added'), onDotsClick: () => console.log('Dots button clicked') },
       // Add more tasks as needed
     ],
     finished: [
-      { name: "Task 1", assignee: <div></div>, dueDate: "2023-12-31", onAccept: () => console.log('Task added'), onDotsClick: () => console.log('Dots button clicked') },
+      { name: "Task 3", assignee: <div></div>, dueDate: "2023-12-31", onAccept: () => console.log('Task added'), onDotsClick: () => console.log('Dots button clicked') },
       // Add more tasks as needed
     ],
   };

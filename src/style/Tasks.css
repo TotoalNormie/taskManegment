@@ -167,8 +167,10 @@
   
   .TodoTable th {
 	border: none;
+	
 	border-bottom: 1px solid;
-	margin-left: 20px;
+	margin-left: 21px;
+	font-weight: lighter;
   }
   
   .TodoTable td {

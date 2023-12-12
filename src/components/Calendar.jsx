@@ -1,4 +1,3 @@
-// Import React and other necessary dependencies
 import React, { useState } from 'react';
 import '../style/Calendar.css';
 import { CaretRight, CaretLeft } from "@phosphor-icons/react";
