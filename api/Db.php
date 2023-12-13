@@ -59,12 +59,23 @@ class Db
 
     function UserExists($username)
     {
+        $query = "SELECT Username FROM user WHERE Username = '$username'";
+        $result = $this->mysqli->query($query);
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+        
+    }
+
+    function GetUsername($user_identifier)
+    {
 
     }
 
     function FindUsers($partial_username) // atgriez masīvu ar rindas ID, kur lietotājvārds sākas ar $partial_username LIMIT 10
     {
-
+        $query = "SELECT Username FROM user WHERE Username LIKE '$partial_username%' LIMIT 10";
+        $result = $this->mysqli->query($query);
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+        return $data;
     }
 
     function RetrievePassword($user_identifier)
@@ -72,7 +83,7 @@ class Db
 
     }
 
-    function ListProjects($user_identifier)
+    function ListProjects($user_identifier) // ieskaitot tie kuros tu esi worker
     {
         return [
             [
@@ -95,38 +106,36 @@ class Db
 
     function DeleteProject($project_id)
     {
+        $stmt = $this->mysqli->prepare("DELETE FROM projects WHERE Project_id = ?");
+        $stmt->bind_param("i", $project_id);
+        $stmt->execute();
 
+        if ($this->mysqli->affected_rows == 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
-    function SetUserPrivilege($project_id, $user_identifier, $privilege) // privilege būs enum UserPrivilege
+    function AddWorker($project_id, $username) // rindas ID
+    {
+        $stmt = $this->mysqli->prepare("INSERT INTO projectworkers(Username, Password, identifier) VALUES(?, ?, ?)");
+        $stmt->bind_param("s", $user_identifier);
+        $stmt->execute();
+
+        if ($this->mysqli->affected_rows == 0){
+        	return false;
+        } else{
+        	return true;
+        }
+    }
+
+    function RemoveWorker($project_id, $username)
     {
 
     }
 
-    function GetUserPrivilege($project_id) // atgriez kādu no enum UserPrivilege
-    {
-
-    }
-
-    function AddWorker($project_id, $user_id) // rindas ID
-    {
-        // $stmt = $this->mysqli->prepare("INSERT INTO projectworkers(Username, Passord, identifier) VALUES(?, ?, ?)");
-        // $stmt->bind_param("s", $user_identifier);
-        // $stmt->execute();
-
-        // if ($this->mysqli->affected_rows == 0){
-        // 	return false;
-        // } else{
-        // 	return true;
-        // }
-    }
-
-    function RemoveWorker($project_id, $user_id)
-    {
-
-    }
-
-    function IsWorker($project_id, $user_identifier)
+    function IsWorker($project_id, $user_identifier) // atgriez true arī ja ir projekta īpašnieks
     {
 
     }
@@ -137,6 +146,16 @@ class Db
         $result = $this->mysqli->query($query);
         $data = $result->fetch_all(MYSQLI_ASSOC);
         return $data;
+    }
+
+    function SetWorkerPrivilege($project_id, $username, $privilege) // privilege būs enum UserPrivilege
+    {
+
+    }
+
+    function GetWorkerPrivilege($project_id) // atgriez kādu no enum UserPrivilege
+    {
+
     }
     
     function CreateTask($project_id, $name, $description, $due_date, $creator_identifier, $asignee = null)
@@ -174,9 +193,9 @@ class Db
     //     //         "CreatedBy" => "Username"
     //     //     ]
     //     // ];
-    // }
+    }
 
-    function Updatetask($task_id, $name = null, $description = null, $expire_time = null, $status = null) // pārveido lai visas kolonnas ir opcionālas (https://www.w3schools.com/sql/func_sqlserver_coalesce.asp)
+    function UpdateTask($task_id, $name = null, $description = null, $expire_time = null, $status = null) // pārveido lai visas kolonnas ir opcionālas (https://www.w3schools.com/sql/func_sqlserver_coalesce.asp)
     {
         $stmt = $this->mysqli->prepare("UPDATE tasks SET Title = COALESCE(?, Title), Description = COALESCE(?, Description), expire_time = COALESCE(?, expire_time), Status = ? WHERE Task_id = ?");
         $stmt->bind_param("ssiii", $name, $description, $expire_time, $status, $task_id);
@@ -188,7 +207,7 @@ class Db
             return true;
         }
     }
-    function AssignTask($project_id, $task_id, $user_id=null)
+    function AssignTask($project_id, $task_id, $username=null)
     {
         $stmt = $this->mysqli->prepare("UPDATE tasks SET Project_ID = ?, Task_ID = ?, Asignee_ID = COALESCE(?, Asignee_ID) WHERE Task_ID = ?");
         $stmt->bind_param("iii", $project_id, $task_id, $user_id);
@@ -214,6 +233,3 @@ class Db
         }
     }
 }
-
-$taski = new Db;
-var_dump($obj->ListTasks(4));

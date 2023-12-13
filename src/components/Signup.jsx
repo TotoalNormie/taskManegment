@@ -1,7 +1,5 @@
-import '../style/Login.css'; 
-import username_Logo from '../assets/username_Logo.png';
-import password_Logo from '../assets/password_Logo.png';
-import confirm_Logo from '../assets/confirm_Logo.png';
+import '../style/Login.css';
+import { User, Lock, CheckCircle } from '@phosphor-icons/react';
 import makeRequest from '../functions/makeAPIRequest';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -10,17 +8,17 @@ const Signup = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [confirmPass, setConfirmPass] = useState('');
-  
+
 	const [error, setError] = useState('');
 
 	const navigate = useNavigate();
 
-	const handleForm = (e) => {
+	const handleForm = e => {
 		e.preventDefault();
-    if(password !== confirmPass) {
-      setError('Passwords do not match');
-      return;
-    }
+		if (password !== confirmPass) {
+			setError('Passwords do not match');
+			return;
+		}
 
 		const body = new URLSearchParams({
 			user: username,
@@ -48,14 +46,12 @@ const Signup = () => {
 		});
 	};
 	return (
-    <div>
-      <form>
-        <div className='LoginDiv'>
+		<form>
+			<div className='LoginDiv'>
 				<div className='inputContainer'>
-					<img src={username_Logo} alt='username_Logo' className='logo2' />
+					<User className='logo2' />
 					<input
 						type='text'
-						id='inputField'
 						className='border-bottom-input'
 						placeholder='Username'
 						value={username}
@@ -63,10 +59,9 @@ const Signup = () => {
 					/>
 				</div>
 				<div className='inputContainer'>
-					<img src={password_Logo} alt='password_Logo' className='logo2' />
+					<Lock className='logo2' />
 					<input
-						type='text'
-						id='inputField'
+						type='password'
 						className='border-bottom-input'
 						placeholder='Password'
 						value={password}
@@ -74,22 +69,22 @@ const Signup = () => {
 					/>
 				</div>
 				<div className='inputContainer'>
-					<img src={confirm_Logo} alt='confirm_Logo' className='logo2' />
+					<CheckCircle className='logo2' />
 					<input
-						type='text'
-						id='inputField'
+						type='password'
 						className='border-bottom-input'
 						placeholder='Confirm Password'
 						value={confirmPass}
 						onChange={e => setConfirmPass(e.target.value)}
 					/>
 				</div>
-        <div className="error">{error}</div>
-				<button className='login-button' onClick={handleForm}>Sign up</button>
+				<div className='error'>{error}</div>
+				<button className='login-button' onClick={handleForm}>
+					Sign up
+				</button>
 			</div>
-      </form>
-    </div>
-  );
+		</form>
+	);
 };
 
 export default Signup;

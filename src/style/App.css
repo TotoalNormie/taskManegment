@@ -16,6 +16,7 @@
 }
 .flipped {
 	rotate: 180deg;
+	transition: rotate 0.4s ease;
 }
 
 .stretched {
@@ -42,6 +43,7 @@ body {
 	& > main {
 		grid-row: 2 / span 1;
 		grid-column: 2 / span 1;
+		padding: 2rem 1rem;
 	}
 
 	& > nav {

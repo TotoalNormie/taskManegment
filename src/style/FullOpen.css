@@ -1,0 +1,17 @@
+ 
+  .ParentBox {
+	height: 800px;
+	position: relative;
+	display: flex;
+	flex-direction: row; /* Change to row to place Tasks and Calendar side by side */
+  }
+  
+  .BoxL {
+	flex: 1; /* Use flex property to make Tasks take available space */
+	padding: 1rem;
+  }
+  
+  .Box {
+	flex: 1; /* Use flex property to make Calendar take available space */
+	padding: 1rem;
+  }

@@ -2,9 +2,10 @@ import '../style/Header.css';
 import logo from '../assets/logo.png';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
+import { CaretDown } from '@phosphor-icons/react';
 
 const Header = () => {
 	const location = useLocation();
@@ -20,13 +21,13 @@ const Header = () => {
 			<Link to='/' className='logo'>
 				<img src={logo} alt='logo' />
 			</Link>
-			<Link to='/' className='title'>
+			<Link to='/' className='title-header'>
 				JustToDoIt!
 			</Link>
 			<div className='user'>
 				<div className='avatar'>RL</div>
 				<button className={`drop ${drop ? 'flipped' : ''}`} onClick={handleClick}>
-					<FontAwesomeIcon icon={faAngleDown}></FontAwesomeIcon>
+					<CaretDown />
 				</button>
 				<button className={`logout ${drop ? 'stretched' : ''}`}>Logout</button>
 			</div>

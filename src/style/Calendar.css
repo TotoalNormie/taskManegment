@@ -1,4 +1,164 @@
-.calendar {
+  
+  .ParentBoxCal {
+	margin: 0;
+	padding: 0;
+	font-family: 'Noto Sans', Arial, sans-serif;
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	align-items: flex-end; /* Align items to the right */
+	justify-content: flex-start; /* Align content to the top */
+  }
+  .SliderContainer {
+	width: 70%;
+	margin: 50% auto 20px;
+  }
+  
+  .react-calendar {
+	font-family: 'Noto Sans', Arial, sans-serif;
+	width: 100%;
+	max-width: 400px;
+	margin: 0 auto;
+  }
+  
+  .generated-div {
+	background-color: #eeeeee;
+	width: calc((100%) / 8);
+	height: 75px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	display: inline-block;
+	text-align: center;
+	line-height: 80px;
+	cursor: pointer;
+	font-size: 50px;
+	border: none;
+	transition: transform 0.3s;
+  }
+  
+  .generated-div.active {
+	background-color: #918eff;
+  }
+  
+  .generated-div.prev-next-month {
+	background-color: #ccc;
+  }
+  
+  .generated-div.shrunken {
+	transform: scale(0.7);
+  }
+  
+  .YeMo {
+	height: 100px;
+	width: 68%;
+	margin-right: 11%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+  }
+  
+  .Label {
+	font-size: 43px;
+	margin: 0 auto;
+	text-align: center;
+  }
+  
+  .Calendar {
+	margin-top: 20px;
+	width: 70%;
+	margin-right: 70px;
+	display: flex;
+	flex-direction: column;
+
+  }
+  
+  .DayLabels {
+	display: flex;
+	justify-content: space-between;
+	margin-right: 76px;
+	margin-bottom: 5px;
+	width: 70%;
+  }
+  
+  .day-label {
+	flex: 1;
+	text-align: center;
+	font-size: 10apx;
+	font-weight: bold;
+	margin: 0;
+  }
+  
+  .BottomDisplay {
+	margin-top: 10px;
+	font-size: 30px;
+	text-align: center;
+	margin-right:270px;
+	display: none;
+  }
+  
+  .BottomDisplay.visible {
+	display: block;
+  }
+  
+  .arrow-button {
+	border: none;
+	background: none;
+	padding: 0;
+	font-size: 40px;
+	cursor: pointer;
+	transition: filter 0.3s;
+  }
+  
+  .arrow-button:hover {
+	filter: brightness(1.2);
+  }
+  
+  .arrow-button:focus {
+	outline: none;
+  }
+  .Table3,
+  .Table2{
+margin-top: 10px;
+width: 100%;
+border-collapse: collapse;
+  }
+  .Table3 td,
+  .Table2 td{
+	
+	padding: 8px;
+	text-align: left;
+	height:50px
+  }
+  .Table3 td:first-child,
+  .Table2 td:first-child{
+	width: 50px;
+  }
+  .Table2 tr {
+	border-bottom: 2px solid #eeeeee;
+  }
+  .Table3 td:nth-last-child(2),
+  .Table2 td:nth-last-child(2) {
+	width: 400px;
+  }
+  .Table2Div{
+	width: 565px;
+	height: 100px;
+	margin-right: 80px;
+  }
+  .icon2{
+	background-color: #918EFF;
+	border-radius: 50%;
+	height: 25px;
+	margin-left: 6px;
+	width: 25px;
+  }
+  .icon3{
+	background-color: #90FF8E;
+	border-radius: 50%;
+	height: 25px;
+	margin-left: 6px;
+	width: 25px;
+  .calendar {
     display: grid;
     flex-wrap: wrap;
   }
