@@ -136,7 +136,7 @@ const Tasks = () => {
   return (
     <div className="ParentBoxT">
       <div className='CalendarPopup'>
-          <button className="Button" onClick={openPopup}>
+          <button className="Button" >
             <div className='GearAndText'>
           <div>Show Calendar</div>
           </div>
