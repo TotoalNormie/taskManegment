@@ -1,6 +1,5 @@
  
   .ParentBox {
-	height: 800px;
 	position: relative;
 	display: flex;
 	flex-direction: row; /* Change to row to place Tasks and Calendar side by side */

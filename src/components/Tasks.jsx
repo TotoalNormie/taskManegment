@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../style/Tasks.css';
 import { DotsThreeVertical, Gear, X } from "@phosphor-icons/react";
 
-const TaskList = ({ tasks }) => {
+const TaskList = ({ tasks, acceptLabel }) => {
   return (
     <div className="ToDo">
       <div className='Labelw'><p>{tasks.label}</p></div>
@@ -10,7 +10,7 @@ const TaskList = ({ tasks }) => {
         <thead>
           <tr>
             <th>Name</th>
-            <th>Asignee</th>
+            <th>Assignee</th>
             <th>Due Date</th>
             <th></th>
             <th></th>
@@ -24,6 +24,7 @@ const TaskList = ({ tasks }) => {
               assignee={task.assignee}
               dueDate={task.dueDate}
               onAccept={task.onAccept}
+              acceptLabel={acceptLabel}
               onDotsClick={task.onDotsClick}
             />
           ))}
@@ -32,31 +33,56 @@ const TaskList = ({ tasks }) => {
     </div>
   );
 };
-const TaskRow = ({ name, assignee, dueDate, onAccept, onDotsClick }) => {
-    const [isDropdownVisible, setDropdownVisible] = useState(false);
-    const toggleDropdown = () => {
-      setDropdownVisible(!isDropdownVisible);
-    };
-  
-    const closeDropdown = () => {
-      setDropdownVisible(false);
-    };
-  
+
+const TaskRow = ({ name, assignee, dueDate, onAccept, acceptLabel, onDotsClick }) => {
+  const [isIconDropdownVisible, setIconDropdownVisible] = useState(false);
+  const [isDotsDropdownVisible, setDotsDropdownVisible] = useState(false);
+
+  const toggleIconDropdown = () => {
+    setIconDropdownVisible(!isIconDropdownVisible);
+  };
+
+  const toggleDotsDropdown = () => {
+    setDotsDropdownVisible(!isDotsDropdownVisible);
+  };
+
+  const closeDropdowns = () => {
+    setIconDropdownVisible(false);
+    setDotsDropdownVisible(false);
+  };
+
   return (
     <tr>
       <td>{name}</td>
-      <td><div className='icon'>{assignee}</div></td>
+      <td>
+      <div className="DropdownContainer">
+        <div className='icon' onClick={toggleIconDropdown}>
+          {assignee}
+        </div>
+        {isIconDropdownVisible && (
+          
+          <div className="Dropdown" style={{ position: 'absolute', top: '100%', left: '0' }} onClick={closeDropdowns}>
+            {/* Different dropdown content for the icon */}
+            <button className="ButtonD2" onClick={() => console.log('Icon Action 1')}><div className='icon23'></div><div className='username'>Username</div></button>
+            <button className="ButtonD2" onClick={() => console.log('Icon Action 2')}><div className='icon23'></div><div className='username'>Username</div></button>
+            <button className="ButtonD2" onClick={() => console.log('Icon Action 2')}><div className='icon23'></div><div className='username'>Username</div></button>
+          </div>
+        
+        )}
+        </div>
+      </td>
       <td>{dueDate}</td>
-      <td><button className="Button" onClick={onAccept}>Accept</button></td>
+      <td><button className="Button" onClick={onAccept}>{acceptLabel}</button></td>
       <td>
         <div className="DropdownContainer">
-          <button className="ButtonDots" onClick={toggleDropdown}>
+          <button className="ButtonDots" onClick={toggleDotsDropdown}>
             <DotsThreeVertical />
           </button>
-          {isDropdownVisible && (
-            <div className="Dropdown" onClick={closeDropdown}>
-                <button className="ButtonD" onClick={() => console.log('Task added')}> Edit </button>
-                <button className="ButtonD" onClick={() => console.log('Task added')}> Delete </button>
+          {isDotsDropdownVisible && (
+            <div className="Dropdown" style={{ position: 'absolute', top: '100%', left: '0' }} onClick={closeDropdowns}>
+              {/* Different dropdown content for three vertical dots */}
+              <button className="ButtonD" onClick={() => console.log('Edit')}>Edit</button>
+              <button className="ButtonD" onClick={() => console.log('Delete')}>Delete</button>
             </div>
           )}
         </div>
@@ -93,29 +119,37 @@ const Tasks = () => {
   };
 
   const taskData = {
-    todo: [
-      { name: "Task 1", assignee: <div></div>, dueDate: "2023-12-31", onAccept: () => console.log('Task added'), onDotsClick: () => console.log('Dots button clicked') },
+
+      todo: [
+        { name: "Task 1", assignee: <div></div>, dueDate: "2023-12-31", onAccept: () => console.log('Accept button clicked'), onDotsClick: () => console.log('Dots button clicked') },
       // Add more tasks as needed
     ],
     inProgress: [
-      { name: "Task 2", assignee: <div></div>, dueDate: "2023-12-31", onAccept: () => console.log('Task added'), onDotsClick: () => console.log('Dots button clicked') },
-      // Add more tasks as needed
+      { name: "Task 2", assignee: <div></div>, dueDate: "2023-12-31", onAccept: () => console.log('Finish button clicked'), onDotsClick: () => console.log('Dots button clicked') },
     ],
     finished: [
-      { name: "Task 3", assignee: <div></div>, dueDate: "2023-12-31", onAccept: () => console.log('Task added'), onDotsClick: () => console.log('Dots button clicked') },
+      { name: "Task 3", assignee: <div></div>, dueDate: "2023-12-31", onAccept: () => console.log('Reset button clicked'), onDotsClick: () => console.log('Dots button clicked') },
       // Add more tasks as needed
     ],
   };
 
   return (
     <div className="ParentBoxT">
+      <div className='CalendarPopup'>
+          <button className="Button" >
+            <div className='GearAndText'>
+          <div>Show Calendar</div>
+          </div>
+          </button>
+           </div>
       <div className="AddTask">
+        
         <div className="AddAddTask">
           <button className="Button" onClick={() => console.log('Task added')}> Add Task </button>
         </div>
         <div className="ProjectSettings">
           
-          <button className="Button2" onClick={openPopup}>
+          <button className="Button" onClick={openPopup}>
             <div className='GearAndText'>
           <div><Gear className='Gear' style={{ marginRight: '8px' }} /></div>
           <div>Project Settings</div>
@@ -123,9 +157,9 @@ const Tasks = () => {
           </button>
         </div>
       </div>
-      <TaskList tasks={{ label: 'TODO', items: taskData.todo }} />
-      <TaskList tasks={{ label: 'In Progress', items: taskData.inProgress }} />
-      <TaskList tasks={{ label: 'Finished', items: taskData.finished }} />
+      <TaskList tasks={{ label: 'TODO', items: taskData.todo }} acceptLabel="Accept" />
+<TaskList tasks={{ label: 'In Progress', items: taskData.inProgress }} acceptLabel="Finish" />
+<TaskList tasks={{ label: 'Finished', items: taskData.finished }} acceptLabel="Reset" />
 
       {isPopupVisible && <ProjectSettingsPopup onClose={closePopup} />}
     </div>
