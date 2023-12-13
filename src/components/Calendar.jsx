@@ -90,13 +90,13 @@ const Calendar = () => {
     for (let i = daysFromPrevMonth; i > 0; i--) {
       divs.push(
         <button
-          key={`prev-${i}`}
-          className={`generated-div prev-next-month ${shrunkenDiv === i ? 'shrunken' : ''}`}
-          disabled={true}
-          onDoubleClick={() => handleDoubleClick(i)}
-        >
-          <span>{prevMonthLastDay - i + 1}</span>
-        </button>
+  key={`prev-${i}`}
+  className={`generated-div prev-next-month ${shrunkenDiv === i ? 'shrunken' : ''}`}
+  disabled={true}
+  onClick={() => handleClick(i)}
+>
+  <span>{prevMonthLastDay - i + 1}</span>
+</button>
       );
     }
   
@@ -106,10 +106,7 @@ const Calendar = () => {
       divs.push(
         <button
           key={`current-${i}`}
-          className={`generated-div ${toggledButtons[i] ? 'active' : ''} ${
-            shrunkenDiv === i + daysFromPrevMonth ? 'shrunken' : ''
-          }`}
-          onClick={() => toggleButton(i)}
+          className={`generated-div ${ shrunkenDiv === i + daysFromPrevMonth ? 'shrunken' : '' }`}
           onDoubleClick={() => handleDoubleClick(i + daysFromPrevMonth)}
         >
           <span>{dayOfMonth}</span>
@@ -136,7 +133,6 @@ const Calendar = () => {
   
     return divs;
   };
-
   const handleMonthChange = (increment) => {
     const newDate = { ...selectedDate };
     newDate.month += increment;
