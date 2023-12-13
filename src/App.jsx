@@ -2,6 +2,7 @@ import makeAPIRequest from './functions/makeAPIRequest';
 import FullOpen from './components/FullOpen';
 import Home from './components/Home';
 import Header from './components/Header';
+import Calendar from './components/Calendar';
 import Sidebar from './components/Sidebar';
 import Login from './components/Login';
 import Signup from './components/Signup';
