@@ -181,6 +181,26 @@ const Calendar = () => {
         <div id="divContainer">{selectedDate.year > 0 && generateDivs()}</div>
       </div>
       <BottomDisplay selectedDate={selectedDate} shrunkenDiv={shrunkenDiv} />
+      <div className='Table2Div'>
+      <table className='Table2'>
+        <tbody>
+        <tr>
+            <td><div className='icon2'></div></td>
+            <td>Write APi Documentation</td>
+            <td>Nov 12</td>
+          </tr>
+        </tbody>
+      </table>
+      <table className='Table3'>
+        <tbody>
+        <tr>
+            <td><div className='icon3'></div></td>
+            <td>other workers task</td>
+            <td>Nov 12</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
     </div>
   
 
