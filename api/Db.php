@@ -62,6 +62,12 @@ class Db
         $query = "SELECT Username FROM user WHERE Username = '$username'";
         $result = $this->mysqli->query($query);
         $data = $result->fetch_all(MYSQLI_ASSOC);
+
+        if (empty($data)) {
+            return false;
+        } else {
+            return true;
+        }
         
     }
 
@@ -75,7 +81,12 @@ class Db
         $query = "SELECT Username FROM user WHERE Username LIKE '$partial_username%' LIMIT 10";
         $result = $this->mysqli->query($query);
         $data = $result->fetch_all(MYSQLI_ASSOC);
-        return $data;
+
+        $users = array();
+        foreach ($data as $row) {
+            $users[] = $row["Username"];
+        }
+        return $users;
     }
 
     function RetrievePassword($user_identifier)
@@ -233,3 +244,8 @@ class Db
         }
     }
 }
+
+$ob = new Db;
+echo "<pre> ";
+var_dump($ob->FindUsers("d"));
+echo "</pre> ";
