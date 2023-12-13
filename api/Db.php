@@ -88,7 +88,18 @@ class Db
         }
         return $users;
     }
+    function GetUserID($username)
+    {
+        $query = "SELECT User_ID FROM user WHERE Username = '$username'";
+        $result = $this->mysqli->query($query);
+        $data = $result->fetch_all(MYSQLI_ASSOC);
 
+        if(empty($data)){
+            return false;
+        } else {
+            return $data[0]["User_ID"];
+        }
+    }
     function RetrievePassword($user_identifier)
     {
 
@@ -143,7 +154,19 @@ class Db
 
     function RemoveWorker($project_id, $username)
     {
+        $userID = $this->GetUserID($username);
+        if($userID === false){
+            return false;
+        }
+        $stmt = $this->mysqli->prepare("DELETE FROM projectworkers WHERE Project_id = ? AND User_ID = ?");
+        $stmt->bind_param("ii", $project_id, $userID);
+        $stmt->execute();
 
+        if ($this->mysqli->affected_rows == 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     function IsWorker($project_id, $user_identifier) // atgriez true arī ja ir projekta īpašnieks
@@ -247,5 +270,5 @@ class Db
 
 $ob = new Db;
 echo "<pre> ";
-var_dump($ob->FindUsers("d"));
+var_dump($ob->GetUserID("ssss"));
 echo "</pre> ";
