@@ -202,7 +202,6 @@ const Calendar = () => {
 		// Days from the next month
 		const totalDays = daysFromPrevMonth + daysInMonth;
 		const daysFromNextMonth = 42 - totalDays; // Total number of cells in a 6x7 grid
-
 		for (let i = 0; i < daysFromNextMonth; i++) {
 			divs.push(
 				<button
