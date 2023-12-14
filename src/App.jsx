@@ -12,6 +12,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import APITest from './components/APITest';
 import TestJomponent from './components/TestJomponent';
 import { UserProvider } from './components/UserProvider';
+import ParentTest from './components/parentTest';
+
 
 function App() {
 	console.log(document.cookie);
@@ -29,6 +31,7 @@ function App() {
 						<Route exact path='/home' element={<Home />}></Route>
 						<Route exact path='/fullopen' element={<FullOpen />}></Route>
 						<Route exact path='/noproject' element={<NoProject />}></Route>
+						<Route exact path='/parentTest' element={<ParentTest /> }></Route>
 					</Routes>
 				</main>
 			</BrowserRouter>
