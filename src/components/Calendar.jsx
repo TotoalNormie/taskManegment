@@ -63,16 +63,7 @@ const Calendar = () => {
     day: null,
   });
 
-  const [toggledButtons, setToggledButtons] = useState([]);
   const [shrunkenDiv, setShrunkenDiv] = useState(null);
-
-  const toggleButton = (index) => {
-    setToggledButtons((prevToggledButtons) => {
-      const newToggledButtons = [...prevToggledButtons];
-      newToggledButtons[index] = !newToggledButtons[index];
-      return newToggledButtons;
-    });
-  };
 
   const handleDoubleClick = (index) => {
     setShrunkenDiv((prev) => (prev === index ? null : index));
