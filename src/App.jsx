@@ -12,7 +12,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import APITest from './components/APITest';
 import TestJomponent from './components/TestJomponent';
 import { UserProvider } from './components/UserProvider';
-import ParentTest from './components/parentTest';
+import ParentTest from './components/ParentTest';
 
 
 function App() {
