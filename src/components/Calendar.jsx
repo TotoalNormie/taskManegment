@@ -63,16 +63,7 @@ const Calendar = () => {
     day: null,
   });
 
-  const [toggledButtons, setToggledButtons] = useState([]);
   const [shrunkenDiv, setShrunkenDiv] = useState(null);
-
-  const toggleButton = (index) => {
-    setToggledButtons((prevToggledButtons) => {
-      const newToggledButtons = [...prevToggledButtons];
-      newToggledButtons[index] = !newToggledButtons[index];
-      return newToggledButtons;
-    });
-  };
 
   const handleDoubleClick = (index) => {
     setShrunkenDiv((prev) => (prev === index ? null : index));
@@ -205,8 +196,7 @@ const Calendar = () => {
   );
 };
 
-export default Calendar;import "../style/Calendar.css";
-const Calendar = () => {
+const Calendar2 = () => {
     const tasks = [
         { title: "Frontend", dueDate: "01.12.2023" },
         { title: "a", dueDate: "08.12.2023" },
