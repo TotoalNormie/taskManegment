@@ -205,8 +205,7 @@ const Calendar = () => {
   );
 };
 
-export default Calendar;import "../style/Calendar.css";
-const Calendar = () => {
+const Calendar2 = () => {
     const tasks = [
         { title: "Frontend", dueDate: "01.12.2023" },
         { title: "a", dueDate: "08.12.2023" },
