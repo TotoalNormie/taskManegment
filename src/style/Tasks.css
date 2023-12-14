@@ -5,9 +5,9 @@
 	cursor: pointer;
 	font-size: 18px;
 	color: #333;
-  }
-  
-  .ParentBoxT {
+}
+
+.ParentBoxT {
 	height: auto;
 	width: 100%;
 	margin: 0;
@@ -16,35 +16,35 @@
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start; /* Align Tasks to the left */
-  }
-  
-  .AddTask {
+}
+
+.AddTask {
 	width: 100%;
 	height: 50px;
 	margin-bottom: 10px;
 	display: flex;
-  }
-  
-  .AddAddTask {
+}
+
+.AddAddTask {
 	width: 50%;
 	height: 50px;
-  }
-  
-  .ProjectSettings {
+}
+
+.ProjectSettings {
 	width: 50%;
 	height: 50px;
 	text-align: right;
-  }
-  
-  .ToDo {
+}
+
+.ToDo {
 	width: 100%;
 	height: auto;
-	background-color: #EFEFEF;
+	background-color: #efefef;
 	margin-bottom: 30px;
-  }
-  
-  .Button {
-	background-color: #D9D9D9;
+}
+
+.Button {
+	background-color: #d9d9d9;
 	border: none;
 	padding: 6px 30px;
 	font-family: 'Noto Sans', Arial, sans-serif;
@@ -55,10 +55,10 @@
 	margin: 2px 2px;
 	cursor: pointer;
 	border-radius: 5px;
-  }
-  
-  .Button2 {
-	background-color: #D9D9D9;
+}
+
+.Button2 {
+	background-color: #d9d9d9;
 	border: none;
 	padding: 1px 10px;
 	text-align: center;
@@ -67,28 +67,28 @@
 	font-size: 21px;
 	margin: 2px 2px;
 	cursor: pointer;
-  }
-  
-  .Button:hover {
-	background-color: #D0D0D0;
-  }
-  
-  .Button2:hover {
-	background-color: #D0D0D0;
-  }
-  .ButtonD{
-	background-color: #D9D9D9;
+}
+
+.Button:hover {
+	background-color: #d0d0d0;
+}
+
+.Button2:hover {
+	background-color: #d0d0d0;
+}
+.ButtonD {
+	background-color: #d9d9d9;
 	border: none;
 	text-align: left;
 	font-size: 19px;
-	width:100%;
-	height:27px;
+	width: 100%;
+	height: 27px;
 	cursor: pointer;
-  }
-  .ButtonD:hover {
-	background-color: #D0D0D0;
-  }
-  .Popup {
+}
+.ButtonD:hover {
+	background-color: #d0d0d0;
+}
+.Popup {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -98,48 +98,48 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-  }
-  
-  .PopupContent {
-	background: #E4E4E4;
+}
+
+.PopupContent {
+	background: #e4e4e4;
 	width: 55%;
 	height: 60%;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 	position: relative;
 	text-align: center;
 	font-size: 25px;
-  }
-  
-  .CloseButton {
+}
+
+.CloseButton {
 	position: absolute;
 	top: 10px;
 	right: 10px;
 	cursor: pointer;
 	font-size: 18px;
 	color: #333;
-  }
-  
-  .Project {
+}
+
+.Project {
 	text-align: left;
 	margin-left: 30px;
 	width: 25%;
 	font-size: 22px;
 	font-family: 'Noto Sans', Arial, sans-serif;
 	float: left;
-  }
-  
-  .TodoTable th,
-  .TodoTable td {
+}
+
+.TodoTable th,
+.TodoTable td {
 	border: 1px solid #ddd;
 	padding: 8px;
 	text-align: left;
-  }
-  
-  .thing {
+}
+
+.thing {
 	font-size: 20px;
-  }
-  
-  .EnterNameInput {
+}
+
+.EnterNameInput {
 	border: none;
 	float: left;
 	outline: none;
@@ -150,116 +150,117 @@
 	margin-top: 20px;
 	font-size: 17px;
 	transition: border 0.3s ease;
-  }
-  
-  .Labelw {
+}
+
+.Labelw {
 	font-size: 20px;
 	margin-left: 20px;
-  }
-  
-  .TodoTable {
+}
+
+.TodoTable {
 	width: 95%;
 	border-collapse: collapse;
 	margin-left: 2.5%;
 	margin-top: 10px;
 	padding: 0 20px;
-  }
-  
-  .TodoTable th {
+}
+
+.TodoTable th {
 	border: none;
-	
+
 	border-bottom: 1px solid;
 	margin-left: 21px;
 	font-weight: lighter;
-  }
-  
-  .TodoTable td {
+}
+
+.TodoTable td {
 	border: none;
-  }
-  
-  .TodoTable th:first-child,
-  .TodoTable td:first-child {
+}
+
+.TodoTable th:first-child,
+.TodoTable td:first-child {
 	width: 300px;
-  }
-  
-  .DotsThreeVertical {
+}
+
+.DotsThreeVertical {
 	font-size: 30px;
-  }
-  
-  .TodoTable th:last-child,
-  .TodoTable td:last-child {
+}
+
+.TodoTable th:last-child,
+.TodoTable td:last-child {
 	width: 50px;
-  }
-  
-  .TodoTable th:nth-last-child(2),
-  .TodoTable td:nth-last-child(2) {
+}
+
+.TodoTable th:nth-last-child(2),
+.TodoTable td:nth-last-child(2) {
 	width: 80px;
-  }
-  
-  .TodoTable tbody tr:hover {
+}
+
+.TodoTable tbody tr:hover {
 	background-color: #e7e7e7;
-  }
-  
-  .ButtonDots {
+}
+
+.ButtonDots {
 	font-size: 30px;
 	background: none;
 	border: none;
 	cursor: pointer;
 	padding: 0;
-  }
-  
-  
-  .Gear {
+}
+
+.Gear {
 	font-size: 30px;
-  }
-  
-  .GearAndText {
+}
+
+.GearAndText {
 	display: flex;
 	align-items: center;
-  }
-  .icon{
+}
+.icon {
 	background-color: #ccc;
+	display: grid;
+	place-items: center;
 	border-radius: 50%;
 	height: 50px;
 	margin-left: 6px;
 	padding: 0;
 	width: 50px;
 	cursor: pointer;
-  }
-  .DropdownContainer {
+}
+.DropdownContainer {
 	position: relative;
 	display: inline-block;
-  }
-  
-  .Dropdown {
+}
+
+.Dropdown {
 	position: absolute;
 	top: 100%;
 	right: 10px;
-	background-color: #D9D9D9;
+	background-color: #d9d9d9;
 	border: none;
-	width:163px;
+	width: 163px;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	border-radius: 10%;
 	z-index: 1;
-  }
-  .icon23{
-	background-color: #918EFF;
-  border-radius: 50%;
-  height: 25px;
-  margin-left: 6px;
-  width: 25px;
-  margin-bottom: 5px;
-  margin-top: 5px;
-  /* Add the following lines to adjust the spacing between the icon and the username */
-  margin-right: 6px;
-  }
-  .username{
+}
+.icon23 {
+	background-color: #918eff;
+	border-radius: 50%;
+	height: 25px;
+	margin-left: 6px;
+	width: 25px;
+	margin-bottom: 5px;
+	margin-top: 5px;
+	/* Add the following lines to adjust the spacing between the icon and the username */
+	margin-right: 6px;
+}
+.username {
 	margin-left: 6px;
 	margin-top: 5px;
-  }
-  .ButtonD2 {
-	background-color: #D9D9D9;
+}
+.ButtonD2 {
+	background-color: #d9d9d9;
 	border: none;
 	text-align: left;
 	font-size: 19px;
@@ -269,37 +270,37 @@
 	cursor: pointer;
 	display: flex; /* Add this line to make the children divs in a row */
 	align-items: center; /* Add this line to vertically center the content */
-  }
-  .ButtonD2:hover {
-	background-color: #D0D0D0;
-  }
-  .CalendarPopup{
+}
+.ButtonD2:hover {
+	background-color: #d0d0d0;
+}
+.CalendarPopup {
 	margin: auto;
 	margin-bottom: 10px;
 	display: none;
-  }
-  .calendar {
-    display: grid;
-    flex-wrap: wrap;
-  }
+}
+.calendar {
+	display: grid;
+	flex-wrap: wrap;
+}
 
-  .output-box {
-    border: 1px solid #ccc;
-    margin: 10px;
-    padding: 10px;
-    width: 200px;
-  }
+.output-box {
+	border: 1px solid #ccc;
+	margin: 10px;
+	padding: 10px;
+	width: 200px;
+}
 
-  .day {
-    font-weight: bold;
-  }
+.day {
+	font-weight: bold;
+}
 
-  .output {
-    margin-top: 8px;
-  }
-  @media only screen and (max-width: 600px) {
+.output {
+	margin-top: 8px;
+}
+@media only screen and (max-width: 600px) {
 	.Button {
-		background-color: #D9D9D9;
+		background-color: #d9d9d9;
 		border: none;
 		padding: 1px 10px;
 		text-align: center;
@@ -308,12 +309,8 @@
 		font-size: 18px;
 		margin: 2px 2px;
 		cursor: pointer;
-	  }
-	  .CalendarPopup{
+	}
+	.CalendarPopup {
 		display: contents;
-	  }
-
-	
+	}
 }
-
-  
