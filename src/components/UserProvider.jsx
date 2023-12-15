@@ -5,7 +5,6 @@ import makeAPIRequest from '../functions/makeAPIRequest';
 const AppContext = createContext();
 
 export const UserProvider = ({ children }) => {
-	// Your context provider logic goes here
 	const [user, setUser] = useState(false);
 	if (getCookie('token') !== null) {
 		makeAPIRequest('get-user-info', data => {
