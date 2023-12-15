@@ -8,8 +8,9 @@ enum TaskState
 
 enum UserPrivilege
 {
-    case User;
-    case Admin;
+    case Worker;
+    case Manager;
+    case Owner;
 }
 
 class Db
