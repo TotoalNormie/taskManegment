@@ -31,7 +31,7 @@
 			return true;
 		}
 
-		function RegisterUser($username, $password, $user_identifier) // vienk uploado parametrus
+		function RegisterUser($username, $user_identifier) // vienk uploado parametrus
 		{
 			if($username === "bad")
 				return false;
@@ -55,11 +55,6 @@
 		function FindUsers($partial_username) // atgriez masīvu ar rindas ID, kur lietotājvārds sākas ar $partial_username LIMIT 10
 		{
 			return ["user1", "user2"];
-		}
-
-		function RetrievePassword($user_identifier)
-		{
-			return "real password";
 		}
 
 		function ProjectExists($project_id, $task_id)
