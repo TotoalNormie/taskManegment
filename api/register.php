@@ -15,6 +15,10 @@
 
 			$DB = new TaskDatabase();
 			
+			if($DB->UserExists($RequestData["user"]))
+				exit(CreateResponse(ResponseType::Failure, "Username Already Taken"));
+
+
 			$user_identifier = GenerateUserID($RequestData["user"], $RequestData["pass"]);
 			if($DB->RegisterUser($RequestData["user"], $RequestData["pass"], $user_identifier))
 			{				
