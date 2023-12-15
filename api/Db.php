@@ -12,7 +12,7 @@ enum UserPrivilege
     case Admin;
 }
 
-class Db
+class TaskDatabase
 {
 
     private $servername = "localhost";
@@ -33,11 +33,13 @@ class Db
 
     function ValidLogin($user_identifier) // atgriez true ja identifier ir user tabulā
     {
-        $stmt = $this->mysqli->prepare("SELECT identifier FROM user WHERE identifier = ?");
+        $stmt = $this->mysqli->prepare("SELECT identifier FROM user WHERE identifier = ? LIMIT 1");
         $stmt->bind_param("s", $user_identifier);
         $stmt->execute();
 
-        if ($this->mysqli->affected_rows == 0) {
+        $result = $stmt->get_result();
+
+        if ($result->num_rows === 0) {
             return false;
         } else {
             return true;
@@ -50,7 +52,9 @@ class Db
         $stmt->bind_param("sss", $username, $password, $user_identifier);
         $stmt->execute();
 
-        if ($this->mysqli->affected_rows == 0) {
+        $result = $stmt->get_result();
+
+        if ($result->num_rows === 0) {
             return false;
         } else {
             return true;
@@ -73,7 +77,17 @@ class Db
 
     function GetUsername($user_identifier)
     {
+        $stmt = $this->mysqli->prepare("SELECT Username FROM user WHERE identifier = ? LIMIT 1");
+        $stmt->bind_param("s", $user_identifier);
+        $stmt->execute();
+        
+        $result = $stmt->get_result();
 
+        if ($result->num_rows === 0) {
+            return false;
+        } else {
+            return $result->fetch_row()["Username"];
+        }
     }
 
     function FindUsers($partial_username) // atgriez masīvu ar rindas ID, kur lietotājvārds sākas ar $partial_username LIMIT 10
@@ -93,21 +107,13 @@ class Db
         $query = "SELECT User_ID FROM user WHERE Username = '$username'";
         $result = $this->mysqli->query($query);
         $data = $result->fetch_all(MYSQLI_ASSOC);
-
-<<<<<<< HEAD
         if(empty($data)){
             return false;
         } else {
             return $data[0]["User_ID"];
         }
     }
-    function RetrievePassword($user_identifier)
-    {
 
-    }
-
-=======
->>>>>>> aab058129652e416e770acf88407594594803526
     function ListProjects($user_identifier) // ieskaitot tie kuros tu esi worker
     {
         return [
@@ -158,10 +164,12 @@ class Db
         $stmt->bind_param("s", $user_identifier);
         $stmt->execute();
 
-        if ($this->mysqli->affected_rows == 0){
-        	return false;
-        } else{
-        	return true;
+        $result = $stmt->get_result();
+
+        if ($result->num_rows === 0) {
+            return false;
+        } else {
+            return true;
         }
     }
 
@@ -175,7 +183,9 @@ class Db
         $stmt->bind_param("ii", $project_id, $userID);
         $stmt->execute();
 
-        if ($this->mysqli->affected_rows == 0) {
+        $result = $stmt->get_result();
+
+        if ($result->num_rows === 0) {
             return false;
         } else {
             return true;
@@ -212,7 +222,9 @@ class Db
         $stmt->bind_param("issiii", $username, $password, $user_identifier);
         $stmt->execute();
 
-        if ($this->mysqli->affected_rows == 0) {
+        $result = $stmt->get_result();
+
+        if ($result->num_rows === 0) {
             return false;
         } else {
             return true;
@@ -230,11 +242,7 @@ class Db
         $result = $this->mysqli->query($query);
         $data = $result->fetch_all(MYSQLI_ASSOC);
         return $data;
-        if ($this->mysqli->affected_rows == 0) {
-            return false;
-        } else {
-            return true;
-        }
+        
     //     return [
     //     //     [
     //     //         "ID" => 0,
@@ -253,7 +261,9 @@ class Db
         $stmt->bind_param("ssiii", $name, $description, $expire_time, $status, $task_id);
         $stmt->execute();
 
-        if ($this->mysqli->affected_rows == 0) {
+        $result = $stmt->get_result();
+
+        if ($result->num_rows === 0) {
             return false;
         } else {
             return true;
@@ -266,7 +276,9 @@ class Db
         $stmt->bind_param("iii", $project_id, $task_id, $user_id);
         $stmt->execute();
 
-        if ($this->mysqli->affected_rows == 0) {
+        $result = $stmt->get_result();
+
+        if ($result->num_rows === 0) {
             return false;
         } else {
             return true;
@@ -279,7 +291,9 @@ class Db
         $stmt->bind_param("ii", $project_id, $task_id);
         $stmt->execute();
 
-        if ($this->mysqli->affected_rows == 0) {
+        $result = $stmt->get_result();
+
+        if ($result->num_rows === 0) {
             return false;
         } else {
             return true;
