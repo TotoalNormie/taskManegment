@@ -44,7 +44,7 @@ class Db
         }
     }
 
-    function RegisterUser($username, $password, $user_identifier) // vienk uploado parametrus
+    function RegisterUser($username, $user_identifier) // vienk uploado parametrus
     {
         $stmt = $this->mysqli->prepare("INSERT INTO user(Username, Password, identifier) VALUES(?, ?, ?)");
         $stmt->bind_param("sss", $username, $password, $user_identifier);
@@ -94,6 +94,7 @@ class Db
         $result = $this->mysqli->query($query);
         $data = $result->fetch_all(MYSQLI_ASSOC);
 
+<<<<<<< HEAD
         if(empty($data)){
             return false;
         } else {
@@ -105,6 +106,8 @@ class Db
 
     }
 
+=======
+>>>>>>> aab058129652e416e770acf88407594594803526
     function ListProjects($user_identifier) // ieskaitot tie kuros tu esi worker
     {
         return [
@@ -116,15 +119,20 @@ class Db
         ];
     }
 
+	function ProjectExists($project_id, $task_id)
+	{
+		return true;
+	}
+
     function CreateProject($user_identifier, $name, $description)
     {
 
     }
 
-    function IsProjectOwner($project_id, $user_identifier)
-    {
-
-    }
+	function UpdateProject($project_id, $name, $description)
+	{
+		return true;
+	}
 
     function DeleteProject($project_id)
     {
@@ -137,6 +145,11 @@ class Db
         } else {
             return true;
         }
+    }
+
+    function IsProjectOwner($project_id, $user_identifier)
+    {
+
     }
 
     function AddWorker($project_id, $username) // rindas ID
@@ -206,6 +219,11 @@ class Db
         }
     }
 
+	function TaskExists($project_id, $task_id)
+	{
+		return true;
+	}
+
     function ListTasks($project_id)
     {
         $query = "SELECT * FROM tasks WHERE Project_ID = $project_id";
@@ -241,6 +259,7 @@ class Db
             return true;
         }
     }
+
     function AssignTask($project_id, $task_id, $username=null)
     {
         $stmt = $this->mysqli->prepare("UPDATE tasks SET Project_ID = ?, Task_ID = ?, Asignee_ID = COALESCE(?, Asignee_ID) WHERE Task_ID = ?");
