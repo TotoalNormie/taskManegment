@@ -100,6 +100,11 @@ class Db
         ];
     }
 
+	function ProjectExists($project_id, $task_id)
+	{
+		return true;
+	}
+
     function CreateProject($user_identifier, $name, $description)
     {
 
