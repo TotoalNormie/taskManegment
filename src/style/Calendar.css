@@ -23,15 +23,14 @@
   
   .generated-div {
 	background-color: #eeeeee;
-	width: calc((100%) / 8);
-	height: 75px;
+	width: calc((100%) / 9);
+	height: 48px;
 	margin-right: 10px;
 	margin-bottom: 10px;
-	display: inline-block;
-	text-align: center;
-	line-height: 80px;
+	align-items: center; 
+	justify-content: center;  
 	cursor: pointer;
-	font-size: 50px;
+	font-size: 15px;
 	border: none;
 	transition: transform 0.3s;
   }
@@ -45,28 +44,30 @@
   }
   
   .generated-div.shrunken {
-	transform: scale(0.7);
+	border: 5px solid #eeeeee;  /* Grey border */
+	background-color: #918eff;
+	
   }
   
   .YeMo {
 	height: 100px;
-	width: 68%;
-	margin-right: 11%;
+	width: 	45%;
+	margin-right: 23%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
   }
   
   .Label {
-	font-size: 43px;
+	font-size: 30px;
 	margin: 0 auto;
 	text-align: center;
   }
   
   .Calendar {
 	margin-top: 20px;
-	width: 70%;
-	margin-right: 70px;
+	width: 50%;
+	margin-right: 150px;
 	display: flex;
 	flex-direction: column;
 
@@ -75,16 +76,16 @@
   .DayLabels {
 	display: flex;
 	justify-content: space-between;
-	margin-right: 76px;
-	margin-bottom: 5px;
-	width: 70%;
+	margin-right: 178px;
+
+	width: 47.5%;
+	font-size: 13px;
   }
   
   .day-label {
 	flex: 1;
 	text-align: center;
 	font-size: 10apx;
-	font-weight: bold;
 	margin: 0;
   }
   
@@ -104,7 +105,7 @@
 	border: none;
 	background: none;
 	padding: 0;
-	font-size: 40px;
+	font-size: 30px;
 	cursor: pointer;
 	transition: filter 0.3s;
   }
@@ -158,4 +159,9 @@ border-collapse: collapse;
 	height: 25px;
 	margin-left: 6px;
 	width: 25px;
+  }  
+  @media only screen and (max-width: 600px) {
+	.ParentBoxCal {
+	  display: none; /* hide the calendar on smaller screens */
+	}
   }
