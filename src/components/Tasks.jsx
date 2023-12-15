@@ -213,10 +213,8 @@ const Tasks = ({ tasks }) => {
 	return (
 		<div className='ParentBoxT'>
 			<div className='CalendarPopup'>
-				<button className='Button'>
-					<div className='GearAndText'>
+				<button className='ButtonC'>
 						<div>Show Calendar</div>
-					</div>
 				</button>
 			</div>
 			<div className='AddTask'>
@@ -227,7 +225,7 @@ const Tasks = ({ tasks }) => {
 					</button>
 				</div>
 				<div className='ProjectSettings'>
-					<button className='Button' onClick={openPopup}>
+					<button className='ButtonG' onClick={openPopup}>
 						<div className='GearAndText'>
 							<div>
 								<Gear className='Gear' style={{ marginRight: '8px' }} />
