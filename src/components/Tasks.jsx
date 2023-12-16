@@ -130,14 +130,34 @@ const ProjectSettingsPopup = ({ onClose }) => {
 				<div className='CloseButton' onClick={onClose}>
 					<X />
 				</div>
+				<div className='upperhalf'>
 				<p>Project Settings</p>
+				
 				<div className='Project'>
 					<p>Project Name</p>
 					<p className='thing'>The name of this project</p>
+					<p>Project Description</p>
+					<p className='thing'>The description of this project</p>
+
 				</div>
 				<div className='EnterName'>
-					<input type='text' className='EnterNameInput' placeholder='Enter name' />
+  					<input type='text' className='EnterNameInput' placeholder='Enter name' />
 				</div>
+					<div className='EnterDescription'>
+ 			 <input type='text' className='EnterDescriptionInput' placeholder='Enter description' />
+			  </div>
+</div>
+<div className='lowerhalf'>
+		<div className='WorkerTable'>
+
+		</div>
+		<div className='AddWorker'>
+
+		</div>
+</div>
+
+			
+				
 			</div>
 		</div>
 	);

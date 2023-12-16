@@ -32,7 +32,7 @@
 
 .ProjectSettings {
 	width: 50%;
-	height: 50px;
+	height: 10px;
 	text-align: right;
 }
 
@@ -59,7 +59,7 @@
 .ButtonG {
 	background-color: #d9d9d9;
 	border: none;
-	padding: 6px 30px;
+	padding: 1px 30px;
 	font-family: 'Noto Sans', Arial, sans-serif;
 	text-align: center;
 	text-decoration: none;
@@ -117,12 +117,12 @@
 }
 
 .PopupContent {
-	background: #e4e4e4;
+	background: #E4E4E4;
 	width: 55%;
 	height: 60%;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-	position: relative;
 	text-align: center;
+	position:relative;
 	font-size: 25px;
 }
 
@@ -138,7 +138,7 @@
 .Project {
 	text-align: left;
 	margin-left: 30px;
-	width: 25%;
+	width: 40%;
 	font-size: 22px;
 	font-family: 'Noto Sans', Arial, sans-serif;
 	float: left;
@@ -152,27 +152,68 @@
 }
 
 .thing {
-	font-size: 20px;
+	font-size: 15px;
+	padding-bottom: 1px;
 }
 
-.EnterNameInput {
+.EnterName {
+	margin-top: 40px; /* Add or adjust the margin as needed */
+  }
+  
+  .EnterNameInput {
 	border: none;
-	float: left;
+	float: right;
 	outline: none;
-	width: 60%;
+	width: 23%;
+	margin-right: 7%;
 	padding: 5px;
 	background-color: #eeeeee;
 	text-align: left;
-	margin-top: 20px;
 	font-size: 17px;
+	margin-bottom: 20px;
+	margin-top: 14px;
 	transition: border 0.3s ease;
-}
+  }
+  
+  /* Add the following styles to move the "Enter description" input below "Enter name" input */
+  .EnterDescription {
+	margin-top: 40px; /* Add or adjust the margin as needed */
+  }
+  
+  .EnterDescriptionInput {
+	border: none;
+  float: right;
+  outline: none;
+  width: 23%;
+  margin-right: 7%;
+  padding: 5px;
+  background-color: #eeeeee;
+  text-align: left;
+  font-size: 17px;
+  transition: border 0.3s ease;
+  margin-top: 26px; 
+  }
+  
+.upperhalf{
+	height:45%;
+	border-style: solid;
 
+}
+.lowerhalf{
+	height:55%;
+	border-style: solid;
+}
 .Labelw {
 	font-size: 20px;
 	margin-left: 20px;
 }
-
+.WorkerTable{
+	margin-top: 2%;
+	margin-left: 3%;
+	background-color: #DEDEDE;
+	height:80%;
+	width: 50%;
+}
 .TodoTable {
 	width: 95%;
 	border-collapse: collapse;
