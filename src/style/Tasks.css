@@ -56,6 +56,21 @@
 	cursor: pointer;
 	border-radius: 5px;
 }
+.ButtonW {
+	background-color: #d9d9d9;
+	border: none;
+	padding: 6px 30px;
+	width:340px;
+	font-family: 'Noto Sans', Arial, sans-serif;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 21px;
+	margin: 2px 2px;
+	margin-top: 15px;
+	cursor: pointer;
+	border-radius: 5px;
+}
 .ButtonG {
 	background-color: #d9d9d9;
 	border: none;
@@ -81,7 +96,7 @@
 	margin: 2px 2px;
 	cursor: pointer;
 }
-
+.ButtonW:hover,
 .Button:hover {
 	background-color: #d0d0d0;
 }
@@ -164,7 +179,7 @@
 	border: none;
 	float: right;
 	outline: none;
-	width: 23%;
+	width: 30%;
 	margin-right: 7%;
 	padding: 5px;
 	background-color: #eeeeee;
@@ -184,7 +199,7 @@
 	border: none;
   float: right;
   outline: none;
-  width: 23%;
+  width: 30%;
   margin-right: 7%;
   padding: 5px;
   background-color: #eeeeee;
@@ -193,15 +208,29 @@
   transition: border 0.3s ease;
   margin-top: 26px; 
   }
-  
+  .EnterDescriptionInput2 {
+	border: none;
+  float: right;
+  outline: none;
+  width: 340px;
+  margin-right: 7%;
+  padding: 5px;
+  background-color: #eeeeee;
+  text-align: left;
+  font-size: 17px;
+  transition: border 0.3s ease;
+ 
+  }
 .upperhalf{
 	height:45%;
-	border-style: solid;
+
 
 }
 .lowerhalf{
 	height:55%;
-	border-style: solid;
+	
+	display:flex;
+	width: 100%;
 }
 .Labelw {
 	font-size: 20px;
@@ -212,7 +241,22 @@
 	margin-left: 3%;
 	background-color: #DEDEDE;
 	height:80%;
-	width: 50%;
+	width: 60%;
+	
+	font-size: 20px;
+	height:80%;
+
+}
+.Table td2{
+	display:flex;
+}
+.AddWorker{
+	margin-top: 2%;
+	margin-left: 3%;
+	width: 40%;
+	height: 50%;
+
+	float: right;
 }
 .TodoTable {
 	width: 95%;
@@ -234,11 +278,25 @@
 	border: none;
 }
 
+
 .TodoTable th:first-child,
 .TodoTable td:first-child {
 	width: 300px;
 }
-
+.Table{
+	width: 95%;
+	border-collapse: collapse;
+	margin-left: 2.5%;
+	margin-top: 10px;
+	text-align: left;
+	padding: 0 20px;
+}
+.Table th {
+	border: none;
+	border-bottom: 1px solid;
+	margin-left: 21px;
+	font-weight: lighter;
+}
 .DotsThreeVertical {
 	font-size: 30px;
 }

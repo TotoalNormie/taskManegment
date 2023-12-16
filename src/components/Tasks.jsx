@@ -149,10 +149,34 @@ const ProjectSettingsPopup = ({ onClose }) => {
 </div>
 <div className='lowerhalf'>
 		<div className='WorkerTable'>
-
+<table className='Table'>
+	<thead>
+		<th>Worker</th>
+		<th>Privilage</th>
+	</thead>
+	<tbody>
+		<tr>
+		<td2><div className='icon23'></div><div className='username'>Ralfs Labutis</div></td2>
+		<td>Owner</td>
+		</tr>
+		<tr>
+		<td2><div className='icon23'></div><div className='username'>Vitālijs Vlads Juhno</div></td2>
+		<td>Manager</td>
+		</tr>
+		<tr>
+		<td2><div className='icon23'></div><div className='username'>Raivo Kingovskis</div></td2>
+		<td>Worker</td>
+		</tr>
+	</tbody>
+</table>
 		</div>
 		<div className='AddWorker'>
-
+		<p>Add Workers</p>
+ 			 <input type='text' className='EnterDescriptionInput2' placeholder='Enter a Username' />
+			  <button className='ButtonW'>
+						{' '}
+						Add Worker{' '}
+					</button>
 		</div>
 </div>
 
@@ -168,14 +192,23 @@ const formatDate = date => {
 };
 
 const Tasks = ({ tasks }) => {
-	const [isPopupVisible, setPopupVisible] = useState(false);
-
-	const openPopup = () => {
-		setPopupVisible(true);
+	const [isProjectSettingsPopupVisible, setProjectSettingsPopupVisible] = useState(false);
+	const [isAddTaskPopupVisible, setAddTaskPopupVisible] = useState(false);
+  
+	const openProjectSettingsPopup = () => {
+	  setProjectSettingsPopupVisible(true);
 	};
-
-	const closePopup = () => {
-		setPopupVisible(false);
+  
+	const closeProjectSettingsPopup = () => {
+	  setProjectSettingsPopupVisible(false);
+	};
+  
+	const openAddTaskPopup = () => {
+	  setAddTaskPopupVisible(true);
+	};
+  
+	const closeAddTaskPopup = () => {
+	  setAddTaskPopupVisible(false);
 	};
 
 	// const taskDataPlaceholder = {
@@ -239,13 +272,13 @@ const Tasks = ({ tasks }) => {
 			</div>
 			<div className='AddTask'>
 				<div className='AddAddTask'>
-					<button className='Button' onClick={() => console.log('Task added')}>
+					<button className='Button' onClick={openAddTaskPopup} >
 						{' '}
 						Add Task{' '}
 					</button>
 				</div>
 				<div className='ProjectSettings'>
-					<button className='ButtonG' onClick={openPopup}>
+					<button className='ButtonG' onClick={openProjectSettingsPopup}>
 						<div className='GearAndText'>
 							<div>
 								<Gear className='Gear' style={{ marginRight: '8px' }} />
@@ -271,7 +304,17 @@ const Tasks = ({ tasks }) => {
 				onAccept={onAcceptFinished}
 			/>
 
-			{isPopupVisible && <ProjectSettingsPopup onClose={closePopup} />}
+{isProjectSettingsPopupVisible && <ProjectSettingsPopup onClose={closeProjectSettingsPopup} />}
+      {isAddTaskPopupVisible && (
+        <div className='Popup'>
+          <div className='PopupContent'>
+            <div className='CloseButton' onClick={closeAddTaskPopup}>
+              <X />
+            </div>
+            {/* Empty content for Add Task popup */}
+          </div>
+        </div>
+      )}
 		</div>
 	);
 };
