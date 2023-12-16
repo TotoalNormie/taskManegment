@@ -20,6 +20,9 @@ function makeAPIRequest(link, arg2, arg3) {
         .catch(err => {
             console.error(err);
             callback({ status: 'Failure', message: err });
+            fetch(apiLink + link, options)
+            .then(response => response.text())
+            .then(response => console.log(response));
         });
 }
 

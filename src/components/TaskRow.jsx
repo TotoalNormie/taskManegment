@@ -5,7 +5,7 @@ const TaskRow = ({ name, task_id, assignee, dueDate, onAccept, acceptLabel, onDo
 	const [isIconDropdownVisible, setIconDropdownVisible] = useState(false);
 	const [isDotsDropdownVisible, setDotsDropdownVisible] = useState(false);
 
-	console.log({ name, task_id, assignee, dueDate, onAccept, acceptLabel, onDotsClick });
+	// console.log({ name, task_id, assignee, dueDate, onAccept, acceptLabel, onDotsClick });
 
 
 	const toggleIconDropdown = () => {

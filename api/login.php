@@ -1,7 +1,7 @@
 <?php
 	header("Access-Control-Allow-Origin: http://localhost:5173");
 	
-	require_once("dummy_db.php");
+	require_once("Db.php");
 	require_once("sessions.php");
 	require_once("utility.php");
 
