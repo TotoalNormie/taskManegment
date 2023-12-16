@@ -28,7 +28,7 @@ const Signup = () => {
 			method: 'POST',
 			body: body,
 		};
-		makeRequest('htaccessTest', options, data => {
+		makeRequest('register', options, data => {
 			// console.log(data);
 			switch (data.status) {
 				case 'Success':

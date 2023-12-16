@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { getCookie } from '../functions/cookie';
 import makeAPIRequest from '../functions/makeAPIRequest';
+import encodeHTML from '../functions/encodeHTML';
 
 const AppContext = createContext();
 
@@ -9,7 +10,7 @@ export const UserProvider = ({ children }) => {
 	if (getCookie('token') !== null) {
 		makeAPIRequest('get-user-info', data => {
 			if (data?.valid_session) {
-				setUser(data.username);
+				setUser(encodeHTML(data.username));
 			}
 		});
 	}

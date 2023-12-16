@@ -45,7 +45,6 @@ const Sidebar = () => {
 						style={{ transition: 'rotate .4s ease' }}
 						className={seen ? 'flipped' : ''}
 					/>
-					{/* <FontAwesomeIcon style={{transition: 'rotate .4s ease'}} className={seen ? 'flipped' : ''} icon={faAngleDown}></FontAwesomeIcon> */}
 					<span> Your Projects</span>
 				</button>
 				<ul className={`projects hidden ${seen ? 'stretched' : ''}`}>

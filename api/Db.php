@@ -47,7 +47,7 @@ class TaskDatabase
         }
     }
 
-    function RegisterUser($username, $user_identifier) // vienk uploado parametrus
+    function RegisterUser($username, $password, $user_identifier) // vienk uploado parametrus
     {
         $stmt = $this->mysqli->prepare("INSERT INTO user(Username, Password, identifier) VALUES(?, ?, ?)");
         $stmt->bind_param("sss", $username, $password, $user_identifier);
@@ -55,11 +55,7 @@ class TaskDatabase
 
         $result = $stmt->get_result();
 
-        if ($result->num_rows === 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return !$result;
     }
 
     function UserExists($username)
@@ -302,7 +298,7 @@ class TaskDatabase
     }
 }
 
-$ob = new Db;
-echo "<pre> ";
-var_dump($ob->GetUserID("ssss"));
-echo "</pre> ";
+// $ob = new Db;
+// echo "<pre> ";
+// var_dump($ob->GetUserID("ssss"));
+// echo "</pre> ";
