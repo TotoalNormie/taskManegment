@@ -16,7 +16,6 @@ import ParentTest from './components/ParentTest';
 
 
 function App() {
-	console.log(document.cookie);
 	return (
 		<UserProvider>
 			<BrowserRouter>
