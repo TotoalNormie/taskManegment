@@ -80,6 +80,14 @@
 			return SafeEncrypt($this->user_identifier . "|" . $this->expire_time . "|" . $this->stamp, $___encryption_key);
 		}
 
+		public function ToResponse()
+		{
+			return [
+				"token" => $this->ToToken(),
+				"expire_time" => $this->expire_time
+			];
+		}
+
 		static public function FromToken($token)
 		{
 			global $___encryption_key;
@@ -110,36 +118,26 @@
 
 	function HandleSession()
 	{
-		$failureMessage = null;
-
-		$session = false;
-		if(isset($_COOKIE["token"]))
+		$token = GetHeader("Authorization");
+		if($token)
 		{
-			if(!($session = Session::FromToken($_COOKIE["token"])))
-			{
-				setcookie("token", "", 1);
-				$failureMessage = "Authentication Failed";
-			}
+			if($session = Session::FromToken($token))
+				return $session;
+			else				
+				exit(CreateResponse(ResponseType::Failure, "Authentication Failed"));
 		}
 		else
 		{
-			$failureMessage = "Please Authenticate Yourself";
+			exit(CreateResponse(ResponseType::Failure, "Please Authenticate Yourself"));
 		}
-		
-		if($failureMessage)
-			exit(CreateResponse(ResponseType::Failure, $failureMessage));
-
-		return $session;
 	}
 
 	function HandleSessionSoft()
 	{
-		$session = false;
-		if(isset($_COOKIE["token"]))
-			if(!($session = Session::FromToken($_COOKIE["token"])))
-				setcookie("token", "", 1);
-
-		
-		return $session;
+		$token = GetHeader("Authorization");
+		if($token)
+			return Session::FromToken($token);
+		else
+			return false;
 	}
 ?>
