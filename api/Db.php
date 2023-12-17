@@ -30,7 +30,6 @@ class TaskDatabase
             die("Connection failed: " . $this->mysqli->connect_error);
         }
     }
-    // visur kur ir parametri lieto mysqli::prepare
 
     function ValidLogin($user_identifier) // atgriez true ja identifier ir user tabulā
     {
@@ -129,8 +128,17 @@ class TaskDatabase
 
     function CreateProject($user_identifier, $name, $description)
     {
-
-    }
+    //     $sql = "INSERT INTO project (user_identifier, title) VALUES (?, ?)";
+    //     $stmt = $mysqli->prepare($sql);
+    //     $stmt->bind_param("ss", $user_identifier, $name);
+    
+    //     $result = $stmt->execute();
+    //     if ($result) {
+    //         echo "Project created successfully";
+    //     } else {
+    //         echo "Error: " . $stmt->error;
+    //     }
+    // }
 
 	function UpdateProject($project_id, $name, $description)
 	{
@@ -298,7 +306,7 @@ class TaskDatabase
     }
 }
 
-// $ob = new Db;
-// echo "<pre> ";
-// var_dump($ob->GetUserID("ssss"));
-// echo "</pre> ";
+$ob = new Db;
+echo "<pre> ";
+var_dump($ob->FindUsers("sss"));
+echo "</pre> ";
