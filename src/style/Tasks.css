@@ -84,7 +84,11 @@
 	cursor: pointer;
 	border-radius: 5px;
 }
-
+.AnotherFKbutton{
+	width:68%;
+	height:100px;
+	margin-left: 4%;
+}
 .Button2 {
 	background-color: #d9d9d9;
 	border: none;
@@ -96,6 +100,20 @@
 	margin: 2px 2px;
 	cursor: pointer;
 }
+.Buttonsrfrsg{
+	background-color: #d9d9d9;
+	border: none;
+	font-family: 'Noto Sans', Arial, sans-serif;
+	text-align: center;
+	font-size: 17px;
+	cursor: pointer;
+	height: 40px;
+	margin-top: 20px;
+	margin-right: 10%;
+	width:90%;
+	border-radius: 5px;
+}
+.Buttonsrfrsg:hover,
 .ButtonW:hover,
 .Button:hover {
 	background-color: #d0d0d0;
@@ -268,7 +286,6 @@
 
 .TodoTable th {
 	border: none;
-
 	border-bottom: 1px solid;
 	margin-left: 21px;
 	font-weight: lighter;
@@ -412,6 +429,68 @@
 
 .output {
 	margin-top: 8px;
+}
+.top{
+	display:flex;
+}
+.name{
+	width:70%;
+	height: 100px;
+	text-align: left;
+	font-size: 17px;
+	margin-top: 5%;
+	margin-left: 4%;
+}
+.nameInput{
+	border: none;
+	outline: none;
+	padding: 5px;
+	width: 90%;
+	background-color: #eeeeee;
+	text-align: left;
+	font-size: 17px;
+	margin-bottom: 20px;
+	transition: border 0.3s ease;
+}
+.description{
+	font-size: 17px;
+	width: 68%;
+	text-align: left;
+margin-left: 4%;
+height:300px;
+}
+.descInput {
+	border: none;
+	outline: none;
+	padding: 5px;
+	width: 90%;
+	background-color: #eeeeee;
+	text-align: left;
+	font-size: 17px;
+	height: 200px;
+	margin-bottom: 20px;
+	font-family: 'Noto Sans', Arial, sans-serif;
+	transition: border 0.3s ease;
+	resize: none; /* Optional: Disable textarea resizing if not needed */
+  }
+.Ddate{
+	height:300px;
+	width: 293px; 
+}
+.EndlessFrontend{
+	margin-top: 60%;
+	font-size: 17px;
+	text-align: left;
+}
+.bottom{
+	display:flex;
+}
+.dropdown{
+font-size: 17px;
+height:100px;
+width:300px;
+margin-top: 5%;
+text-align: left;
 }
 @media only screen and (max-width: 600px) {
 	.Button {

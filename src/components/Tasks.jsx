@@ -311,8 +311,40 @@ const Tasks = ({ tasks }) => {
             <div className='CloseButton' onClick={closeAddTaskPopup}>
               <X />
             </div>
-            {/* Empty content for Add Task popup */}
+			<div className='top'>
+            <div className='name'>
+				<p>Name</p>
+			<input type='text' className='nameInput' placeholder='Enter name' />
+			</div>
+			<div className='dropdown'>
+			<p>Asignee</p>
+      <select className='nameInput'>
+        <option value="">None</option>
+        <option value="option1"><div className='icon23'></div><div className='username'>Ralfs Labutis</div></option>
+        <option value="option2">Raivo Kingovskis</option>
+        <option value="option3">Vitālijs Juhno Vlads</option>
+      </select>
+				</div>
+				
           </div>
+		  <div className='bottom'>
+		  <div className='description'>
+					<p>Description</p>
+					<textarea type='text' className='descInput' placeholder='Enter description' />
+				</div>
+				<div className='Ddate'>
+					<div className='EndlessFrontend'>
+						<p>Due Date</p>
+						<input type='text' className='nameInput' placeholder='DD/MM/YY' />
+						</div>
+						
+				</div>
+				
+				</div>
+				<div className='AnotherFKbutton'>
+				<button className='Buttonsrfrsg'>Upload Task</button>
+							</div>
+		  </div>
         </div>
       )}
 		</div>
