@@ -94,7 +94,7 @@
 			return true;
 		}
 
-		function AddWorker($project_id, $username, $privilege=UserPrivilege::Worker) // rindas ID
+		function AddWorker($project_id, $username, $privilege = UserPrivilege::Worker) // rindas ID
 		{
 			return true;
 		}
