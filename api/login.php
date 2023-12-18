@@ -1,5 +1,7 @@
 <?php
 	header("Access-Control-Allow-Origin: http://localhost:5173");
+	header('Access-Control-Allow-Credentials: true');
+
 	
 	require_once("Db.php");
 	require_once("sessions.php");
@@ -21,7 +23,11 @@
 				if($DB->ValidLogin($user_identifier))
 				{				
 					$expire_time = time() + 60 * 60 * 24 * 5; // 5 days
-					setcookie("token", (new Session($user_identifier, $expire_time, SessionAuthority::USER))->ToToken(), $expire_time, "/");				
+					setcookie("token", (new Session($user_identifier, $expire_time, SessionAuthority::USER))->ToToken(),[
+						'expires' => $expire_time, // Expiration time in one hour
+						'path' => '/',
+						'samesite' => 'None', // Set SameSite to None for cross-origin requests
+					]);				
 					exit(CreateResponse(ResponseType::Success, "Session Created Succesfully"));
 				}
 				else

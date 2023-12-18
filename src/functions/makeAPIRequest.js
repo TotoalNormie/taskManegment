@@ -4,7 +4,9 @@ function makeAPIRequest(link, arg2, arg3) {
     let options, callback;
 
     if (typeof arg2 === 'function') {
-        options = [];
+        options = {
+            credentials: 'include'
+          };
         callback = arg2;
     } else if ((arg2 !== null && typeof arg2 === 'object' && !Array.isArray(arg2)) && typeof arg3 === 'function') {
         options = arg2;

@@ -22,8 +22,8 @@ const Login = () => {
 			method: 'POST',
 			body: body,
 		};
-		makeRequest('htaccessTest', options, data => {
-			// console.log(data);
+		makeRequest('login', options, data => {
+			console.log(data);
 			switch (data.status) {
 				case 'Success':
 					navigate('/');

@@ -13,6 +13,8 @@ export const UserProvider = ({ children }) => {
 				setUser(encodeHTML(data.username));
 			}
 		});
+	}else {
+		console.log('cookie does not exist');
 	}
 
 	return <AppContext.Provider value={{ user, setUser }}>{children}</AppContext.Provider>;

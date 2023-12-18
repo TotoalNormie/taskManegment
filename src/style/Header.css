@@ -39,11 +39,15 @@ header {
 
 		& .logout {
 			position: absolute;
+			display: flex;
+			align-items: center;
+			gap: .5rem;
 			top: 100%;
 			right: 0;
 			overflow: hidden;
+			font: inherit;
 			scale: 1 0;
-			padding: 0.2rem 0.5rem;
+			padding: 0.2rem;
 			translate: 0 -50%;
 			transition: scale 0.4s ease, translate 0.4s ease;
 			background: none;
