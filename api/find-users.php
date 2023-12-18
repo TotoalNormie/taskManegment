@@ -5,27 +5,26 @@
 	require_once("sessions.php");
 	require_once("utility.php");
 	
-	$session = HandleSessionSoft();
-	if(!$session)
-		exit(CreateResponse(ResponseType::Success, "User Data Retrieved Succesfully", ["valid_session"=>false])); // no seperate output for lack of the token cookie since the client has no way of knowing if its set in the first place
+	$session = HandleSession();
 
 	if($_SERVER["REQUEST_METHOD"] === "GET")
 	{
-		try
+		$RequestData = GetAllRequestData();
+		if(isset($RequestData["username"]))
 		{
-			$DB = new TaskDatabase();
+			if(strlen($RequestData["username"]) < 4)
+				exit(CreateResponse(ResponseType::Failure, "Username Too Short"));
 
-			$username = $DB->GetUsername($session->user_identifier);
+			try
+			{
+				$DB = new TaskDatabase();
 
-			exit(CreateResponse(ResponseType::Success, "User Data Retrieved Succesfully", [
-				"username" => $username,
-				"user_color" => GenerateColorFromString($username),
-				"valid_session" => true
-			]));
-		}
-		catch(Exception $e)
-		{
-			exit(CreateResponse(ResponseType::Failure, "Something Went Wrong - Server Side Error", $e->getMessage()));
+				exit(CreateResponse(ResponseType::Success, "Users Succesfully Retrieved", $DB->FindUsers($RequestData["username"])));
+			}
+			catch(Exception $e)
+			{
+				exit(CreateResponse(ResponseType::Failure, "Something Went Wrong - Server Side Error", $e->getMessage()));
+			}
 		}
 	}
 	else

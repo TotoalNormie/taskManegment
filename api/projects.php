@@ -10,25 +10,22 @@
 
 	if(isset($_GET["id"]))
 	{
-		if(intval($_GET["id"])<1)
-			exit(CreateResponse(ResponseType::Failure, "Invalid ID"));
-		
 		$_GET["id"] = intval($_GET["id"]); // the user may try to pass a float
+
+		if($_GET["id"]<1)
+			exit(CreateResponse(ResponseType::Failure, "Invalid ID"));		
+		
+		if(!$DB->ProjectExists($_GET["id"]) || !$DB->IsWorker($_GET["id"], $session->user_identifier))
+			exit(CreateResponse(ResponseType::Failure, "Project Not Found"));		
 
 		if(isset($_GET["intent"]))
 		{
 			if($_GET["intent"] === "workers")
-			{
-
-			}
+				require("project_worker_handler.php");
 			else if($_GET["intent"] === "tasks")
-			{
-				
-			}
+				require("project_task_handler.php");
 			else
-			{
 				exit(CreateResponse(ResponseType::Failure, "Unknown Request"));
-			}
 		}
 		else
 		{
@@ -45,7 +42,9 @@
 						exit(CreateResponse(ResponseType::Failure, "Failed To Deleted Project"));
 				}
 				else
+				{
 					exit(CreateResponse(ResponseType::Failure, "Missing Authority"));
+				}
 			}
 			else
 			{
@@ -66,7 +65,9 @@
 								exit(CreateResponse(ResponseType::Failure, "Failed To Update Project"));
 						}
 						else
+						{
 							exit(CreateResponse(ResponseType::Failure, "Missing Authority"));
+						}
 					}
 					else
 					{

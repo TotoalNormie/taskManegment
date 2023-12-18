@@ -45,6 +45,36 @@
 		return $out;
 	}
 
+	function ValidateObjectArray($targetArray, $objectKeys)
+	{
+		$targetCount = count($targetArray);
+		$keyCount = count($objectKeys);
+		for($target_i = 0; $target_i < $targetCount; ++$target_i)
+			for($key_i = 0; $key_i < $keyCount; ++$key_i)
+				if(!isset($targetArray[$target_i][$objectKeys[$key_i]]))
+					return false
+		
+		return true;
+	}
+
+	function GetHeader($name)
+	{
+		$headerName = str_replace("-", "_", strtoupper($name));
+		if(isset($_SERVER["HTTP_".$headerName]))
+		{
+			return $_SERVER["HTTP_".$headerName];
+		}
+		else
+		{
+			return getallheaders()[implode("-", array_map(function($v)
+			{
+				$v[0] = strtoupper($v[0]);
+				return $v;
+			},
+			explode("-", strtolower($name))))] ?? null;
+		}
+	}
+
 	function HSVToHEX($h, $s, $v)
     {
 		$h /= 360;
@@ -77,7 +107,6 @@
 			$b = round($b * 255);
         }
 
-		// normally id use sprintf but i need to ensure each byte is 2 characters long
         $r = dechex($r);
 		if(strlen($r) < 2)
 			$r = "0" . $r;
