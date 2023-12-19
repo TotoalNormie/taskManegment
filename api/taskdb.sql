@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS tasks(
 	project_id INT NOT NULL,
 	name VARCHAR(20) NOT NULL,
 	description VARCHAR(1000) NOT NULL,
+	due_date BIGINT UNSIGNED NOT NULL,
 	state SMALLINT UNSIGNED NOT NULL,
 	assignee INT,
 	

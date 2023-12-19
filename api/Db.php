@@ -1,6 +1,8 @@
 <?php
 	require_once("utility.php");
 
+	// TODO: rewrite sql create statements so that the owner of a project cannot be in the workers table
+	// also disallow multiple workers with same id
 	enum TaskState
 	{
 		case ToDo;
@@ -65,7 +67,46 @@
 
 	function Tr_UserPrivToDB($value)
 	{
-		
+		if($value === UserPrivilege::Worker)
+			return 0;
+		else if($value === UserPrivilege::Manager)
+			return 1;
+		else
+			return false;
+	}
+
+	function Tr_TaskStateToDB($value)
+	{
+		if($value === TaskState::ToDo)
+			return 0;
+		else if($value === TaskState::InProgress)
+			return 1;
+		else if($value === TaskState::Done)
+			return 2;
+		else
+			return false;
+	}
+
+	function Tr_DBToUserPriv($value)
+	{
+		if($value === 0)
+			return UserPrivilege::Worker;
+		else if($value === 1)
+			return UserPrivilege::Manager;
+		else
+			return false;
+	}
+
+	function Tr_DBToTaskState($value)
+	{
+		if($value === 0)
+			return TaskState::ToDo;
+		else if($value === 1)
+			return TaskState::InProgress;
+		else if($value === 2)
+			return TaskState::Done;
+		else
+			return false;
 	}
 
 class TaskDatabase
@@ -95,7 +136,7 @@ class TaskDatabase
 		if($result == false)
 			return false;
 
-		return $result->field_count == 1;
+		return $result->num_rows == 1;
     }
 
     function RegisterUser($username, $user_identifier) // vienk uploado parametrus
@@ -104,7 +145,7 @@ class TaskDatabase
         $stmt->bind_param("ss", $username, $user_identifier);
         $stmt->execute();
 
-        return true;
+        return $this->mysqli->affected_rows == 1;
     }
 
     function UserExists($username)
@@ -117,7 +158,7 @@ class TaskDatabase
 		if($result == false)
 			return false;
 
-		return $result->field_count == 1;
+		return $result->num_rows == 1;
     }
 
     function GetUsername($user_identifier)
@@ -127,7 +168,7 @@ class TaskDatabase
         $stmt->execute();
 
 		$result = $stmt->get_result();
-		if($result == false || $result->field_count != 1)
+		if($result == false || $result->num_rows != 1)
 			return false;
 
 		return $result->fetch_array(MYSQLI_NUM)[0];
@@ -142,7 +183,7 @@ class TaskDatabase
         $stmt->execute();
 		
 		$result = $stmt->get_result();
-		if($result == false || $result->field_count == 0)
+		if($result == false || $result->num_rows == 0)
 			return [];
 
         $data = array_map(function($v){
@@ -161,7 +202,7 @@ class TaskDatabase
 		$stmt->execute();
 		
 		$result = $stmt->get_result();
-		if($result == false || $result->field_count == 0)
+		if($result == false || $result->num_rows == 0)
 			return [];
 
         return $result->fetch_all(MYSQLI_ASSOC);
@@ -177,7 +218,7 @@ class TaskDatabase
 		if($result == false)
 			return false;
 
-		return $result->field_count == 1;
+		return $result->num_rows == 1;
 	}
 
     function CreateProject($user_identifier, $name, $description)
@@ -186,11 +227,11 @@ class TaskDatabase
         $stmt->bind_param("sss", $name, $description, $user_identifier);
         $stmt->execute();
 
-        return true;
+        return $this->mysqli->affected_rows == 1;
     }
 
 	function UpdateProject($project_id, $name, $description)
-	{		
+	{
 		$stmt = $this->mysqli->prepare("UPDATE projects SET name=COALESCE(?, name), description=COALESCE(?, description) WHERE ID=? LIMIT 1");
         $stmt->bind_param("ssi", $name, $description, $project_id);
         $stmt->execute();
@@ -209,7 +250,7 @@ class TaskDatabase
 
     function IsProjectOwner($project_id, $user_identifier)
     {
-		$stmt = $this->mysqli->prepare("SELECT projects.ID FROM projects WHERE projects.ID = ? AND projects.owner_id=(SELECT users.id FROM users WHERE users.identifier=?);");
+		$stmt = $this->mysqli->prepare("SELECT projects.ID FROM projects WHERE projects.ID = ? AND projects.owner_id=(SELECT users.id FROM users WHERE users.identifier=?)");
         $stmt->bind_param("is", $project_id, $user_identifier);
         $stmt->execute();
 
@@ -217,129 +258,136 @@ class TaskDatabase
 		if($result == false)
 			return false;
 
-		return $result->field_count == 1;
+		return $result->num_rows == 1;
     }
 
     function AddWorker($project_id, $username, $privilege=UserPrivilege::Worker) // rindas ID
     {
-        $stmt = $this->mysqli->prepare("INSERT INTO workers (project_id, privilege, user_id) VALUES (?, ?, (SELECT users.ID FROM users WHERE users.identifier=?))");
-        $stmt->bind_param("s", $user_identifier);
+		if(!($privilege = Tr_UserPrivToDB($privilege)))
+			exit(CreateResponse(ResponseType::Failure, "ALERT!!! THE DEVELOPER IS RETARDED (bad privilege given to AddWorker)"));
+
+        $stmt = $this->mysqli->prepare("INSERT INTO workers (project_id, privilege, user_id) VALUES (?, ?, (SELECT users.ID FROM users WHERE users.username=?))");
+        $stmt->bind_param("iis", $project_id, $privilege, $username);
         $stmt->execute();
 
-        if ($this->mysqli->affected_rows == 0){
-        	return false;
-        } else{
-        	return true;
-        }
+        return $this->mysqli->affected_rows == 1;
     }
 
     function RemoveWorker($project_id, $username)
     {
+        $stmt = $this->mysqli->prepare("DELETE FROM workers WHERE workers.project_id=? AND workers.user_id = (SELECT users.ID FROM users WHERE users.username=?) LIMIT 1");
+        $stmt->bind_param("is", $project_id, $username);
+        $stmt->execute();
 
+        return $this->mysqli->affected_rows == 1;
     }
 
     function IsWorker($project_id, $user_identifier) // atgriez true arī ja ir projekta īpašnieks
-    {
+    {		
+		$stmt = $this->mysqli->prepare("SELECT workers.ID FROM ((workers
+		                                INNER JOIN users AS this_user ON this_user.identifier=?)
+		                                INNER JOIN projects AS this_project ON this_project.ID = ?)
+		                                WHERE workers.project_id = this_project.ID AND (workers.user_id = this_user.ID OR this_project.owner_id = this_user.ID)");
+		
+        $stmt->bind_param("si", $user_identifier, $project_id);
+        $stmt->execute();
 
+		$result = $stmt->get_result();
+		if($result == false)
+			return false;
+
+		return $result->num_rows == 1;
     }
 
     function ListWorkers($project_id) // masīvs ar rindas ID
-    {
-        $query = "SELECT User_ID FROM projectworkers WHERE Project_ID = $project_id";
-        $result = $this->mysqli->query($query);
-        $data = $result->fetch_all(MYSQLI_ASSOC);
-        return $data;
+    {		
+		$stmt = $this->mysqli->prepare("SELECT users.username FROM users WHERE users.ID=(SELECT workers.user_id FROM workers WHERE workers.project_id=?)");
+		$stmt->bind_param("i", $project_id);
+		$stmt->execute();
+		
+		$result = $stmt->get_result();
+		if($result == false || $result->num_rows == 0)
+			return [];
+
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     function SetWorkerPrivilege($project_id, $username, $privilege) // privilege būs enum UserPrivilege
     {
+		if(!($privilege = Tr_UserPrivToDB($privilege)))
+			exit(CreateResponse(ResponseType::Failure, "ALERT!!! THE DEVELOPER IS RETARDED (bad privilege given to SetWorkerPrivilege)"));
 
-    }
-
-    function GetWorkerPrivilege($project_id) // atgriez kādu no enum UserPrivilege
-    {
-
-    }
-    
-    function CreateTask($project_id, $name, $description, $due_date, $creator_identifier, $asignee = null)
-    {
-        $stmt = $this->mysqli->prepare("INSERT INTO `tasks`(`Project_ID`, `Title`, `Description`, 
-        `Created_at`, `due_date`, `Created_by`, `Asignee_ID`) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("issiii", $username, $password, $user_identifier);
+		$stmt = $this->mysqli->prepare("UPDATE workers SET workers.privilege=1 WHERE workers.project_id=? AND workers.user_id=(SELECT users.ID FROM users WHERE users.username = ?) LIMIT 1");
+        $stmt->bind_param("iis", $privilege, $project_id, $username);
         $stmt->execute();
 
-        if ($this->mysqli->affected_rows == 0) {
-            return false;
-        } else {
-            return true;
-        }
+		return $result->affected_rows == 1;
     }
 
-	function TaskExists($project_id, $task_id)
+    function GetWorkerPrivilege($project_id, $username) // atgriez kādu no enum UserPrivilege
+    {
+		$stmt = $this->mysqli->prepare("SELECT workers.privilege FROM workers WHERE workers.project_id=? AND workers.user_id=(SELECT users.ID FROM users WHERE users.username=?)");
+		$stmt->bind_param("is", $project_id, $username);
+		$stmt->execute();
+		
+		$result = $stmt->get_result();
+		if($result == false || $result->num_rows == 0)
+			return false;
+
+		return Tr_DBToUserPriv($result->fetch_array(MYSQLI_NUM)[0]);
+    }
+    
+    function CreateTask($project_id, $name, $description, $due_date, $assignee = null)
+    {
+        $stmt = $this->mysqli->prepare("INSERT INTO `INSERT INTO tasks (project_id, name, description, due_date, state, assignee) VALUES (?, ?, ?, ?, ?, 0, (SELECT users.ID FROM users WHERE users.username = ?))");
+        $stmt->bind_param("isssi", $project_id, $name, $description, $due_date, $assignee);
+        $stmt->execute();
+        
+        return $this->mysqli->affected_rows == 1;
+    }
+
+	function TaskExists($task_id)
 	{
-		return true;
+		$stmt = $this->mysqli->prepare("SELECT tasks.ID FROM tasks WHERE tasks.ID = ? LIMIT 1");
+        $stmt->bind_param("i", $task_id);
+        $stmt->execute();
+
+		$result = $stmt->get_result();
+		if($result == false)
+			return false;
+
+		return $result->num_rows == 1;
 	}
 
     function ListTasks($project_id)
     {
-        $query = "SELECT * FROM tasks WHERE Project_ID = $project_id";
-        $result = $this->mysqli->query($query);
-        $data = $result->fetch_all(MYSQLI_ASSOC);
-        return $data;
-        if ($this->mysqli->affected_rows == 0) {
-            return false;
-        } else {
-            return true;
-        }
-    //     return [
-    //     //     [
-    //     //         "ID" => 0,
-    //     //         "Name" => "123",
-    //     //         "Description" => "321",
-    //     //         "expire_time" => 123,
-    //     //         "Status" => TaskState::ToDo,
-    //     //         "CreatedBy" => "Username"
-    //     //     ]
-    //     // ];
+        $stmt = $this->mysqli->prepare("SELECT ID AS id, name, description, due_date, state, assignee FROM tasks WHERE tasks.ID = 1");
+		$stmt->bind_param("i", $project_id);
+		$stmt->execute();
+		
+		$result = $stmt->get_result();
+		if($result == false || $result->num_rows == 0)
+			return [];
+
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    function UpdateTask($task_id, $name = null, $description = null, $expire_time = null, $status = null) // pārveido lai visas kolonnas ir opcionālas (https://www.w3schools.com/sql/func_sqlserver_coalesce.asp)
+    function UpdateTask($task_id, $name = null, $description = null, $due_date = null, $state = null, $assignee = null) // pārveido lai visas kolonnas ir opcionālas (https://www.w3schools.com/sql/func_sqlserver_coalesce.asp)
     {
-        $stmt = $this->mysqli->prepare("UPDATE tasks SET Title = COALESCE(?, Title), Description = COALESCE(?, Description), expire_time = COALESCE(?, expire_time), Status = ? WHERE Task_id = ?");
-        $stmt->bind_param("ssiii", $name, $description, $expire_time, $status, $task_id);
+        $stmt = $this->mysqli->prepare("UPDATE tasks SET name = COALESCE(?, name), description = COALESCE(?, description), due_date = COALESCE(?, due_date), state = COALESCE(?, state), assignee=COALESCE((SELECT users.ID FROM users WHERE users.username=?), assignee) WHERE tasks.ID = ? LIMIT 1");
+        $stmt->bind_param("ssiii", $name, $description, $due_date, $state, $task_id);
         $stmt->execute();
-
-        if ($this->mysqli->affected_rows == 0) {
-            return false;
-        } else {
-            return true;
-        }
+        
+		return $result->num_rows == 1;
     }
 
-    function AssignTask($project_id, $task_id, $username=null)
+    function DeleteTask($task_id)
     {
-        $stmt = $this->mysqli->prepare("UPDATE tasks SET Project_ID = ?, Task_ID = ?, Asignee_ID = COALESCE(?, Asignee_ID) WHERE Task_ID = ?");
-        $stmt->bind_param("iii", $project_id, $task_id, $user_id);
+        $stmt = $this->mysqli->prepare("DELETE FROM tasks WHERE tasks.ID = ? LIMIT 1");
+        $stmt->bind_param("i", $task_id);
         $stmt->execute();
-
-        if ($this->mysqli->affected_rows == 0) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    function DeleteTask($project_id, $task_id)
-    {
-        $stmt = $this->mysqli->prepare("DELETE FROM tasks WHERE Project_id = ? AND Task_id = ?");
-        $stmt->bind_param("ii", $project_id, $task_id);
-        $stmt->execute();
-
-        if ($this->mysqli->affected_rows == 0) {
-            return false;
-        } else {
-            return true;
-        }
+        
+        return $this->mysqli->affected_rows == 1;
     }
 }
 
