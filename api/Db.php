@@ -98,12 +98,12 @@ class TaskDatabase
 		return $result->field_count == 1;
     }
 
-    function RegisterUser($username, $password, $user_identifier) // vienk uploado parametrus
+    function RegisterUser($username, $user_identifier) // vienk uploado parametrus
     {
         $stmt = $this->mysqli->prepare("INSERT INTO users (username, identifier) VALUES (?, ?)");
         $stmt->bind_param("ss", $username, $user_identifier);
         $stmt->execute();
-      
+
         return true;
     }
 
@@ -150,17 +150,6 @@ class TaskDatabase
 		}, $result->fetch_all(MYSQLI_NUM));
 
         return $data;
-    }
-    function GetUserID($username)
-    {
-        $query = "SELECT User_ID FROM user WHERE Username = '$username'";
-        $result = $this->mysqli->query($query);
-        $data = $result->fetch_all(MYSQLI_ASSOC);
-        if(empty($data)){
-            return false;
-        } else {
-            return $data[0]["User_ID"];
-        }
     }
 
     function ListProjects($user_identifier)
@@ -237,32 +226,16 @@ class TaskDatabase
         $stmt->bind_param("s", $user_identifier);
         $stmt->execute();
 
-        $result = $stmt->get_result();
-
-        if ($result->num_rows === 0) {
-            return false;
-        } else {
-            return true;
+        if ($this->mysqli->affected_rows == 0){
+        	return false;
+        } else{
+        	return true;
         }
     }
 
     function RemoveWorker($project_id, $username)
     {
-        $userID = $this->GetUserID($username);
-        if($userID === false){
-            return false;
-        }
-        $stmt = $this->mysqli->prepare("DELETE FROM projectworkers WHERE Project_id = ? AND User_ID = ?");
-        $stmt->bind_param("ii", $project_id, $userID);
-        $stmt->execute();
 
-        $result = $stmt->get_result();
-
-        if ($result->num_rows === 0) {
-            return false;
-        } else {
-            return true;
-        }
     }
 
     function IsWorker($project_id, $user_identifier) // atgriez true arī ja ir projekta īpašnieks
@@ -295,9 +268,7 @@ class TaskDatabase
         $stmt->bind_param("issiii", $username, $password, $user_identifier);
         $stmt->execute();
 
-        $result = $stmt->get_result();
-
-        if ($result->num_rows === 0) {
+        if ($this->mysqli->affected_rows == 0) {
             return false;
         } else {
             return true;
@@ -315,7 +286,11 @@ class TaskDatabase
         $result = $this->mysqli->query($query);
         $data = $result->fetch_all(MYSQLI_ASSOC);
         return $data;
-        
+        if ($this->mysqli->affected_rows == 0) {
+            return false;
+        } else {
+            return true;
+        }
     //     return [
     //     //     [
     //     //         "ID" => 0,
@@ -334,9 +309,7 @@ class TaskDatabase
         $stmt->bind_param("ssiii", $name, $description, $expire_time, $status, $task_id);
         $stmt->execute();
 
-        $result = $stmt->get_result();
-
-        if ($result->num_rows === 0) {
+        if ($this->mysqli->affected_rows == 0) {
             return false;
         } else {
             return true;
@@ -349,9 +322,7 @@ class TaskDatabase
         $stmt->bind_param("iii", $project_id, $task_id, $user_id);
         $stmt->execute();
 
-        $result = $stmt->get_result();
-
-        if ($result->num_rows === 0) {
+        if ($this->mysqli->affected_rows == 0) {
             return false;
         } else {
             return true;
@@ -364,9 +335,7 @@ class TaskDatabase
         $stmt->bind_param("ii", $project_id, $task_id);
         $stmt->execute();
 
-        $result = $stmt->get_result();
-
-        if ($result->num_rows === 0) {
+        if ($this->mysqli->affected_rows == 0) {
             return false;
         } else {
             return true;
@@ -374,7 +343,4 @@ class TaskDatabase
     }
 }
 
-// $ob = new Db;
-// echo "<pre> ";
-// var_dump($ob->GetUserID("ssss"));
-// echo "</pre> ";
+?>
