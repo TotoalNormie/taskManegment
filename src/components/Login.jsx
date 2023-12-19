@@ -3,10 +3,12 @@ import '../style/Login.css';
 import makeRequest from '../functions/makeAPIRequest';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useUserContext } from './UserProvider';
 
 const Login = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
+	const { setUser } = useUserContext();
 
 	const [error, setError] = useState('');
 
@@ -26,6 +28,9 @@ const Login = () => {
 			console.log(data);
 			switch (data.status) {
 				case 'Success':
+					localStorage.setItem('token', data.data.token);
+					localStorage.setItem('expire_time', data.data.expire_time);
+					setUser(username);
 					navigate('/');
 					break;
 				case 'Failure':

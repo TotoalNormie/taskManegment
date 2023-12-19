@@ -3,11 +3,13 @@ import { User, Lock, CheckCircle } from '@phosphor-icons/react';
 import makeRequest from '../functions/makeAPIRequest';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useUserContext } from './UserProvider';
 
 const Signup = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [confirmPass, setConfirmPass] = useState('');
+	const { setUser } = useUserContext();
 
 	const [error, setError] = useState('');
 
@@ -30,8 +32,12 @@ const Signup = () => {
 		};
 		makeRequest('register', options, data => {
 			// console.log(data);
+			console.log(data);
 			switch (data.status) {
 				case 'Success':
+					localStorage.setItem('token', data.data.token);
+					localStorage.setItem('expire_time', data.data.expire_time);
+					setUser(username);
 					navigate('/');
 					break;
 				case 'Failure':

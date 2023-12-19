@@ -1,7 +1,8 @@
 <?php
 	header("Access-Control-Allow-Origin: http://localhost:5173");
+	header("Access-Control-Allow-Headers: Content-Type, Authorization");
 	
-	require_once("dummy_db.php");
+	require_once("Db.php");
 	require_once("sessions.php");
 	require_once("utility.php");	
 

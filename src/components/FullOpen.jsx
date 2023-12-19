@@ -5,8 +5,9 @@ import Calendar from './Calendar';
 import Tasks from './Tasks';
 import React, { useEffect, useState } from 'react';
 import makeAPIRequest from '../functions/makeAPIRequest';
-import { useParams } from 'react-router';
+import { useParams, useNavigate } from 'react-router';
 import NoProject from './NoProject';
+import { useUserContext } from './UserProvider';
 
 const tasksJson = `[
     {"task_id": 1, "name": "Task 1", "description": "Description for Task 1", "creation_date": 1701964754, "status": "done", "due_date": 1702296807, "asignee": "user3", "asignee_color": "#928FFF"},
@@ -27,6 +28,7 @@ const tasksJson = `[
 ]`;
 
 const FullOpen = () => {
+	const { user } = useUserContext();
 	const taskArray = JSON.parse(tasksJson);
 	const formatted = taskArray.map(task => ({
 		...task,
@@ -37,6 +39,8 @@ const FullOpen = () => {
 	const [updated, setUpdated] = useState(false);
 	const [workers, setWorkers] = useState(null);
 	const { id } = useParams();
+	const navigate = useNavigate();
+
 
 	useEffect(() => {
 		if (id && !tasks) {
@@ -44,7 +48,7 @@ const FullOpen = () => {
 				setTasks(response.data); // Corrected setTasks here
 			});
 		}
-	}, [tasks, id]);
+	}, [id]);
 
 	useEffect(() => {
 		makeAPIRequest('projects/' + id + '/workers', response => {
@@ -52,20 +56,28 @@ const FullOpen = () => {
 		});
 	}, [id]);
 
+	useEffect(()=> {
+		console.log(user, localStorage.getItem('user'));
+		if(!user && !localStorage.getItem('user')) navigate('/home');
+	}, [user]);
+
+
 	const resetComponent = () => {
 		setUpdated(!updated);
 	};
 
 	return id ? (
-			<div className='ParentBox'>
-				<div className='BoxL'>
-					<Tasks tasks={tasks} workers={workers} />
-				</div>
-				<div className='Box'>
-					<Calendar tasks={tasks} workers={workers} />
-				</div>
+		<div className='ParentBox'>
+			<div className='BoxL'>
+				<Tasks tasks={tasks} workers={workers} />
 			</div>
-		) : <NoProject />;
+			<div className='Box'>
+				<Calendar tasks={tasks} workers={workers} />
+			</div>
+		</div>
+	) : (
+		<NoProject />
+	);
 };
 
 export default FullOpen;

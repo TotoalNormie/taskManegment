@@ -13,14 +13,10 @@ import { UserProvider } from './components/UserProvider';
 import ParentTest from './components/ParentTest';
 import { useEffect } from 'react';
 
-
 function App() {
 	console.log(document.cookie);
-	useEffect(()=> {
-		makeAPIRequest('get-user-info', (data) =>{
-			console.log(data);
-		});
-	}, [])
+	const token = localStorage.getItem('token');
+	console.log(token);
 	return (
 		<UserProvider>
 			<BrowserRouter>
@@ -33,9 +29,6 @@ function App() {
 						<Route exact path='/signup' element={<Signup />}></Route>
 						<Route exact path='/login' element={<Login />}></Route>
 						<Route exact path='/home' element={<Home />}></Route>
-						<Route exact path='/fullopen' element={<FullOpen />}></Route>
-						<Route exact path='/noproject' element={<NoProject />}></Route>
-						<Route exact path='/parentTest' element={<ParentTest /> }></Route>
 					</Routes>
 				</main>
 			</BrowserRouter>

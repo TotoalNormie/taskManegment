@@ -1,31 +1,40 @@
 import '../style/Header.css';
 import logo from '../assets/logo.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import { CaretDown, SignOut } from '@phosphor-icons/react';
-import { eraseCookie } from '../functions/cookie';
 import { useUserContext } from './UserProvider';
+import formatUser from '../functions/formatUser';
 
 
 
 const Header = () => {
-	const { user } = useUserContext();
+	const { user, setUser } = useUserContext();
 	const location = useLocation();
 	const [drop, setDrop] = useState(false);
-	const [test, setTest] = useState(false);
-	if (location.pathname === '/landing') return null;
+	
+	console.log('user', user);
+	
+	const navigate = useNavigate();
+	if (location.pathname === '/home') return null;
+	const formatedUser = formatUser(user);
 
 	const handleClick = () => {
 		setDrop(!drop);
 	};
 
 	const logout = () => {
-		eraseCookie('token');
+		localStorage.removeItem('token');
+		localStorage.removeItem('expire_time');
+		localStorage.removeItem('user');
+		setDrop(false);
+		setUser(false);
+		navigate('/home');
 	};
-
+	
 	return (
 		<header>
 			<Link to='/' className='logo'>
@@ -36,11 +45,11 @@ const Header = () => {
 			</Link>
 			{location.pathname !== '/login' && location.pathname !== '/signup' && (
 				<div className='user'>
-					<div className='avatar'>{user}</div>
+					<div className='avatar'>{formatedUser}</div>
 					<button className={`drop ${drop ? 'flipped' : ''}`} onClick={handleClick}>
 						<CaretDown />
 					</button>
-					<button className={`logout ${drop ? 'stretched' : ''}`}>
+					<button onClick={logout} className={`logout ${drop ? 'stretched' : ''}`}>
 						<SignOut /> Logout
 					</button>
 				</div>

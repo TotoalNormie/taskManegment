@@ -6,16 +6,36 @@ import encodeHTML from '../functions/encodeHTML';
 const AppContext = createContext();
 
 export const UserProvider = ({ children }) => {
-	const [user, setUser] = useState(false);
-	if (getCookie('token') !== null) {
-		makeAPIRequest('get-user-info', data => {
-			if (data?.valid_session) {
-				setUser(encodeHTML(data.username));
+	const [user, setUser] = useState(null);
+
+	useEffect(() => {
+		const fetchUserFromLocalStorage = async () => {
+			const storedUser = localStorage.getItem('user');
+			console.log('works', storedUser);
+
+			if (storedUser) {
+				console.log('stored');
+				setUser(storedUser);
+			} else if (localStorage.getItem('token') && !localStorage.getItem('user')) {
+				console.log('token');
+
+				const token = localStorage.getItem('token');
+
+				makeAPIRequest('get-user-info', { headers: { Authorization: token } }, data => {
+					if (data.data?.valid_session) {
+						const username = encodeHTML(data.data?.username);
+						setUser(username);
+						localStorage.setItem('user', username);
+					}
+				});
+			} else {
+				console.log('false');
+				setUser(false);
 			}
-		});
-	}else {
-		console.log('cookie does not exist');
-	}
+		};
+
+		fetchUserFromLocalStorage();
+	}, []);
 
 	return <AppContext.Provider value={{ user, setUser }}>{children}</AppContext.Provider>;
 };
