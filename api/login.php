@@ -22,13 +22,8 @@
 				$user_identifier = GenerateUserID($RequestData["user"], $RequestData["pass"]);
 				if($DB->ValidLogin($user_identifier))
 				{				
-					$expire_time = time() + 60 * 60 * 24 * 5; // 5 days
-					setcookie("token", (new Session($user_identifier, $expire_time, SessionAuthority::USER))->ToToken(),[
-						'expires' => $expire_time, // Expiration time in one hour
-						'path' => '/',
-						'samesite' => 'None', // Set SameSite to None for cross-origin requests
-					]);				
-					exit(CreateResponse(ResponseType::Success, "Session Created Succesfully"));
+					$expire_time = time() + 60 * 60 * 24 * 5; // 5 days			
+					exit(CreateResponse(ResponseType::Success, "Session Created Succesfully", (new Session($user_identifier, $expire_time, SessionAuthority::USER))->ToResponse()));
 				}
 				else
 				{
