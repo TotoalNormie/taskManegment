@@ -80,7 +80,7 @@
 								
 								
 					for($i = 0; $i < $workerCount; ++$i)
-						$DB->AddWorker($project_id, $RequestData["workers"][$i]["username"], $RequestData["workers"][$i]["privilege"]);
+						$DB->SetWorkerPrivilege($project_id, $RequestData["workers"][$i]["username"], $RequestData["workers"][$i]["privilege"]);
 				}
 				else
 				{								
