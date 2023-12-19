@@ -75,7 +75,6 @@
 		public function ToToken()
 		{
 			global $___encryption_key;
-			global $___encryption_iv;
 	
 			return SafeEncrypt($this->user_identifier . "|" . $this->expire_time . "|" . $this->stamp, $___encryption_key);
 		}
@@ -91,7 +90,6 @@
 		static public function FromToken($token)
 		{
 			global $___encryption_key;
-			global $___encryption_iv;
 	
 			$data = SafeDecrypt($token, $___encryption_key);
 			if($data === false)
