@@ -52,9 +52,31 @@
 		for($target_i = 0; $target_i < $targetCount; ++$target_i)
 			for($key_i = 0; $key_i < $keyCount; ++$key_i)
 				if(!isset($targetArray[$target_i][$objectKeys[$key_i]]))
-					return false
+					return false;
 		
 		return true;
+	}
+
+	function FindArrayKey($targetArray, $keys)
+	{
+		$keyCount = count($keys);
+		for($key_i = 0; $key_i < $keyCount; ++$key_i)
+			if(isset($targetArray[$keys[$key_i]]))
+				return true;
+		
+		return false;
+	}
+
+	function FindArrayKeys($targetArray, $keys)
+	{
+		$count = 0;
+
+		$keyCount = count($keys);
+		for($key_i = 0; $key_i < $keyCount; ++$key_i)
+			if(isset($targetArray[$keys[$key_i]]))
+				++$count;
+		
+		return $count;
 	}
 
 	function GetHeader($name)

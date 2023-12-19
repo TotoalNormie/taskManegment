@@ -13,6 +13,54 @@
 		case Owner;
 	}
 
+	function Tr_UserPrivToString($value)
+	{
+		if($value === UserPrivilege::Worker)
+			return "worker";
+		else if($value === UserPrivilege::Manager)
+			return "manager";
+		else if($value === UserPrivilege::Owner)
+			return "owner";
+		else
+			return false;
+	}
+
+	function Tr_StringToUserPriv()
+	{
+		if($value === "worker")
+			return UserPrivilege::Worker;
+		else if($value === "manager")
+			return UserPrivilege::Manager;
+		else if($value === "owner")
+			return UserPrivilege::Owner;
+		else
+			return false;
+	}
+
+	function Tr_TaskStateToString($value)
+	{
+		if($value === TaskState::ToDo)
+			return "todo";
+		else if($value === TaskState::InProgress)
+			return "in progress";
+		else if($value === TaskState::Done)
+			return "done";
+		else
+			return false;
+	}
+
+	function Tr_StringToTaskState()
+	{
+		if($value === "todo")
+			return TaskState::ToDo;
+		else if($value === "in progress")
+			return TaskState::InProgress;
+		else if($value === "done")
+			return TaskState::Done;
+		else
+			return false;
+	}
+
 	class TaskDatabase
 	{
 
@@ -67,9 +115,9 @@
 		{
 			return [
 				[
-					"ID" => 0,
-					"Name" => "123",
-					"Description" => "321"
+					"id" => 0,
+					"name" => "123",
+					"description" => "321"
 				]
 			];
 		}
@@ -109,9 +157,14 @@
 			return true;
 		}
 
-		function ListWorkers($project_id) // masīvs ar rindas ID
+		function ListWorkers($project_id) // masīvs ar username un 
 		{
-			return true;
+			return [
+				[
+					"username" => "joe 123",
+					"privilege" => UserPrivilege::Worker
+				]
+			];
 		}
 
 		function SetWorkerPrivilege($project_id, $username, $privilege) // privilege būs enum UserPrivilege
@@ -119,9 +172,9 @@
 			return true;
 		}
 
-		function GetWorkerPrivilege($project_id) // atgriez kādu no enum UserPrivilege
+		function GetWorkerPrivilege($project_id, $username) // atgriez kādu no enum UserPrivilege
 		{
-			return true;
+			return UserPrivilege::Owner;
 		}
 		
 		function CreateTask($project_id, $name, $description, $due_date, $creator_identifier, $asignee = null)
@@ -138,21 +191,18 @@
 		{
 			return [
 				[
-					"ID" => 0,
-					"Name" => "123",
-					"Description" => "321",
+					"id" => 0,
+					"name" => "123",
+					"description" => "321",
 					"expire_time" => 123,
-					"Status" => TaskState::ToDo,
-					"CreatedBy" => "Username"
+					"status" => TaskState::ToDo,
+					"created_by" => "Username",
+					"assignee" => "username2"
 				]
 			];
 		}
 
-		function UpdateTask($task_id, $name = null, $description = null, $expire_time = null, $status = null) // pārveido lai visas kolonnas ir opcionālas (https://www.w3schools.com/sql/func_sqlserver_coalesce.asp)
-		{
-			return true;
-		}
-		function AssignTask($project_id, $task_id, $username=null)
+		function UpdateTask($task_id, $name = null, $description = null, $status = null, $expire_time = null, $assignee = null) // pārveido lai visas kolonnas ir opcionālas (https://www.w3schools.com/sql/func_sqlserver_coalesce.asp)
 		{
 			return true;
 		}
