@@ -13,6 +13,54 @@ enum UserPrivilege
     case Owner;
 }
 
+	function Tr_UserPrivToString($value)
+	{
+		if($value === UserPrivilege::Worker)
+			return "worker";
+		else if($value === UserPrivilege::Manager)
+			return "manager";
+		else if($value === UserPrivilege::Owner)
+			return "owner";
+		else
+			return false;
+	}
+
+	function Tr_StringToUserPriv()
+	{
+		if($value === "worker")
+			return UserPrivilege::Worker;
+		else if($value === "manager")
+			return UserPrivilege::Manager;
+		else if($value === "owner")
+			return UserPrivilege::Owner;
+		else
+			return false;
+	}
+
+	function Tr_TaskStateToString($value)
+	{
+		if($value === TaskState::ToDo)
+			return "todo";
+		else if($value === TaskState::InProgress)
+			return "in progress";
+		else if($value === TaskState::Done)
+			return "done";
+		else
+			return false;
+	}
+
+	function Tr_StringToTaskState()
+	{
+		if($value === "todo")
+			return TaskState::ToDo;
+		else if($value === "in progress")
+			return TaskState::InProgress;
+		else if($value === "done")
+			return TaskState::Done;
+		else
+			return false;
+	}
+
 class TaskDatabase
 {
 
@@ -20,7 +68,7 @@ class TaskDatabase
     private $username = "root";
     private $password = "";
     private $dbname = "webtm";
-    private $mysqli;
+    private $DB;
 
     public function __construct()
     {
@@ -34,70 +82,70 @@ class TaskDatabase
 
     function ValidLogin($user_identifier) // atgriez true ja identifier ir user tabulā
     {
-        $stmt = $this->mysqli->prepare("SELECT identifier FROM user WHERE identifier = ? LIMIT 1");
+        $stmt = $this->mysqli->prepare("SELECT ID FROM users WHERE identifier = ?");
         $stmt->bind_param("s", $user_identifier);
         $stmt->execute();
 
-        $result = $stmt->get_result();
+		$result = $stmt->get_result();
+		if($result == false)
+			return false;
 
-        if ($result->num_rows === 0) {
-            return false;
-        } else {
-            return true;
-        }
+		return $result->field_count == 1;
     }
 
     function RegisterUser($username, $password, $user_identifier) // vienk uploado parametrus
     {
-        $stmt = $this->mysqli->prepare("INSERT INTO user(Username, Password, identifier) VALUES(?, ?, ?)");
-        $stmt->bind_param("sss", $username, $password, $user_identifier);
+        $stmt = $this->mysqli->prepare("INSERT INTO users (username, identifier) VALUES (?, ?);");
+        $stmt->bind_param("ss", $username, $user_identifier);
         $stmt->execute();
-
-        $result = $stmt->get_result();
-
-        return !$result;
+      
+        return true;
     }
 
     function UserExists($username)
     {
-        $query = "SELECT Username FROM user WHERE Username = '$username'";
-        $result = $this->mysqli->query($query);
-        $data = $result->fetch_all(MYSQLI_ASSOC);
+        $stmt = $this->mysqli->prepare("SELECT ID FROM users WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
 
-        if (empty($data)) {
-            return false;
-        } else {
-            return true;
-        }
+		$result = $stmt->get_result();
+		if($result == false)
+			return false;
+
+		return $result->field_count == 1;
         
     }
 
     function GetUsername($user_identifier)
     {
-        $stmt = $this->mysqli->prepare("SELECT Username FROM user WHERE identifier = ? LIMIT 1");
-        $stmt->bind_param("s", $user_identifier);
+		$stmt = $this->mysqli->prepare("SELECT username FROM users WHERE identifier = ?");
+        $stmt->bind_param("s", $username);
         $stmt->execute();
-        
-        $result = $stmt->get_result();
 
-        if ($result->num_rows === 0) {
-            return false;
-        } else {
-            return $result->fetch_row()["Username"];
-        }
+		$result = $stmt->get_result();
+		if($result == false || $result->field_count != 1)
+			return false;
+
+		return $result->fetch_array(MYSQLI_NUM)[0];
     }
 
     function FindUsers($partial_username) // atgriez masīvu ar rindas ID, kur lietotājvārds sākas ar $partial_username LIMIT 10
     {
-        $query = "SELECT Username FROM user WHERE Username LIKE '$partial_username%' LIMIT 10";
-        $result = $this->mysqli->query($query);
-        $data = $result->fetch_all(MYSQLI_ASSOC);
+		$partial_username = $partial_username . "%";
 
-        $users = array();
-        foreach ($data as $row) {
-            $users[] = $row["Username"];
-        }
-        return $users;
+        $stmt = $this->mysqli->prepare("SELECT username FROM users WHERE username LIKE ? LIMIT 10");
+        $stmt->bind_param("s", $partial_username);
+        $stmt->execute();
+		
+		$result = $stmt->get_result();
+		if($result == false || $result->field_count == 0)
+			return [];
+
+        $data = array_map(function($v){
+			return $v[0];
+		}, $result->fetch_all(MYSQLI_NUM));
+
+        return $data;
     }
     function GetUserID($username)
     {
@@ -113,6 +161,10 @@ class TaskDatabase
 
     function ListProjects($user_identifier) // ieskaitot tie kuros tu esi worker
     {
+		//SELECT projects.ID, projects.name, projects.description FROM ((projects
+    	//INNER JOIN users AS owner_user ON projects.owner_id = owner_use) )
+        //WHERE projects.owner_id = owner_user.ID OR workers.project_id = projects.ID
+		
         return [
             [
                 "ID" => 0,
