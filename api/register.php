@@ -1,7 +1,7 @@
 <?php
 	header("Access-Control-Allow-Origin: http://localhost:5173");
 	
-	require_once("dummy_db.php");
+	require_once("Db.php");
 	require_once("sessions.php");
 	require_once("utility.php");
 
@@ -10,7 +10,7 @@
 		$RequestData = GetAllRequestData();
 		if(isset($RequestData["user"]) && isset($RequestData["pass"]))
 		{
-			if(strlen($RequestData) < 4)
+			if(strlen($RequestData["user"]) < 4)
 				exit(CreateResponse(ResponseType::Failure, "Username Too Short"));
 
 			try
