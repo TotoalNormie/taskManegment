@@ -44,10 +44,11 @@
 .login-button {
 	background-color: #d9d9d9;
 	border: none;
-	width: 100%;
+	width: 95%;
 	padding: 15px 20px; /* Adjust padding as needed */
 	border-radius: 10px; /* Rounded corners */
 	cursor: pointer;
+	margin-right: 40%;
 	margin-top: 40px;
 	font-size: 16px;
 	transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
@@ -65,4 +66,10 @@
 
 .LoginDiv:has(.error:not(:empty)) .border-bottom-input {
 	border-bottom: 1px solid var(--_error_color);
+}
+@media only screen and (max-width: 600px) {
+	.login-button{
+		margin-right: 40%;
+		width: 95%;
+	}
 }

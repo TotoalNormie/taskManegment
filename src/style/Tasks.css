@@ -32,7 +32,7 @@
 
 .ProjectSettings {
 	width: 50%;
-	height: 50px;
+	height: 10px;
 	text-align: right;
 }
 
@@ -56,7 +56,39 @@
 	cursor: pointer;
 	border-radius: 5px;
 }
-
+.ButtonW {
+	background-color: #d9d9d9;
+	border: none;
+	padding: 6px 30px;
+	width:340px;
+	font-family: 'Noto Sans', Arial, sans-serif;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 21px;
+	margin: 2px 2px;
+	margin-top: 15px;
+	cursor: pointer;
+	border-radius: 5px;
+}
+.ButtonG {
+	background-color: #d9d9d9;
+	border: none;
+	padding: 1px 30px;
+	font-family: 'Noto Sans', Arial, sans-serif;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 21px;
+	margin: 2px 2px;
+	cursor: pointer;
+	border-radius: 5px;
+}
+.AnotherFKbutton{
+	width:68%;
+	height:100px;
+	margin-left: 4%;
+}
 .Button2 {
 	background-color: #d9d9d9;
 	border: none;
@@ -68,7 +100,21 @@
 	margin: 2px 2px;
 	cursor: pointer;
 }
-
+.Buttonsrfrsg{
+	background-color: #d9d9d9;
+	border: none;
+	font-family: 'Noto Sans', Arial, sans-serif;
+	text-align: center;
+	font-size: 17px;
+	cursor: pointer;
+	height: 40px;
+	margin-top: 20px;
+	margin-right: 10%;
+	width:90%;
+	border-radius: 5px;
+}
+.Buttonsrfrsg:hover,
+.ButtonW:hover,
 .Button:hover {
 	background-color: #d0d0d0;
 }
@@ -88,6 +134,9 @@
 .ButtonD:hover {
 	background-color: #d0d0d0;
 }
+.ButtonG:hover {
+	background-color: #d0d0d0;
+}
 .Popup {
 	position: fixed;
 	top: 0;
@@ -101,12 +150,12 @@
 }
 
 .PopupContent {
-	background: #e4e4e4;
+	background: #E4E4E4;
 	width: 55%;
 	height: 60%;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-	position: relative;
 	text-align: center;
+	position:relative;
 	font-size: 25px;
 }
 
@@ -122,7 +171,7 @@
 .Project {
 	text-align: left;
 	margin-left: 30px;
-	width: 25%;
+	width: 40%;
 	font-size: 22px;
 	font-family: 'Noto Sans', Arial, sans-serif;
 	float: left;
@@ -136,27 +185,97 @@
 }
 
 .thing {
-	font-size: 20px;
+	font-size: 15px;
+	padding-bottom: 1px;
 }
 
-.EnterNameInput {
+.EnterName {
+	margin-top: 40px; /* Add or adjust the margin as needed */
+  }
+  
+  .EnterNameInput {
 	border: none;
-	float: left;
+	float: right;
 	outline: none;
-	width: 60%;
+	width: 30%;
+	margin-right: 7%;
 	padding: 5px;
 	background-color: #eeeeee;
 	text-align: left;
-	margin-top: 20px;
 	font-size: 17px;
+	margin-bottom: 20px;
+	margin-top: 14px;
 	transition: border 0.3s ease;
-}
+  }
+  
+  /* Add the following styles to move the "Enter description" input below "Enter name" input */
+  .EnterDescription {
+	margin-top: 40px; /* Add or adjust the margin as needed */
+  }
+  
+  .EnterDescriptionInput {
+	border: none;
+  float: right;
+  outline: none;
+  width: 30%;
+  margin-right: 7%;
+  padding: 5px;
+  background-color: #eeeeee;
+  text-align: left;
+  font-size: 17px;
+  transition: border 0.3s ease;
+  margin-top: 26px; 
+  }
+  .EnterDescriptionInput2 {
+	border: none;
+  float: right;
+  outline: none;
+  width: 340px;
+  margin-right: 7%;
+  padding: 5px;
+  background-color: #eeeeee;
+  text-align: left;
+  font-size: 17px;
+  transition: border 0.3s ease;
+ 
+  }
+.upperhalf{
+	height:45%;
 
+
+}
+.lowerhalf{
+	height:55%;
+	
+	display:flex;
+	width: 100%;
+}
 .Labelw {
 	font-size: 20px;
 	margin-left: 20px;
 }
+.WorkerTable{
+	margin-top: 2%;
+	margin-left: 3%;
+	background-color: #DEDEDE;
+	height:80%;
+	width: 60%;
+	
+	font-size: 20px;
+	height:80%;
 
+}
+.Table td2{
+	display:flex;
+}
+.AddWorker{
+	margin-top: 2%;
+	margin-left: 3%;
+	width: 40%;
+	height: 50%;
+
+	float: right;
+}
 .TodoTable {
 	width: 95%;
 	border-collapse: collapse;
@@ -167,7 +286,6 @@
 
 .TodoTable th {
 	border: none;
-
 	border-bottom: 1px solid;
 	margin-left: 21px;
 	font-weight: lighter;
@@ -177,11 +295,25 @@
 	border: none;
 }
 
+
 .TodoTable th:first-child,
 .TodoTable td:first-child {
 	width: 300px;
 }
-
+.Table{
+	width: 95%;
+	border-collapse: collapse;
+	margin-left: 2.5%;
+	margin-top: 10px;
+	text-align: left;
+	padding: 0 20px;
+}
+.Table th {
+	border: none;
+	border-bottom: 1px solid;
+	margin-left: 21px;
+	font-weight: lighter;
+}
 .DotsThreeVertical {
 	font-size: 30px;
 }
@@ -298,19 +430,119 @@
 .output {
 	margin-top: 8px;
 }
+.top{
+	display:flex;
+}
+.name{
+	width:70%;
+	height: 100px;
+	text-align: left;
+	font-size: 17px;
+	margin-top: 5%;
+	margin-left: 4%;
+}
+.nameInput{
+	border: none;
+	outline: none;
+	padding: 5px;
+	width: 90%;
+	background-color: #eeeeee;
+	text-align: left;
+	font-size: 17px;
+	margin-bottom: 20px;
+	transition: border 0.3s ease;
+}
+.description{
+	font-size: 17px;
+	width: 68%;
+	text-align: left;
+margin-left: 4%;
+height:300px;
+}
+.descInput {
+	border: none;
+	outline: none;
+	padding: 5px;
+	width: 90%;
+	background-color: #eeeeee;
+	text-align: left;
+	font-size: 17px;
+	height: 200px;
+	margin-bottom: 20px;
+	font-family: 'Noto Sans', Arial, sans-serif;
+	transition: border 0.3s ease;
+	resize: none; /* Optional: Disable textarea resizing if not needed */
+  }
+.Ddate{
+	height:300px;
+	width: 293px; 
+}
+.EndlessFrontend{
+	margin-top: 60%;
+	font-size: 17px;
+	text-align: left;
+}
+.bottom{
+	display:flex;
+}
+.dropdown{
+font-size: 17px;
+height:100px;
+width:300px;
+margin-top: 5%;
+text-align: left;
+}
 @media only screen and (max-width: 600px) {
 	.Button {
+		background-color: #d9d9d9;
+		border: none;
+		padding: 10px 17px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 13px;
+		margin-top: 10px;
+		cursor: pointer;
+	}
+	.ButtonG {
+		background-color: #d9d9d9;
+		border: none;
+		padding: 6px 30px;
+		font-family: 'Noto Sans', Arial, sans-serif;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 21px;
+		margin: 2px 2px;
+		cursor: pointer;
+		border-radius: 5px;
 		background-color: #d9d9d9;
 		border: none;
 		padding: 1px 10px;
 		text-align: center;
 		text-decoration: none;
 		display: inline-block;
-		font-size: 18px;
-		margin: 2px 2px;
+		font-size: 13px;
+		margin-top: 10px;
+		border-radius: 5px;
 		cursor: pointer;
+	}
+	.ButtonC{
+		background-color: #d9d9d9;
+		border: none;
+		padding: 4px 10px;
+		width:100%;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 18px;
+		margin-bottom: 1px;
+		cursor: pointer;
+		border-radius: 5px;
 	}
 	.CalendarPopup {
 		display: contents;
 	}
+
 }
+
