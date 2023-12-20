@@ -81,19 +81,21 @@
 
 	function GetHeader($name)
 	{
-		$headerName = str_replace("-", "_", strtoupper($name));
+		$name = strtoupper($name);
+		$headerName = str_replace("-", "_", $name);
 		if(isset($_SERVER["HTTP_".$headerName]))
 		{
 			return $_SERVER["HTTP_".$headerName];
 		}
 		else
 		{
-			return getallheaders()[implode("-", array_map(function($v)
-			{
-				$v[0] = strtoupper($v[0]);
-				return $v;
-			},
-			explode("-", strtolower($name))))] ?? null;
+			$headers = getallheaders();
+			$headerCount = count($headers);
+			foreach($headers as $header=>$value)
+				if(strtoupper($header) === $name)
+					return $value;
+
+			return null;
 		}
 	}
 

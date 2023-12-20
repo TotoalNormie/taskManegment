@@ -7,7 +7,7 @@
 		global $___hmac_key;
 
 		$iv = substr(hash("sha256", openssl_random_pseudo_bytes(32)), 0, 16);
-				
+		
 		$cipher_text = openssl_encrypt($data, "aes-256-cbc", $key, 0, $iv);
 
 		return $cipher_text . $iv . hash_hmac("sha1", $cipher_text, $___hmac_key);
@@ -23,7 +23,6 @@
 			return false;
 
 		$iv = substr($full_cipher_text, -(16+40), 16);
-
 		
 		return openssl_decrypt($cipher_text, "aes-256-cbc", $key, 0, $iv);
 	}

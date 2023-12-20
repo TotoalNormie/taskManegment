@@ -3,9 +3,6 @@
 
 	if($_SERVER["REQUEST_METHOD"] === "DELETE")
 	{
-		if($DB->ProjectExists($_GET["id"]))
-			exit(CreateResponse(ResponseType::Failure, "Project Doesn't Exist"));
-
 		if($DB->IsProjectOwner($_GET["id"], $session->user_identifier))
 		{
 			if($DB->DeleteProject($_GET["id"]))
@@ -25,10 +22,7 @@
 		if($_SERVER["REQUEST_METHOD"] === "POST")
 		{
 			if(isset($RequestData["name"]) && isset($RequestData["description"]))
-			{
-				if($DB->ProjectExists($_GET["id"]))
-					exit(CreateResponse(ResponseType::Failure, "Project Doesn't Exist"));
-						
+			{				
 				if($DB->IsProjectOwner($_GET["id"], $session->user_identifier))
 				{
 					if($DB->UpdateProject($_GET["id"], $RequestData["name"], $RequestData["description"]))

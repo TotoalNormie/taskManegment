@@ -90,11 +90,11 @@
 		static public function FromToken($token)
 		{
 			global $___encryption_key;
-	
+			
 			$data = SafeDecrypt($token, $___encryption_key);
 			if($data === false)
 				return false;
-			
+
 			$data = explode("|", $data);
 			if(intval($data[1]) <= time())
 				return false;	

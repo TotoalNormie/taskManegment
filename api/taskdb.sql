@@ -33,5 +33,5 @@ CREATE TABLE IF NOT EXISTS tasks(
 	assignee INT,
 	
 	CONSTRAINT CHK_state CHECK (state >= 0 AND state <=2),
-	FOREIGN KEY (assignee) REFERENCES workers(ID) ON DELETE CASCADE
+	FOREIGN KEY (assignee) REFERENCES users(ID) ON DELETE CASCADE
 );

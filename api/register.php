@@ -1,7 +1,7 @@
 <?php
 	header("Access-Control-Allow-Origin: http://localhost:5173");
 	
-	require_once("Db.php");
+	require_once("task_db_interface.php");
 	require_once("sessions.php");
 	require_once("utility.php");
 
@@ -22,7 +22,7 @@
 
 
 				$user_identifier = GenerateUserID($RequestData["user"], $RequestData["pass"]);
-				if($DB->RegisterUser($RequestData["user"], $RequestData["pass"], $user_identifier))
+				if($DB->RegisterUser($RequestData["user"], $user_identifier))
 				{				
 					$expire_time = time() + 60 * 60 * 24 * 5; // 5 days			
 					exit(CreateResponse(ResponseType::Success, "Account Registered Succesfully", (new Session($user_identifier, $expire_time, SessionAuthority::USER))->ToResponse()));

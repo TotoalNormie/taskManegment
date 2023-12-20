@@ -3,6 +3,7 @@
 	
 	require_once("utility.php");
 	require_once("sessions.php");
+	require_once("task_db_interface.php");
 
 	$session = HandleSession();
 
@@ -29,56 +30,7 @@
 		}
 		else
 		{
-			if($_SERVER["REQUEST_METHOD"] === "DELETE")
-			{
-				if($DB->ProjectExists($_GET["id"]))
-					exit(CreateResponse(ResponseType::Failure, "Project Doesn't Exist"));
-
-				if($DB->IsProjectOwner($_GET["id"], $session->user_identifier))
-				{
-					if($DB->DeleteProject($_GET["id"]))
-						exit(CreateResponse(ResponseType::Success, "Project Deleted Succesfully"));
-					else
-						exit(CreateResponse(ResponseType::Failure, "Failed To Deleted Project"));
-				}
-				else
-				{
-					exit(CreateResponse(ResponseType::Failure, "Missing Authority"));
-				}
-			}
-			else
-			{
-				$RequestData = GetAllRequestData();
-
-				if($_SERVER["REQUEST_METHOD"] === "POST")
-				{
-					if(isset($RequestData["name"]) && isset($RequestData["description"]))
-					{
-						if($DB->ProjectExists($_GET["id"]))
-							exit(CreateResponse(ResponseType::Failure, "Project Doesn't Exist"));
-						
-						if($DB->IsProjectOwner($_GET["id"], $session->user_identifier))
-						{
-							if($DB->UpdateProject($_GET["id"], $RequestData["name"], $RequestData["description"]))
-								exit(CreateResponse(ResponseType::Success, "Project Updated Succesfully"));
-							else
-								exit(CreateResponse(ResponseType::Failure, "Failed To Update Project"));
-						}
-						else
-						{
-							exit(CreateResponse(ResponseType::Failure, "Missing Authority"));
-						}
-					}
-					else
-					{
-						exit(CreateResponse(ResponseType::Failure, "Missing Arguments"));
-					}
-				}
-				else
-				{
-					exit(CreateResponse(ResponseType::Failure, "Unknown Method"));
-				}
-			}
+			require("project_general_handler.php");
 		}
 	}
 	else
@@ -95,8 +47,9 @@
 			{
 				if(isset($RequestData["name"]) && isset($RequestData["description"]))
 				{
-					if($DB->CreateProject($session->user_identifier, $RequestData["name"], $RequestData["description"]))
-						exit(CreateResponse(ResponseType::Success, "Project Created Succesfully"));
+					$new_project_id = $DB->CreateProject($session->user_identifier, $RequestData["name"], $RequestData["description"]);
+					if($new_project_id)
+						exit(CreateResponse(ResponseType::Success, "Project Created Succesfully", $new_project_id));
 					else
 						exit(CreateResponse(ResponseType::Failure, "Failed To Create Project"));
 				}
